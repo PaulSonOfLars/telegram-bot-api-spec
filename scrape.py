@@ -47,7 +47,8 @@ def retrieve_api_info() -> Dict:
 
         if x.name == "p":
             description = x.get_text().strip()
-            # we only need returns for methods. If we have no no desription has been checked for returns yes
+            # we only need returns for methods.
+            # We only check this when curr_desc is empty, since the first paragraph contains the description.
             if curr_type == METHODS and not curr_desc:
                 get_method_return_type(curr_name, curr_type, description, items)
 
@@ -75,6 +76,7 @@ def get_subtypes(curr_name: str, curr_type: str, x, items: dict):
     items[curr_type][curr_name]["subtypes"] = subtypes
 
 
+# Get fields/parameters of type/method
 def get_fields(curr_name: str, curr_type: str, x, items: dict):
     body = x.find("tbody")
     fields = []
@@ -102,12 +104,13 @@ def get_fields(curr_name: str, curr_type: str, x, items: dict):
             )
 
         else:
-            print("idk what happened")
-            print("Type", curr_type)
-            print("Name", curr_name)
-            print("n children", len(children))
+            print("An unexpected state has occurred!")
+            print("Type:", curr_type)
+            print("Name:", curr_name)
+            print("Number of children:", len(children))
             print(children)
             exit(1)
+
     items[curr_type][curr_name]["fields"] = fields
 
 
