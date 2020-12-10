@@ -1,4 +1,3 @@
-
 on:
   schedule:
     - cron:  '0 12 * * *' # Every day at 12:00 (noon). Ref https://crontab.guru/examples.html
@@ -10,11 +9,18 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
     - name: Install dependencies
-      run: pip3 install -r requirements.txt
+      run: >
+        pip install --upgrade pip setuptools wheel
+        pip install -r requirements.txt
 
     - name: Scrape website
-      run: python3 scrape.py
+      run: python scrape.py
 
     - name: Open Pull Request
       uses: peter-evans/create-pull-request@v3.5.2
