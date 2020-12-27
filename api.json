@@ -4575,7 +4575,7 @@
             "Dice"
           ],
           "required": false,
-          "description": "Optional. Message is a dice with random value from 1 to 6"
+          "description": "Optional. Message is a dice with random value"
         },
         {
           "name": "game",
