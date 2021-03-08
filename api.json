@@ -322,7 +322,7 @@
         "MessageId"
       ],
       "description": [
-        "Use this method to copy messages of any kind. The method is analogous to the method forwardMessages, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
+        "Use this method to copy messages of any kind. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
       ],
       "fields": [
         {
