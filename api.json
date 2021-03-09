@@ -40,7 +40,7 @@
             "Array of String"
           ],
           "required": false,
-          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [\"message\", \"edited_channel_post\", \"callback_query\"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time."
+          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [\"message\", \"edited_channel_post\", \"callback_query\"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted updates may be received for a short period of time."
         }
       ]
     },
@@ -93,7 +93,7 @@
             "Array of String"
           ],
           "required": false,
-          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [\"message\", \"edited_channel_post\", \"callback_query\"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all updates regardless of type (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time."
+          "description": "A JSON-serialized list of the update types you want your bot to receive. For example, specify [\"message\", \"edited_channel_post\", \"callback_query\"] to only receive updates of these types. See Update for a complete list of available update types. Specify an empty list to receive all update types except chat_member (default). If not specified, the previous setting will be used.Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time."
         },
         {
           "name": "drop_pending_updates",
@@ -1846,7 +1846,7 @@
             "String"
           ],
           "required": false,
-          "description": "Emoji on which the dice throw animation is based. Currently, must be one of \"\", \"\", \"\", \"\", or \"\". Dice can have values 1-6 for \"\" and \"\", values 1-5 for \"\" and \"\", and values 1-64 for \"\". Defaults to \"\""
+          "description": "Emoji on which the dice throw animation is based. Currently, must be one of \"\", \"\", \"\", \"\", \"\", or \"\". Dice can have values 1-6 for \"\", \"\" and \"\", values 1-5 for \"\" and \"\", and values 1-64 for \"\". Defaults to \"\""
         },
         {
           "name": "disable_notification",
@@ -2006,6 +2006,14 @@
           ],
           "required": false,
           "description": "Date when the user will be unbanned, unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only."
+        },
+        {
+          "name": "revoke_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True to delete all messages from the chat for the user that is being removed. If False, the user will be able to see messages in the group that were sent before the user was removed. Always True for supergroups and channels."
         }
       ]
     },
@@ -2127,12 +2135,12 @@
           "description": "Pass True, if the administrator's presence in the chat is hidden"
         },
         {
-          "name": "can_change_info",
+          "name": "can_manage_chat",
           "types": [
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can change chat title, photo and other settings"
+          "description": "Pass True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergoups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "name": "can_post_messages",
@@ -2159,12 +2167,12 @@
           "description": "Pass True, if the administrator can delete messages of other users"
         },
         {
-          "name": "can_invite_users",
+          "name": "can_manage_voice_chats",
           "types": [
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can invite new users to the chat"
+          "description": "Pass True, if the administrator can manage voice chats, supergroups only"
         },
         {
           "name": "can_restrict_members",
@@ -2175,20 +2183,36 @@
           "description": "Pass True, if the administrator can restrict, ban or unban chat members"
         },
         {
-          "name": "can_pin_messages",
-          "types": [
-            "Boolean"
-          ],
-          "required": false,
-          "description": "Pass True, if the administrator can pin messages, supergroups only"
-        },
-        {
           "name": "can_promote_members",
           "types": [
             "Boolean"
           ],
           "required": false,
           "description": "Pass True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by him)"
+        },
+        {
+          "name": "can_change_info",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True, if the administrator can change chat title, photo and other settings"
+        },
+        {
+          "name": "can_invite_users",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True, if the administrator can invite new users to the chat"
+        },
+        {
+          "name": "can_pin_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True, if the administrator can pin messages, supergroups only"
         }
       ]
     },
@@ -2265,7 +2289,7 @@
         "String"
       ],
       "description": [
-        "Use this method to generate a new invite link for a chat; any previously generated link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the new invite link as String on success."
+        "Use this method to generate a new primary invite link for a chat; any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the new invite link as String on success."
       ],
       "fields": [
         {
@@ -2276,6 +2300,117 @@
           ],
           "required": true,
           "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        }
+      ]
+    },
+    "createChatInviteLink": {
+      "name": "createChatInviteLink",
+      "href": "https://core.telegram.org/bots/api#createchatinvitelink",
+      "returns": [
+        "ChatInviteLink"
+      ],
+      "description": [
+        "Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. The link can be revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object."
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "expire_date",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Point in time (Unix timestamp) when the link will expire"
+        },
+        {
+          "name": "member_limit",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
+        }
+      ]
+    },
+    "editChatInviteLink": {
+      "name": "editChatInviteLink",
+      "href": "https://core.telegram.org/bots/api#editchatinvitelink",
+      "returns": [
+        "ChatInviteLink"
+      ],
+      "description": [
+        "Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the edited invite link as a ChatInviteLink object."
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "invite_link",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "The invite link to edit"
+        },
+        {
+          "name": "expire_date",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Point in time (Unix timestamp) when the link will expire"
+        },
+        {
+          "name": "member_limit",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
+        }
+      ]
+    },
+    "revokeChatInviteLink": {
+      "name": "revokeChatInviteLink",
+      "href": "https://core.telegram.org/bots/api#revokechatinvitelink",
+      "returns": [
+        "ChatInviteLink"
+      ],
+      "description": [
+        "Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns the revoked invite link as ChatInviteLink object."
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier of the target chat or username of the target channel (in the format @channelusername)"
+        },
+        {
+          "name": "invite_link",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "The invite link to revoke"
         }
       ]
     },
@@ -4028,6 +4163,22 @@
           ],
           "required": false,
           "description": "Optional. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself."
+        },
+        {
+          "name": "my_chat_member",
+          "types": [
+            "ChatMemberUpdated"
+          ],
+          "required": false,
+          "description": "Optional. The bot's chat member status was updated in a chat. For private chats, this update is received only when the bot is blocked or unblocked by the user."
+        },
+        {
+          "name": "chat_member",
+          "types": [
+            "ChatMemberUpdated"
+          ],
+          "required": false,
+          "description": "Optional. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify \"chat_member\" in the list of allowed_updates to receive these updates."
         }
       ]
     },
@@ -4100,7 +4251,7 @@
             "Array of String"
           ],
           "required": false,
-          "description": "Optional. A list of update types the bot is subscribed to. Defaults to all update types"
+          "description": "Optional. A list of update types the bot is subscribed to. Defaults to all update types except chat_member"
         }
       ]
     },
@@ -4117,7 +4268,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Unique identifier for this user or bot"
+          "description": "Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "name": "is_bot",
@@ -4198,7 +4349,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Unique identifier for this chat. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier."
+          "description": "Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "name": "type",
@@ -4270,7 +4421,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Chat invite link, for groups, supergroups and channel chats. Each administrator in a chat generates their own invite links, so the bot must first generate the link using exportChatInviteLink. Returned only in getChat."
+          "description": "Optional. Primary invite link, for groups, supergroups and channel chats. Returned only in getChat."
         },
         {
           "name": "pinned_message",
@@ -4295,6 +4446,14 @@
           ],
           "required": false,
           "description": "Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unpriviledged user. Returned only in getChat."
+        },
+        {
+          "name": "message_auto_delete_time",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Optional. The time after which all messages sent to the chat will be automatically deleted; in seconds. Returned only in getChat."
         },
         {
           "name": "sticker_set_name",
@@ -4674,12 +4833,20 @@
           "description": "Optional. Service message: the channel has been created. This field can't be received in a message coming through updates, because bot can't be a member of a channel when it is created. It can only be found in reply_to_message if someone replies to a very first message in a channel."
         },
         {
+          "name": "message_auto_delete_timer_changed",
+          "types": [
+            "MessageAutoDeleteTimerChanged"
+          ],
+          "required": false,
+          "description": "Optional. Service message: auto-delete timer settings changed in the chat"
+        },
+        {
           "name": "migrate_to_chat_id",
           "types": [
             "Integer"
           ],
           "required": false,
-          "description": "Optional. The group has been migrated to a supergroup with the specified identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier."
+          "description": "Optional. The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "name": "migrate_from_chat_id",
@@ -4687,7 +4854,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. The supergroup has been migrated from a group with the specified identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier."
+          "description": "Optional. The supergroup has been migrated from a group with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "name": "pinned_message",
@@ -4736,6 +4903,30 @@
           ],
           "required": false,
           "description": "Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location."
+        },
+        {
+          "name": "voice_chat_started",
+          "types": [
+            "VoiceChatStarted"
+          ],
+          "required": false,
+          "description": "Optional. Service message: voice chat started"
+        },
+        {
+          "name": "voice_chat_ended",
+          "types": [
+            "VoiceChatEnded"
+          ],
+          "required": false,
+          "description": "Optional. Service message: voice chat ended"
+        },
+        {
+          "name": "voice_chat_participants_invited",
+          "types": [
+            "VoiceChatParticipantsInvited"
+          ],
+          "required": false,
+          "description": "Optional. Service message: new participants invited to a voice chat"
         },
         {
           "name": "reply_markup",
@@ -5313,7 +5504,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Contact's user identifier in Telegram"
+          "description": "Optional. Contact's user identifier in Telegram. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "name": "vcard",
@@ -5346,7 +5537,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Value of the dice, 1-6 for \"\" and \"\" base emoji, 1-5 for \"\" and \"\" base emoji, 1-64 for \"\" base emoji"
+          "description": "Value of the dice, 1-6 for \"\", \"\" and \"\" base emoji, 1-5 for \"\" and \"\" base emoji, 1-64 for \"\" base emoji"
         }
       ]
     },
@@ -5673,6 +5864,64 @@
           ],
           "required": true,
           "description": "The distance between the users"
+        }
+      ]
+    },
+    "MessageAutoDeleteTimerChanged": {
+      "name": "MessageAutoDeleteTimerChanged",
+      "href": "https://core.telegram.org/bots/api#messageautodeletetimerchanged",
+      "description": [
+        "This object represents a service message about a change in auto-delete timer settings."
+      ],
+      "fields": [
+        {
+          "name": "message_auto_delete_time",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "New auto-delete time for messages in the chat"
+        }
+      ]
+    },
+    "VoiceChatStarted": {
+      "name": "VoiceChatStarted",
+      "href": "https://core.telegram.org/bots/api#voicechatstarted",
+      "description": [
+        "This object represents a service message about a voice chat started in the chat. Currently holds no information."
+      ]
+    },
+    "VoiceChatEnded": {
+      "name": "VoiceChatEnded",
+      "href": "https://core.telegram.org/bots/api#voicechatended",
+      "description": [
+        "This object represents a service message about a voice chat ended in the chat."
+      ],
+      "fields": [
+        {
+          "name": "duration",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Voice chat duration; in seconds"
+        }
+      ]
+    },
+    "VoiceChatParticipantsInvited": {
+      "name": "VoiceChatParticipantsInvited",
+      "href": "https://core.telegram.org/bots/api#voicechatparticipantsinvited",
+      "description": [
+        "This object represents a service message about new members invited to a voice chat."
+      ],
+      "fields": [
+        {
+          "name": "users",
+          "types": [
+            "Array of User"
+          ],
+          "required": false,
+          "description": "Optional. New members that were invited to the voice chat"
         }
       ]
     },
@@ -6131,6 +6380,63 @@
         }
       ]
     },
+    "ChatInviteLink": {
+      "name": "ChatInviteLink",
+      "href": "https://core.telegram.org/bots/api#chatinvitelink",
+      "description": [
+        "Represents an invite link for a chat."
+      ],
+      "fields": [
+        {
+          "name": "invite_link",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "The invite link. If the link was created by another chat administrator, then the second part of the link will be replaced with \"\u2026\"."
+        },
+        {
+          "name": "creator",
+          "types": [
+            "User"
+          ],
+          "required": true,
+          "description": "Creator of the link"
+        },
+        {
+          "name": "is_primary",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the link is primary"
+        },
+        {
+          "name": "is_revoked",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the link is revoked"
+        },
+        {
+          "name": "expire_date",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Optional. Point in time (Unix timestamp) when the link will expire or has been expired"
+        },
+        {
+          "name": "member_limit",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Optional. Maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999"
+        }
+      ]
+    },
     "ChatMember": {
       "name": "ChatMember",
       "href": "https://core.telegram.org/bots/api#chatmember",
@@ -6179,6 +6485,14 @@
           "description": "Optional. Administrators only. True, if the bot is allowed to edit administrator privileges of that user"
         },
         {
+          "name": "can_manage_chat",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. Administrators only. True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergoups and ignore slow mode. Implied by any other administrator privilege"
+        },
+        {
           "name": "can_post_messages",
           "types": [
             "Boolean"
@@ -6201,6 +6515,14 @@
           ],
           "required": false,
           "description": "Optional. Administrators only. True, if the administrator can delete messages of other users"
+        },
+        {
+          "name": "can_manage_voice_chats",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. Administrators only. True, if the administrator can manage voice chats"
         },
         {
           "name": "can_restrict_members",
@@ -6297,6 +6619,63 @@
           ],
           "required": false,
           "description": "Optional. Restricted and kicked only. Date when restrictions will be lifted for this user; unix time"
+        }
+      ]
+    },
+    "ChatMemberUpdated": {
+      "name": "ChatMemberUpdated",
+      "href": "https://core.telegram.org/bots/api#chatmemberupdated",
+      "description": [
+        "This object represents changes in the status of a chat member."
+      ],
+      "fields": [
+        {
+          "name": "chat",
+          "types": [
+            "Chat"
+          ],
+          "required": true,
+          "description": "Chat the user belongs to"
+        },
+        {
+          "name": "from",
+          "types": [
+            "User"
+          ],
+          "required": true,
+          "description": "Performer of the action, which resulted in the change"
+        },
+        {
+          "name": "date",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Date the change was done in Unix time"
+        },
+        {
+          "name": "old_chat_member",
+          "types": [
+            "ChatMember"
+          ],
+          "required": true,
+          "description": "Previous information about the chat member"
+        },
+        {
+          "name": "new_chat_member",
+          "types": [
+            "ChatMember"
+          ],
+          "required": true,
+          "description": "New information about the chat member"
+        },
+        {
+          "name": "invite_link",
+          "types": [
+            "ChatInviteLink"
+          ],
+          "required": false,
+          "description": "Optional. Chat invite link, which was used by the user to join the chat; for joining by invite link events only."
         }
       ]
     },
@@ -6436,7 +6815,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. The group has been migrated to a supergroup with the specified identifier. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier."
+          "description": "Optional. The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier."
         },
         {
           "name": "retry_after",
@@ -7097,7 +7476,8 @@
       "name": "InlineQueryResult",
       "href": "https://core.telegram.org/bots/api#inlinequeryresult",
       "description": [
-        "This object represents one result of an inline query. Telegram clients currently support results of the following 20 types:"
+        "This object represents one result of an inline query. Telegram clients currently support results of the following 20 types:",
+        "Note: All URLs passed in inline query results will be available to end users and therefore must be assumed to be public."
       ],
       "subtypes": [
         "InlineQueryResultCachedAudio",
