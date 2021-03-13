@@ -20,7 +20,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Scrape website
-      run: python scrape.py
+      run: python scrape_tg_botapi.py botapi.json
 
     - name: Open Pull Request
       uses: peter-evans/create-pull-request@v3.5.2

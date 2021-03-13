@@ -1,6 +1,7 @@
 import json
 import re
 import string
+import sys
 from typing import List, Dict
 
 import requests
@@ -262,5 +263,5 @@ if __name__ == '__main__':
     verify_type_parameters(ITEMS)
     verify_method_parameters(ITEMS)
 
-    with open("api.json", "w") as f:
+    with open(sys.argv[1], "w") as f:
         json.dump(ITEMS, f, indent=2)

@@ -1,2 +1,5 @@
-requests
-bs4
+# GET / POST network requests
+requests==2.24.0
+
+# web scrapping tools
+bs4==0.0.1
