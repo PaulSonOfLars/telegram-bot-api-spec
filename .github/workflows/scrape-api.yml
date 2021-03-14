@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron:  '0 12 * * *' # Every day at 12:00 (noon). Ref https://crontab.guru/examples.html
+    - cron:  '15 12 * * *' # Every day at 12:15 (noon). Ref https://crontab.guru/examples.html
 name: Scrape telegram bot API
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
         body: >
           This is an automated PR. Please check the diff, and the action logs, to check for any funky behaviour.
         branch: automated/bot-api-update
-        reviewers: PaulSonOfLars
-        assignees: PaulSonOfLars
+        reviewers: SpEcHiDe
+        assignees: SpEcHiDe
         labels: automated
         delete-branch: true
