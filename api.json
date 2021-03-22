@@ -2172,7 +2172,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if the administrator can manage voice chats, supergroups only"
+          "description": "Pass True, if the administrator can manage voice chats"
         },
         {
           "name": "can_restrict_members",
