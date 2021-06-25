@@ -19,7 +19,6 @@ def retrieve_api_info() -> Dict:
     dev_rules = soup.find("div", {"id": "dev_page_content"})
     curr_type = ""
     curr_name = ""
-    curr_desc = []
 
     items = {
         METHODS: dict(),
@@ -31,7 +30,6 @@ def retrieve_api_info() -> Dict:
             # New category; clear name and type.
             curr_name = ""
             curr_type = ""
-            curr_desc = []
 
         if x.name == "h4":
             anchor = x.find("a")
@@ -39,11 +37,9 @@ def retrieve_api_info() -> Dict:
             if name and "-" in name:
                 curr_name = ""
                 curr_type = ""
-                curr_desc = []
                 continue
 
             curr_name, curr_type = get_type_and_name(x, anchor, items)
-            curr_desc = []
 
         if not curr_type or not curr_name:
             continue
@@ -52,11 +48,10 @@ def retrieve_api_info() -> Dict:
             description = x.get_text().strip()
             # we only need returns for methods.
             # We only check this when curr_desc is empty, since the first paragraph contains the description.
-            if curr_type == METHODS and not curr_desc:
+            if curr_type == METHODS and not items[curr_type][curr_name].get("description"):
                 get_method_return_type(curr_name, curr_type, description, items)
 
-            curr_desc.append(description)
-            items[curr_type][curr_name]["description"] = curr_desc
+            items[curr_type][curr_name].setdefault("description", []).append(description)
 
         if x.name == "table":
             get_fields(curr_name, curr_type, x, items)
@@ -208,10 +203,7 @@ def verify_type_parameters(items: Dict):
 
             for st in subtypes:
                 if st in items[TYPES]:
-                    if "subtype_of" in items[TYPES][st]:
-                        items[TYPES][st]["subtype_of"].append(t)
-                    else:
-                        items[TYPES][st]["subtype_of"] = [t]
+                    items[TYPES][st].setdefault("subtype_of", []).append(t)
                 else:
                     print("TYPE", t, "USES INVALID SUBTYPE", st)
 
