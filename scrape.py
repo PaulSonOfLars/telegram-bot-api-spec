@@ -37,6 +37,9 @@ def retrieve_api_info() -> Dict:
             anchor = x.find("a")
             name = anchor.get("name")
             if name and "-" in name:
+                curr_name = ""
+                curr_type = ""
+                curr_desc = []
                 continue
 
             curr_name, curr_type = get_type_and_name(x, anchor, items)

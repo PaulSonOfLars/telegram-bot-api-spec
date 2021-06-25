@@ -172,17 +172,7 @@
         "Message"
       ],
       "description": [
-        "Use this method to send text messages. On success, the sent Message is returned.",
-        "The Bot API supports basic formatting for messages. You can use bold, italic, underlined and strikethrough text, as well as inline links and pre-formatted code in your bots' messages. Telegram clients will render them accordingly. You can use either markdown-style or HTML-style formatting.",
-        "Note that Telegram clients will display an alert to the user before opening an inline link ('Open this link?' together with the full URL).",
-        "Message entities can be nested, providing following restrictions are met:- If two entities has common characters then one of them is fully contained inside another.- bold, italic, underline and strikethrough entities can contain and to be contained in any other entities, except pre and code.- All other entities can't contain each other.",
-        "Links tg://user?id=<user_id> can be used to mention a user by their ID without using a username. Please note:",
-        "To use this mode, pass MarkdownV2 in the parse_mode field. Use the following syntax in your message:",
-        "Please note:",
-        "To use this mode, pass HTML in the parse_mode field. The following tags are currently supported:",
-        "Please note:",
-        "This is a legacy mode, retained for backward compatibility. To use this mode, pass Markdown in the parse_mode field. Use the following syntax in your message:",
-        "Please note:"
+        "Use this method to send text messages. On success, the sent Message is returned."
       ],
       "fields": [
         {
@@ -261,12 +251,6 @@
           "required": false,
           "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
-      ],
-      "subtypes": [
-        "Entities must not be nested, use parse mode MarkdownV2 instead.",
-        "There is no way to specify underline and strikethrough entities, use parse mode MarkdownV2 instead.",
-        "To escape characters '_', '*', '`', '[' outside of an entity, prepend the characters '\\' before them.",
-        "Escaping inside entities is not allowed, so entity must be closed first and reopened again: use _snake_\\__case_ for italic snake_case and *2*\\**2=4* for bold 2*2=4."
       ]
     },
     "forwardMessage": {
@@ -2895,8 +2879,7 @@
         "Array of BotCommand"
       ],
       "description": [
-        "Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned.",
-        "Methods and objects used in the inline mode are described in the Inline mode section."
+        "Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned."
       ],
       "fields": [
         {
@@ -7132,24 +7115,16 @@
       "name": "BotCommandScope",
       "href": "https://core.telegram.org/bots/api#botcommandscope",
       "description": [
-        "This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:",
-        "The following algorithm is used to determine the list of commands for a particular user viewing the bot menu. The first list of commands which is set is returned:",
-        "Commands in the chat with the bot",
-        "Commands in group and supergroup chats"
+        "This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:"
       ],
       "subtypes": [
-        "botCommandScopeChatMember + language_code",
-        "botCommandScopeChatMember",
-        "botCommandScopeChatAdministrators + language_code (admins only)",
-        "botCommandScopeChatAdministrators (admins only)",
-        "botCommandScopeChat + language_code",
-        "botCommandScopeChat",
-        "botCommandScopeAllChatAdministrators + language_code (admins only)",
-        "botCommandScopeAllChatAdministrators (admins only)",
-        "botCommandScopeAllGroupChats + language_code",
-        "botCommandScopeAllGroupChats",
-        "botCommandScopeDefault + language_code",
-        "botCommandScopeDefault"
+        "BotCommandScopeDefault",
+        "BotCommandScopeAllPrivateChats",
+        "BotCommandScopeAllGroupChats",
+        "BotCommandScopeAllChatAdministrators",
+        "BotCommandScopeChat",
+        "BotCommandScopeChatAdministrators",
+        "BotCommandScopeChatMember"
       ]
     },
     "BotCommandScopeDefault": {
@@ -7167,6 +7142,9 @@
           "required": true,
           "description": "Scope type, must be default"
         }
+      ],
+      "subtype_of": [
+        "BotCommandScope"
       ]
     },
     "BotCommandScopeAllPrivateChats": {
@@ -7184,6 +7162,9 @@
           "required": true,
           "description": "Scope type, must be all_private_chats"
         }
+      ],
+      "subtype_of": [
+        "BotCommandScope"
       ]
     },
     "BotCommandScopeAllGroupChats": {
@@ -7201,6 +7182,9 @@
           "required": true,
           "description": "Scope type, must be all_group_chats"
         }
+      ],
+      "subtype_of": [
+        "BotCommandScope"
       ]
     },
     "BotCommandScopeAllChatAdministrators": {
@@ -7218,6 +7202,9 @@
           "required": true,
           "description": "Scope type, must be all_chat_administrators"
         }
+      ],
+      "subtype_of": [
+        "BotCommandScope"
       ]
     },
     "BotCommandScopeChat": {
@@ -7244,6 +7231,9 @@
           "required": true,
           "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
         }
+      ],
+      "subtype_of": [
+        "BotCommandScope"
       ]
     },
     "BotCommandScopeChatAdministrators": {
@@ -7270,6 +7260,9 @@
           "required": true,
           "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
         }
+      ],
+      "subtype_of": [
+        "BotCommandScope"
       ]
     },
     "BotCommandScopeChatMember": {
@@ -7304,6 +7297,9 @@
           "required": true,
           "description": "Unique identifier of the target user"
         }
+      ],
+      "subtype_of": [
+        "BotCommandScope"
       ]
     },
     "ResponseParameters": {
@@ -7733,11 +7729,7 @@
       "name": "InputFile",
       "href": "https://core.telegram.org/bots/api#inputfile",
       "description": [
-        "This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser.",
-        "There are three ways to send files (photos, stickers, audio, media, etc.):",
-        "Sending by file_id",
-        "Sending by URL",
-        "Objects and methods used in the inline mode are described in the Inline mode section."
+        "This object represents the contents of a file to be uploaded. Must be posted using multipart/form-data in the usual way that files are uploaded via the browser."
       ]
     },
     "Sticker": {
