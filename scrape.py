@@ -77,6 +77,7 @@ def get_subtypes(curr_name: str, curr_type: str, x, items: dict):
         subtypes.append(subtype_name)
 
     items[curr_type][curr_name]["subtypes"] = subtypes
+    items[curr_type][curr_name]["description"] += [f"- {s}" for s in subtypes]
 
 
 # Get fields/parameters of type/method

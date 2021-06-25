@@ -6544,7 +6544,13 @@
       "name": "ChatMember",
       "href": "https://core.telegram.org/bots/api#chatmember",
       "description": [
-        "This object contains information about one member of a chat. Currently, the following 6 types of chat members are supported:"
+        "This object contains information about one member of a chat. Currently, the following 6 types of chat members are supported:",
+        "- ChatMemberOwner",
+        "- ChatMemberAdministrator",
+        "- ChatMemberMember",
+        "- ChatMemberRestricted",
+        "- ChatMemberLeft",
+        "- ChatMemberBanned"
       ],
       "subtypes": [
         "ChatMemberOwner",
@@ -7115,7 +7121,14 @@
       "name": "BotCommandScope",
       "href": "https://core.telegram.org/bots/api#botcommandscope",
       "description": [
-        "This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:"
+        "This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:",
+        "- BotCommandScopeDefault",
+        "- BotCommandScopeAllPrivateChats",
+        "- BotCommandScopeAllGroupChats",
+        "- BotCommandScopeAllChatAdministrators",
+        "- BotCommandScopeChat",
+        "- BotCommandScopeChatAdministrators",
+        "- BotCommandScopeChatMember"
       ],
       "subtypes": [
         "BotCommandScopeDefault",
@@ -7331,7 +7344,12 @@
       "name": "InputMedia",
       "href": "https://core.telegram.org/bots/api#inputmedia",
       "description": [
-        "This object represents the content of a media message to be sent. It should be one of"
+        "This object represents the content of a media message to be sent. It should be one of",
+        "- InputMediaAnimation",
+        "- InputMediaDocument",
+        "- InputMediaAudio",
+        "- InputMediaPhoto",
+        "- InputMediaVideo"
       ],
       "subtypes": [
         "InputMediaAnimation",
@@ -7981,6 +7999,26 @@
       "href": "https://core.telegram.org/bots/api#inlinequeryresult",
       "description": [
         "This object represents one result of an inline query. Telegram clients currently support results of the following 20 types:",
+        "- InlineQueryResultCachedAudio",
+        "- InlineQueryResultCachedDocument",
+        "- InlineQueryResultCachedGif",
+        "- InlineQueryResultCachedMpeg4Gif",
+        "- InlineQueryResultCachedPhoto",
+        "- InlineQueryResultCachedSticker",
+        "- InlineQueryResultCachedVideo",
+        "- InlineQueryResultCachedVoice",
+        "- InlineQueryResultArticle",
+        "- InlineQueryResultAudio",
+        "- InlineQueryResultContact",
+        "- InlineQueryResultGame",
+        "- InlineQueryResultDocument",
+        "- InlineQueryResultGif",
+        "- InlineQueryResultLocation",
+        "- InlineQueryResultMpeg4Gif",
+        "- InlineQueryResultPhoto",
+        "- InlineQueryResultVenue",
+        "- InlineQueryResultVideo",
+        "- InlineQueryResultVoice",
         "Note: All URLs passed in inline query results will be available to end users and therefore must be assumed to be public."
       ],
       "subtypes": [
@@ -9989,7 +10027,12 @@
       "name": "InputMessageContent",
       "href": "https://core.telegram.org/bots/api#inputmessagecontent",
       "description": [
-        "This object represents the content of a message to be sent as a result of an inline query. Telegram clients currently support the following 5 types:"
+        "This object represents the content of a message to be sent as a result of an inline query. Telegram clients currently support the following 5 types:",
+        "- InputTextMessageContent",
+        "- InputLocationMessageContent",
+        "- InputVenueMessageContent",
+        "- InputContactMessageContent",
+        "- InputInvoiceMessageContent"
       ],
       "subtypes": [
         "InputTextMessageContent",
@@ -11013,7 +11056,16 @@
       "name": "PassportElementError",
       "href": "https://core.telegram.org/bots/api#passportelementerror",
       "description": [
-        "This object represents an error in the Telegram Passport element which was submitted that should be resolved by the user. It should be one of:"
+        "This object represents an error in the Telegram Passport element which was submitted that should be resolved by the user. It should be one of:",
+        "- PassportElementErrorDataField",
+        "- PassportElementErrorFrontSide",
+        "- PassportElementErrorReverseSide",
+        "- PassportElementErrorSelfie",
+        "- PassportElementErrorFile",
+        "- PassportElementErrorFiles",
+        "- PassportElementErrorTranslationFile",
+        "- PassportElementErrorTranslationFiles",
+        "- PassportElementErrorUnspecified"
       ],
       "subtypes": [
         "PassportElementErrorDataField",
