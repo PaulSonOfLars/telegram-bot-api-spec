@@ -1972,14 +1972,14 @@
         }
       ]
     },
-    "kickChatMember": {
-      "name": "kickChatMember",
-      "href": "https://core.telegram.org/bots/api#kickchatmember",
+    "banChatMember": {
+      "name": "banChatMember",
+      "href": "https://core.telegram.org/bots/api#banchatmember",
       "returns": [
         "Boolean"
       ],
       "description": [
-        "Use this method to kick a user from a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success."
+        "Use this method to ban a user in a group, a supergroup or a channel. In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Returns True on success."
       ],
       "fields": [
         {
@@ -2024,7 +2024,7 @@
         "Boolean"
       ],
       "description": [
-        "Use this method to unban a previously kicked user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned. Returns True on success."
+        "Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned. Returns True on success."
       ],
       "fields": [
         {
@@ -2672,9 +2672,9 @@
         }
       ]
     },
-    "getChatMembersCount": {
-      "name": "getChatMembersCount",
-      "href": "https://core.telegram.org/bots/api#getchatmemberscount",
+    "getChatMemberCount": {
+      "name": "getChatMemberCount",
+      "href": "https://core.telegram.org/bots/api#getchatmembercount",
       "returns": [
         "Integer"
       ],
@@ -2831,7 +2831,7 @@
         "Boolean"
       ],
       "description": [
-        "Use this method to change the list of the bot's commands. Returns True on success."
+        "Use this method to change the list of the bot's commands. See https://core.telegram.org/bots#commands for more details about bot commands. Returns True on success."
       ],
       "fields": [
         {
@@ -2841,6 +2841,50 @@
           ],
           "required": true,
           "description": "A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified."
+        },
+        {
+          "name": "scope",
+          "types": [
+            "BotCommandScope"
+          ],
+          "required": false,
+          "description": "A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault."
+        },
+        {
+          "name": "language_code",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands"
+        }
+      ]
+    },
+    "deleteMyCommands": {
+      "name": "deleteMyCommands",
+      "href": "https://core.telegram.org/bots/api#deletemycommands",
+      "returns": [
+        "Boolean"
+      ],
+      "description": [
+        "Use this method to delete the list of the bot's commands for the given scope and user language. After deletion, higher level commands will be shown to affected users. Returns True on success."
+      ],
+      "fields": [
+        {
+          "name": "scope",
+          "types": [
+            "BotCommandScope"
+          ],
+          "required": false,
+          "description": "A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to BotCommandScopeDefault."
+        },
+        {
+          "name": "language_code",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands"
         }
       ]
     },
@@ -2851,8 +2895,26 @@
         "Array of BotCommand"
       ],
       "description": [
-        "Use this method to get the current list of the bot's commands. Requires no parameters. Returns Array of BotCommand on success.",
+        "Use this method to get the current list of the bot's commands for the given scope and user language. Returns Array of BotCommand on success. If commands aren't set, an empty list is returned.",
         "Methods and objects used in the inline mode are described in the Inline mode section."
+      ],
+      "fields": [
+        {
+          "name": "scope",
+          "types": [
+            "BotCommandScope"
+          ],
+          "required": false,
+          "description": "A JSON-serialized object, describing scope of users. Defaults to BotCommandScopeDefault."
+        },
+        {
+          "name": "language_code",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "A two-letter ISO 639-1 language code or an empty string"
+        }
       ]
     },
     "editMessageText": {
@@ -6065,6 +6127,14 @@
           "description": "Optional. Requests clients to hide the keyboard as soon as it's been used. The keyboard will still be available, but clients will automatically display the usual letter-keyboard in the chat \u2013 the user can press a special button in the input field to see the custom keyboard again. Defaults to false."
         },
         {
+          "name": "input_field_placeholder",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. The placeholder to be shown in the input field when the keyboard is active; 1-64 characters"
+        },
+        {
           "name": "selective",
           "types": [
             "Boolean"
@@ -6372,6 +6442,14 @@
           "description": "Shows reply interface to the user, as if they manually selected the bot's message and tapped 'Reply'"
         },
         {
+          "name": "input_field_placeholder",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. The placeholder to be shown in the input field when the reply is active; 1-64 characters"
+        },
+        {
           "name": "selective",
           "types": [
             "Boolean"
@@ -6483,9 +6561,32 @@
       "name": "ChatMember",
       "href": "https://core.telegram.org/bots/api#chatmember",
       "description": [
-        "This object contains information about one member of a chat."
+        "This object contains information about one member of a chat. Currently, the following 6 types of chat members are supported:"
+      ],
+      "subtypes": [
+        "ChatMemberOwner",
+        "ChatMemberAdministrator",
+        "ChatMemberMember",
+        "ChatMemberRestricted",
+        "ChatMemberLeft",
+        "ChatMemberBanned"
+      ]
+    },
+    "ChatMemberOwner": {
+      "name": "ChatMemberOwner",
+      "href": "https://core.telegram.org/bots/api#chatmemberowner",
+      "description": [
+        "Represents a chat member that owns the chat and has all administrator privileges."
       ],
       "fields": [
+        {
+          "name": "status",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "The member's status in the chat, always \"creator\""
+        },
         {
           "name": "user",
           "types": [
@@ -6495,173 +6596,356 @@
           "description": "Information about the user"
         },
         {
-          "name": "status",
-          "types": [
-            "String"
-          ],
-          "required": true,
-          "description": "The member's status in the chat. Can be \"creator\", \"administrator\", \"member\", \"restricted\", \"left\" or \"kicked\""
-        },
-        {
           "name": "custom_title",
           "types": [
             "String"
           ],
-          "required": false,
-          "description": "Optional. Owner and administrators only. Custom title for this user"
+          "required": true,
+          "description": "Custom title for this user"
         },
         {
           "name": "is_anonymous",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Owner and administrators only. True, if the user's presence in the chat is hidden"
+          "required": true,
+          "description": "True, if the user's presence in the chat is hidden"
+        }
+      ],
+      "subtype_of": [
+        "ChatMember"
+      ]
+    },
+    "ChatMemberAdministrator": {
+      "name": "ChatMemberAdministrator",
+      "href": "https://core.telegram.org/bots/api#chatmemberadministrator",
+      "description": [
+        "Represents a chat member that has some additional privileges."
+      ],
+      "fields": [
+        {
+          "name": "status",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "The member's status in the chat, always \"administrator\""
+        },
+        {
+          "name": "user",
+          "types": [
+            "User"
+          ],
+          "required": true,
+          "description": "Information about the user"
         },
         {
           "name": "can_be_edited",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators only. True, if the bot is allowed to edit administrator privileges of that user"
+          "required": true,
+          "description": "True, if the bot is allowed to edit administrator privileges of that user"
+        },
+        {
+          "name": "custom_title",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Custom title for this user"
+        },
+        {
+          "name": "is_anonymous",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user's presence in the chat is hidden"
         },
         {
           "name": "can_manage_chat",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators only. True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+          "required": true,
+          "description": "True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "name": "can_post_messages",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators only. True, if the administrator can post in the channel; channels only"
+          "required": true,
+          "description": "True, if the administrator can post in the channel; channels only"
         },
         {
           "name": "can_edit_messages",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators only. True, if the administrator can edit messages of other users and can pin messages; channels only"
+          "required": true,
+          "description": "True, if the administrator can edit messages of other users and can pin messages; channels only"
         },
         {
           "name": "can_delete_messages",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators only. True, if the administrator can delete messages of other users"
+          "required": true,
+          "description": "True, if the administrator can delete messages of other users"
         },
         {
           "name": "can_manage_voice_chats",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators only. True, if the administrator can manage voice chats"
+          "required": true,
+          "description": "True, if the administrator can manage voice chats"
         },
         {
           "name": "can_restrict_members",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators only. True, if the administrator can restrict, ban or unban chat members"
+          "required": true,
+          "description": "True, if the administrator can restrict, ban or unban chat members"
         },
         {
           "name": "can_promote_members",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators only. True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by the user)"
+          "required": true,
+          "description": "True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that he has promoted, directly or indirectly (promoted by administrators that were appointed by the user)"
         },
         {
           "name": "can_change_info",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators and restricted only. True, if the user is allowed to change the chat title, photo and other settings"
+          "required": true,
+          "description": "True, if the user is allowed to change the chat title, photo and other settings"
         },
         {
           "name": "can_invite_users",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators and restricted only. True, if the user is allowed to invite new users to the chat"
+          "required": true,
+          "description": "True, if the user is allowed to invite new users to the chat"
         },
         {
           "name": "can_pin_messages",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Administrators and restricted only. True, if the user is allowed to pin messages; groups and supergroups only"
+          "required": true,
+          "description": "True, if the user is allowed to pin messages; groups and supergroups only"
+        }
+      ],
+      "subtype_of": [
+        "ChatMember"
+      ]
+    },
+    "ChatMemberMember": {
+      "name": "ChatMemberMember",
+      "href": "https://core.telegram.org/bots/api#chatmembermember",
+      "description": [
+        "Represents a chat member that has no additional privileges or restrictions."
+      ],
+      "fields": [
+        {
+          "name": "status",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "The member's status in the chat, always \"member\""
+        },
+        {
+          "name": "user",
+          "types": [
+            "User"
+          ],
+          "required": true,
+          "description": "Information about the user"
+        }
+      ],
+      "subtype_of": [
+        "ChatMember"
+      ]
+    },
+    "ChatMemberRestricted": {
+      "name": "ChatMemberRestricted",
+      "href": "https://core.telegram.org/bots/api#chatmemberrestricted",
+      "description": [
+        "Represents a chat member that is under certain restrictions in the chat. Supergroups only."
+      ],
+      "fields": [
+        {
+          "name": "status",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "The member's status in the chat, always \"restricted\""
+        },
+        {
+          "name": "user",
+          "types": [
+            "User"
+          ],
+          "required": true,
+          "description": "Information about the user"
         },
         {
           "name": "is_member",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Restricted only. True, if the user is a member of the chat at the moment of the request"
+          "required": true,
+          "description": "True, if the user is a member of the chat at the moment of the request"
+        },
+        {
+          "name": "can_change_info",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to change the chat title, photo and other settings"
+        },
+        {
+          "name": "can_invite_users",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to invite new users to the chat"
+        },
+        {
+          "name": "can_pin_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to pin messages; groups and supergroups only"
         },
         {
           "name": "can_send_messages",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Restricted only. True, if the user is allowed to send text messages, contacts, locations and venues"
+          "required": true,
+          "description": "True, if the user is allowed to send text messages, contacts, locations and venues"
         },
         {
           "name": "can_send_media_messages",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Restricted only. True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes"
+          "required": true,
+          "description": "True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes"
         },
         {
           "name": "can_send_polls",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Restricted only. True, if the user is allowed to send polls"
+          "required": true,
+          "description": "True, if the user is allowed to send polls"
         },
         {
           "name": "can_send_other_messages",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Restricted only. True, if the user is allowed to send animations, games, stickers and use inline bots"
+          "required": true,
+          "description": "True, if the user is allowed to send animations, games, stickers and use inline bots"
         },
         {
           "name": "can_add_web_page_previews",
           "types": [
             "Boolean"
           ],
-          "required": false,
-          "description": "Optional. Restricted only. True, if the user is allowed to add web page previews to their messages"
+          "required": true,
+          "description": "True, if the user is allowed to add web page previews to their messages"
         },
         {
           "name": "until_date",
           "types": [
             "Integer"
           ],
-          "required": false,
-          "description": "Optional. Restricted and kicked only. Date when restrictions will be lifted for this user; unix time"
+          "required": true,
+          "description": "Date when restrictions will be lifted for this user; unix time"
         }
+      ],
+      "subtype_of": [
+        "ChatMember"
+      ]
+    },
+    "ChatMemberLeft": {
+      "name": "ChatMemberLeft",
+      "href": "https://core.telegram.org/bots/api#chatmemberleft",
+      "description": [
+        "Represents a chat member that isn't currently a member of the chat, but may join it themselves."
+      ],
+      "fields": [
+        {
+          "name": "status",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "The member's status in the chat, always \"left\""
+        },
+        {
+          "name": "user",
+          "types": [
+            "User"
+          ],
+          "required": true,
+          "description": "Information about the user"
+        }
+      ],
+      "subtype_of": [
+        "ChatMember"
+      ]
+    },
+    "ChatMemberBanned": {
+      "name": "ChatMemberBanned",
+      "href": "https://core.telegram.org/bots/api#chatmemberbanned",
+      "description": [
+        "Represents a chat member that was banned in the chat and can't return to the chat or view chat messages."
+      ],
+      "fields": [
+        {
+          "name": "status",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "The member's status in the chat, always \"kicked\""
+        },
+        {
+          "name": "user",
+          "types": [
+            "User"
+          ],
+          "required": true,
+          "description": "Information about the user"
+        },
+        {
+          "name": "until_date",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Date when restrictions will be lifted for this user; unix time"
+        }
+      ],
+      "subtype_of": [
+        "ChatMember"
       ]
     },
     "ChatMemberUpdated": {
@@ -6841,6 +7125,184 @@
           ],
           "required": true,
           "description": "Description of the command, 3-256 characters."
+        }
+      ]
+    },
+    "BotCommandScope": {
+      "name": "BotCommandScope",
+      "href": "https://core.telegram.org/bots/api#botcommandscope",
+      "description": [
+        "This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:",
+        "The following algorithm is used to determine the list of commands for a particular user viewing the bot menu. The first list of commands which is set is returned:",
+        "Commands in the chat with the bot",
+        "Commands in group and supergroup chats"
+      ],
+      "subtypes": [
+        "botCommandScopeChatMember + language_code",
+        "botCommandScopeChatMember",
+        "botCommandScopeChatAdministrators + language_code (admins only)",
+        "botCommandScopeChatAdministrators (admins only)",
+        "botCommandScopeChat + language_code",
+        "botCommandScopeChat",
+        "botCommandScopeAllChatAdministrators + language_code (admins only)",
+        "botCommandScopeAllChatAdministrators (admins only)",
+        "botCommandScopeAllGroupChats + language_code",
+        "botCommandScopeAllGroupChats",
+        "botCommandScopeDefault + language_code",
+        "botCommandScopeDefault"
+      ]
+    },
+    "BotCommandScopeDefault": {
+      "name": "BotCommandScopeDefault",
+      "href": "https://core.telegram.org/bots/api#botcommandscopedefault",
+      "description": [
+        "Represents the default scope of bot commands. Default commands are used if no commands with a narrower scope are specified for the user."
+      ],
+      "fields": [
+        {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Scope type, must be default"
+        }
+      ]
+    },
+    "BotCommandScopeAllPrivateChats": {
+      "name": "BotCommandScopeAllPrivateChats",
+      "href": "https://core.telegram.org/bots/api#botcommandscopeallprivatechats",
+      "description": [
+        "Represents the scope of bot commands, covering all private chats."
+      ],
+      "fields": [
+        {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Scope type, must be all_private_chats"
+        }
+      ]
+    },
+    "BotCommandScopeAllGroupChats": {
+      "name": "BotCommandScopeAllGroupChats",
+      "href": "https://core.telegram.org/bots/api#botcommandscopeallgroupchats",
+      "description": [
+        "Represents the scope of bot commands, covering all group and supergroup chats."
+      ],
+      "fields": [
+        {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Scope type, must be all_group_chats"
+        }
+      ]
+    },
+    "BotCommandScopeAllChatAdministrators": {
+      "name": "BotCommandScopeAllChatAdministrators",
+      "href": "https://core.telegram.org/bots/api#botcommandscopeallchatadministrators",
+      "description": [
+        "Represents the scope of bot commands, covering all group and supergroup chat administrators."
+      ],
+      "fields": [
+        {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Scope type, must be all_chat_administrators"
+        }
+      ]
+    },
+    "BotCommandScopeChat": {
+      "name": "BotCommandScopeChat",
+      "href": "https://core.telegram.org/bots/api#botcommandscopechat",
+      "description": [
+        "Represents the scope of bot commands, covering a specific chat."
+      ],
+      "fields": [
+        {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Scope type, must be chat"
+        },
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        }
+      ]
+    },
+    "BotCommandScopeChatAdministrators": {
+      "name": "BotCommandScopeChatAdministrators",
+      "href": "https://core.telegram.org/bots/api#botcommandscopechatadministrators",
+      "description": [
+        "Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat."
+      ],
+      "fields": [
+        {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Scope type, must be chat_administrators"
+        },
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        }
+      ]
+    },
+    "BotCommandScopeChatMember": {
+      "name": "BotCommandScopeChatMember",
+      "href": "https://core.telegram.org/bots/api#botcommandscopechatmember",
+      "description": [
+        "Represents the scope of bot commands, covering a specific member of a group or supergroup chat."
+      ],
+      "fields": [
+        {
+          "name": "type",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Scope type, must be chat_member"
+        },
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        },
+        {
+          "name": "user_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Unique identifier of the target user"
         }
       ]
     },
