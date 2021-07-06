@@ -6818,7 +6818,7 @@
             "Boolean"
           ],
           "required": true,
-          "description": "True, if the user is allowed to pin messages; groups and supergroups only"
+          "description": "True, if the user is allowed to pin messages"
         },
         {
           "name": "can_send_messages",
