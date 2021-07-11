@@ -6866,7 +6866,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Date when restrictions will be lifted for this user; unix time"
+          "description": "Date when restrictions will be lifted for this user; unix time. If 0, then the user is restricted forever"
         }
       ],
       "subtype_of": [
@@ -6930,7 +6930,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Date when restrictions will be lifted for this user; unix time"
+          "description": "Date when restrictions will be lifted for this user; unix time. If 0, then the user is banned forever"
         }
       ],
       "subtype_of": [
