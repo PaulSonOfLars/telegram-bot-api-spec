@@ -6596,20 +6596,20 @@
           "description": "Information about the user"
         },
         {
-          "name": "custom_title",
-          "types": [
-            "String"
-          ],
-          "required": true,
-          "description": "Custom title for this user"
-        },
-        {
           "name": "is_anonymous",
           "types": [
             "Boolean"
           ],
           "required": true,
           "description": "True, if the user's presence in the chat is hidden"
+        },
+        {
+          "name": "custom_title",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. Custom title for this user"
         }
       ],
       "subtype_of": [
@@ -6648,14 +6648,6 @@
           "description": "True, if the bot is allowed to edit administrator privileges of that user"
         },
         {
-          "name": "custom_title",
-          "types": [
-            "String"
-          ],
-          "required": true,
-          "description": "Custom title for this user"
-        },
-        {
           "name": "is_anonymous",
           "types": [
             "Boolean"
@@ -6670,22 +6662,6 @@
           ],
           "required": true,
           "description": "True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
-        },
-        {
-          "name": "can_post_messages",
-          "types": [
-            "Boolean"
-          ],
-          "required": true,
-          "description": "True, if the administrator can post in the channel; channels only"
-        },
-        {
-          "name": "can_edit_messages",
-          "types": [
-            "Boolean"
-          ],
-          "required": true,
-          "description": "True, if the administrator can edit messages of other users and can pin messages; channels only"
         },
         {
           "name": "can_delete_messages",
@@ -6736,12 +6712,36 @@
           "description": "True, if the user is allowed to invite new users to the chat"
         },
         {
+          "name": "can_post_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the administrator can post in the channel; channels only"
+        },
+        {
+          "name": "can_edit_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; channels only"
+        },
+        {
           "name": "can_pin_messages",
           "types": [
             "Boolean"
           ],
-          "required": true,
-          "description": "True, if the user is allowed to pin messages; groups and supergroups only"
+          "required": false,
+          "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+        },
+        {
+          "name": "custom_title",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. Custom title for this user"
         }
       ],
       "subtype_of": [
@@ -6829,7 +6829,7 @@
             "Boolean"
           ],
           "required": true,
-          "description": "True, if the user is allowed to pin messages; groups and supergroups only"
+          "description": "True, if the user is allowed to pin messages"
         },
         {
           "name": "can_send_messages",
@@ -6877,7 +6877,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Date when restrictions will be lifted for this user; unix time"
+          "description": "Date when restrictions will be lifted for this user; unix time. If 0, then the user is restricted forever"
         }
       ],
       "subtype_of": [
@@ -6941,7 +6941,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Date when restrictions will be lifted for this user; unix time"
+          "description": "Date when restrictions will be lifted for this user; unix time. If 0, then the user is banned forever"
         }
       ],
       "subtype_of": [
