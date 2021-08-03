@@ -7,7 +7,8 @@ import requests
 from bs4 import BeautifulSoup, Tag
 
 TG_CORE_TYPES = ["String", "Boolean", "Integer", "Float"]
-API_URL = "https://core.telegram.org/bots/api"
+ROOT_URL = "https://core.telegram.org"
+API_URL = ROOT_URL + "/bots/api"
 
 METHODS = "methods"
 TYPES = "types"
@@ -166,6 +167,23 @@ def clean_tg_description(t: Tag) -> str:
     # Make sure to include linebreaks, or spacing gets weird
     for br in t.find_all("br"):
         br.replace_with("\n")
+
+    # Replace helpful anchors with the actual URL.
+    for a in t.find_all("a"):
+        anchor_text = a.get_text()
+        if "»" not in anchor_text:
+            continue
+
+        link = a.get("href")
+        # Page-relative URL
+        if link.startswith("#"):
+            link = API_URL + link
+        # Domain-relative URL
+        elif link.startswith("/"):
+            link = ROOT_URL + link
+
+        anchor_text = anchor_text.replace(" »", ": " + link)
+        a.replace_with(anchor_text)
 
     text = t.get_text()
 
