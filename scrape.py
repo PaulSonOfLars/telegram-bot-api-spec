@@ -27,7 +27,7 @@ def retrieve_api_info() -> Dict:
     }
 
     for x in list(dev_rules.children):
-        if x.name == "h3":
+        if x.name == "h3" or x.name == "hr":
             # New category; clear name and type.
             curr_name = ""
             curr_type = ""
