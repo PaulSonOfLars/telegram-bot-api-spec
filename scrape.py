@@ -4,7 +4,7 @@ import string
 from typing import List, Dict
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 TG_CORE_TYPES = ["String", "Boolean", "Integer", "Float"]
 API_URL = "https://core.telegram.org/bots/api"
@@ -82,7 +82,7 @@ def get_fields(curr_name: str, curr_type: str, x, items: dict):
     for tr in body.find_all("tr"):
         children = list(tr.find_all("td"))
         if curr_type == TYPES and len(children) == 3:
-            desc = clean_tg_description(children[2].get_text())
+            desc = clean_tg_description(children[2])
             fields.append(
                 {
                     "name": children[0].get_text(),
@@ -98,7 +98,7 @@ def get_fields(curr_name: str, curr_type: str, x, items: dict):
                     "name": children[0].get_text(),
                     "types": clean_tg_type(children[1].get_text()),
                     "required": children[2].get_text() == "Yes",
-                    "description": clean_tg_description(children[3].get_text()),
+                    "description": clean_tg_description(children[3]),
                 }
             )
 
@@ -155,8 +155,16 @@ def extract_return_type(curr_type: str, curr_name: str, ret_str: str, items: Dic
         items[curr_type][curr_name]["returns"] = rets
 
 
-def clean_tg_description(t: str) -> str:
-    return t.replace('”', '"').replace('“', '"')
+def clean_tg_description(t: Tag) -> str:
+    # Replace HTML emoji images with actual emoji
+    for i in t.find_all("img"):
+        split_src_url = i.get("src").split("/")
+        file = split_src_url[len(split_src_url) - 1]
+        file_no_ext = file.split(".")[0]
+        i.replace_with(bytes.fromhex(file_no_ext).decode("utf-8"))
+
+    # Replace weird UTF-8 quotes with proper quotes
+    return t.get_text().replace('”', '"').replace('“', '"')
 
 
 def get_proper_type(t: str) -> str:

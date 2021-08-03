@@ -1830,7 +1830,7 @@
             "String"
           ],
           "required": false,
-          "description": "Emoji on which the dice throw animation is based. Currently, must be one of \"\", \"\", \"\", \"\", \"\", or \"\". Dice can have values 1-6 for \"\", \"\" and \"\", values 1-5 for \"\" and \"\", and values 1-64 for \"\". Defaults to \"\""
+          "description": "Emoji on which the dice throw animation is based. Currently, must be one of \"\ud83c\udfb2\", \"\ud83c\udfaf\", \"\ud83c\udfc0\", \"\u26bd\", \"\ud83c\udfb3\", or \"\ud83c\udfb0\". Dice can have values 1-6 for \"\ud83c\udfb2\", \"\ud83c\udfaf\" and \"\ud83c\udfb3\", values 1-5 for \"\ud83c\udfc0\" and \"\u26bd\", and values 1-64 for \"\ud83c\udfb0\". Defaults to \"\ud83c\udfb2\""
         },
         {
           "name": "disable_notification",
@@ -5607,7 +5607,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Value of the dice, 1-6 for \"\", \"\" and \"\" base emoji, 1-5 for \"\" and \"\" base emoji, 1-64 for \"\" base emoji"
+          "description": "Value of the dice, 1-6 for \"\ud83c\udfb2\", \"\ud83c\udfaf\" and \"\ud83c\udfb3\" base emoji, 1-5 for \"\ud83c\udfc0\" and \"\u26bd\" base emoji, 1-64 for \"\ud83c\udfb0\" base emoji"
         }
       ]
     },
