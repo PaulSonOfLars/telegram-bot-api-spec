@@ -163,8 +163,24 @@ def clean_tg_description(t: Tag) -> str:
         file_no_ext = file.split(".")[0]
         i.replace_with(bytes.fromhex(file_no_ext).decode("utf-8"))
 
+    # Make sure to include linebreaks, or spacing gets weird
+    for br in t.find_all("br"):
+        br.replace_with("\n")
+
+    text = t.get_text()
+
+    # Replace newlines with spaces
+    text = re.sub("\n+", " ", text)
+
+    # Replace weird unicode with three dots
+    text = text.replace("…", "...")
+
+    # Use sensible dashes
+    text = text.replace(u"\u2013", "-")
+    text = text.replace(u"\u2014", "-")
+
     # Replace weird UTF-8 quotes with proper quotes
-    return t.get_text().replace('”', '"').replace('“', '"')
+    return text.replace('”', '"').replace('“', '"')
 
 
 def get_proper_type(t: str) -> str:
