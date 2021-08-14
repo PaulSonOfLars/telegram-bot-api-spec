@@ -22,17 +22,12 @@ jobs:
     - name: Scrape website
       run: python scrape_tg_botapi.py botapi.json
 
-    - name: Open Pull Request
-      uses: peter-evans/create-pull-request@v3.5.2
-      with:
-        commit-message: >
-          Regenerate bot API docs.
-        title: >
-          Update bot API docs based on the latest changes
-        body: >
-          This is an automated PR. Please check the diff, and the action logs, to check for any funky behaviour.
-        branch: automated/bot-api-update
-        reviewers: SpEcHiDe
-        assignees: SpEcHiDe
-        labels: automated
-        delete-branch: true
+    - name: Commit and push changes.
+      run: |
+          git checkout main
+
+          git config --global user.email "github-action@users.noreply.github.com"
+          git config --global user.name "GitHub Action"
+
+          git commit -am "Regenerate bot API docs."
+          git push
