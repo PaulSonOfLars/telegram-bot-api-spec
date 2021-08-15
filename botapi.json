@@ -7437,6 +7437,7 @@
         {
           "name": "thumb",
           "types": [
+            "InputFile",
             "String"
           ],
           "required": false,
@@ -7529,6 +7530,7 @@
         {
           "name": "thumb",
           "types": [
+            "InputFile",
             "String"
           ],
           "required": false,
@@ -7613,6 +7615,7 @@
         {
           "name": "thumb",
           "types": [
+            "InputFile",
             "String"
           ],
           "required": false,
@@ -7697,6 +7700,7 @@
         {
           "name": "thumb",
           "types": [
+            "InputFile",
             "String"
           ],
           "required": false,
