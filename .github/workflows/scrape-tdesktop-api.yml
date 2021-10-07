@@ -1,0 +1,22 @@
+on:
+  schedule:
+    - cron:  '15 12 * * *' # Every day at 12:15 (noon). Ref https://crontab.guru/examples.html
+name: Scrape Telegram tDesktop API
+jobs:
+  wget:
+    runs-on: ubuntu-latest
+    steps:
+    - name: wget
+      uses: wei/wget@v1
+      with:
+        args: -O mtproto.tl https://github.com/telegramdesktop/tdesktop/raw/dev/Telegram/Resources/tl/api.tl
+
+    - name: Commit and push changes.
+      run: |
+          git checkout main
+
+          git config --global user.email "johnprestonmail@gmail.com"
+          git config --global user.name "GitHub Action <John Preston>"
+
+          git commit -am "update tDesktop API scheme."
+          git push

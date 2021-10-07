@@ -1,7 +1,7 @@
 on:
   schedule:
     - cron:  '15 12 * * *' # Every day at 12:15 (noon). Ref https://crontab.guru/examples.html
-name: Scrape telegram bot API
+name: Scrape Telegram BOT API
 jobs:
   build:
     name: Scrape
@@ -29,5 +29,5 @@ jobs:
           git config --global user.email "github-action@users.noreply.github.com"
           git config --global user.name "GitHub Action"
 
-          git commit -am "Regenerate bot API docs."
+          git commit -am "update BOT API docs."
           git push

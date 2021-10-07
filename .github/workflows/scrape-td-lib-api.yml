@@ -1,0 +1,22 @@
+on:
+  schedule:
+    - cron:  '15 12 * * *' # Every day at 12:15 (noon). Ref https://crontab.guru/examples.html
+name: Scrape Telegram DLib API
+jobs:
+  wget:
+    runs-on: ubuntu-latest
+    steps:
+    - name: wget
+      uses: wei/wget@v1
+      with:
+        args: -O tdlib.tl https://github.com/tdlib/td/raw/master/td/generate/scheme/telegram_api.tl
+
+    - name: Commit and push changes.
+      run: |
+          git checkout main
+
+          git config --global user.email "levlam@telegram.org"
+          git config --global user.name "GitHub Action <Aliaksei Levin>"
+
+          git commit -am "update TDLib API scheme."
+          git push
