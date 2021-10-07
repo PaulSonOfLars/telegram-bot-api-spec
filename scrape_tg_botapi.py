@@ -5,10 +5,11 @@ import sys
 from typing import List, Dict
 
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 TG_CORE_TYPES = ["String", "Boolean", "Integer", "Float"]
-API_URL = "https://core.telegram.org/bots/api"
+ROOT_URL = "https://core.telegram.org"
+API_URL = ROOT_URL + "/bots/api"
 
 METHODS = "methods"
 TYPES = "types"
@@ -27,7 +28,7 @@ def retrieve_api_info() -> Dict:
     }
 
     for x in list(dev_rules.children):
-        if x.name == "h3":
+        if x.name == "h3" or x.name == "hr":
             # New category; clear name and type.
             curr_name = ""
             curr_type = ""
@@ -83,7 +84,7 @@ def get_fields(curr_name: str, curr_type: str, x, items: dict):
     for tr in body.find_all("tr"):
         children = list(tr.find_all("td"))
         if curr_type == TYPES and len(children) == 3:
-            desc = clean_tg_description(children[2].get_text())
+            desc = clean_tg_description(children[2])
             fields.append(
                 {
                     "name": children[0].get_text(),
@@ -99,7 +100,7 @@ def get_fields(curr_name: str, curr_type: str, x, items: dict):
                     "name": children[0].get_text(),
                     "types": clean_tg_type(children[1].get_text()),
                     "required": children[2].get_text() == "Yes",
-                    "description": clean_tg_description(children[3].get_text()),
+                    "description": clean_tg_description(children[3]),
                 }
             )
 
@@ -156,8 +157,49 @@ def extract_return_type(curr_type: str, curr_name: str, ret_str: str, items: Dic
         items[curr_type][curr_name]["returns"] = rets
 
 
-def clean_tg_description(t: str) -> str:
-    return t.replace('”', '"').replace('“', '"')
+def clean_tg_description(t: Tag) -> str:
+    # Replace HTML emoji images with actual emoji
+    for i in t.find_all("img"):
+        split_src_url = i.get("src").split("/")
+        file = split_src_url[len(split_src_url) - 1]
+        file_no_ext = file.split(".")[0]
+        i.replace_with(bytes.fromhex(file_no_ext).decode("utf-8"))
+
+    # Make sure to include linebreaks, or spacing gets weird
+    for br in t.find_all("br"):
+        br.replace_with("\n")
+
+    # Replace helpful anchors with the actual URL.
+    for a in t.find_all("a"):
+        anchor_text = a.get_text()
+        if "»" not in anchor_text:
+            continue
+
+        link = a.get("href")
+        # Page-relative URL
+        if link.startswith("#"):
+            link = API_URL + link
+        # Domain-relative URL
+        elif link.startswith("/"):
+            link = ROOT_URL + link
+
+        anchor_text = anchor_text.replace(" »", ": " + link)
+        a.replace_with(anchor_text)
+
+    text = t.get_text()
+
+    # Replace newlines with spaces
+    text = re.sub("\n+", " ", text)
+
+    # Replace weird unicode with three dots
+    text = text.replace("…", "...")
+
+    # Use sensible dashes
+    text = text.replace(u"\u2013", "-")
+    text = text.replace(u"\u2014", "-")
+
+    # Replace weird UTF-8 quotes with proper quotes
+    return text.replace('”', '"').replace('“', '"')
 
 
 def get_proper_type(t: str) -> str:
