@@ -5127,7 +5127,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size"
+          "description": "Optional. File size in bytes"
         }
       ]
     },
@@ -5208,7 +5208,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size"
+          "description": "Optional. File size in bytes"
         }
       ]
     },
@@ -5281,7 +5281,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size"
+          "description": "Optional. File size in bytes"
         },
         {
           "name": "thumb",
@@ -5346,7 +5346,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size"
+          "description": "Optional. File size in bytes"
         }
       ]
     },
@@ -5427,7 +5427,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size"
+          "description": "Optional. File size in bytes"
         }
       ]
     },
@@ -5484,7 +5484,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size"
+          "description": "Optional. File size in bytes"
         }
       ]
     },
@@ -5533,7 +5533,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size"
+          "description": "Optional. File size in bytes"
         }
       ]
     },
@@ -5991,7 +5991,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Voice chat duration; in seconds"
+          "description": "Voice chat duration in seconds"
         }
       ]
     },
@@ -6066,7 +6066,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size, if known"
+          "description": "Optional. File size in bytes, if known"
         },
         {
           "name": "file_path",
@@ -7489,7 +7489,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Video duration"
+          "description": "Optional. Video duration in seconds"
         },
         {
           "name": "supports_streaming",
@@ -7582,7 +7582,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Animation duration"
+          "description": "Optional. Animation duration in seconds"
         }
       ],
       "subtype_of": [
@@ -7835,7 +7835,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size"
+          "description": "Optional. File size in bytes"
         }
       ]
     },
@@ -8173,7 +8173,7 @@
             "String"
           ],
           "required": true,
-          "description": "A valid URL of the photo. Photo must be in jpeg format. Photo size must not exceed 5MB"
+          "description": "A valid URL of the photo. Photo must be in JPEG format. Photo size must not exceed 5MB"
         },
         {
           "name": "thumb_url",
@@ -8313,7 +8313,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Duration of the GIF"
+          "description": "Optional. Duration of the GIF in seconds"
         },
         {
           "name": "thumb_url",
@@ -8437,7 +8437,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Video duration"
+          "description": "Optional. Video duration in seconds"
         },
         {
           "name": "thumb_url",
@@ -8553,7 +8553,7 @@
             "String"
           ],
           "required": true,
-          "description": "URL of the thumbnail (jpeg only) for the video"
+          "description": "URL of the thumbnail (JPEG only) for the video"
         },
         {
           "name": "title",
@@ -8936,7 +8936,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. URL of the thumbnail (jpeg only) for the file"
+          "description": "Optional. URL of the thumbnail (JPEG only) for the file"
         },
         {
           "name": "thumb_width",
@@ -10918,7 +10918,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "File size"
+          "description": "File size in bytes"
         },
         {
           "name": "file_date",
