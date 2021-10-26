@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron:  '15 12 * * *' # Every day at 12:15 (noon). Ref https://crontab.guru/examples.html
+    - cron:  '0 */5 * * *'
 name: Scrape Telegram BOT API
 jobs:
   build:

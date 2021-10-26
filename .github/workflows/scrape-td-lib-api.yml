@@ -1,11 +1,13 @@
 on:
   schedule:
-    - cron:  '15 12 * * *' # Every day at 12:15 (noon). Ref https://crontab.guru/examples.html
+    - cron:  '0 */2 * * *'
 name: Scrape Telegram DLib API
 jobs:
   wget:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@master
+
     - name: wget
       uses: wei/wget@v1
       with:
