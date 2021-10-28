@@ -20,5 +20,6 @@ jobs:
           git config --global user.email "levlam@telegram.org"
           git config --global user.name "GitHub Action <Aliaksei Levin>"
 
+          git add tdlib.tl
           git commit -am "update TDLib API scheme."
           git push
