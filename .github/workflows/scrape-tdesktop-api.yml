@@ -20,5 +20,6 @@ jobs:
           git config --global user.email "johnprestonmail@gmail.com"
           git config --global user.name "GitHub Action <John Preston>"
 
+          git add mtproto.tl
           git commit -am "update tDesktop API scheme."
           git push
