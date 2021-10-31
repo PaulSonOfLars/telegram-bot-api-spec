@@ -4507,7 +4507,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unpriviledged user. Returned only in getChat."
+          "description": "Optional. For supergroups, the minimum allowed delay between consecutive messages sent by each unpriviledged user; in seconds. Returned only in getChat."
         },
         {
           "name": "message_auto_delete_time",
@@ -5819,7 +5819,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Time relative to the message sending date, during which the location can be updated, in seconds. For active live locations only."
+          "description": "Optional. Time relative to the message sending date, during which the location can be updated; in seconds. For active live locations only."
         },
         {
           "name": "heading",
@@ -5950,7 +5950,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "New auto-delete time for messages in the chat"
+          "description": "New auto-delete time for messages in the chat; in seconds"
         }
       ]
     },
