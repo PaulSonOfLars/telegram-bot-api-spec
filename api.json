@@ -225,6 +225,14 @@
           "description": "Sends the message silently. Users will receive a notification with no sound."
         },
         {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of sent messages from forwarding and saving"
+        },
+        {
           "name": "reply_to_message_id",
           "types": [
             "Integer"
@@ -288,6 +296,14 @@
           ],
           "required": false,
           "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the forwarded message from forwarding and saving"
         },
         {
           "name": "message_id",
@@ -366,6 +382,14 @@
           ],
           "required": false,
           "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
         },
         {
           "name": "reply_to_message_id",
@@ -455,6 +479,14 @@
           ],
           "required": false,
           "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
         },
         {
           "name": "reply_to_message_id",
@@ -580,6 +612,14 @@
           "description": "Sends the message silently. Users will receive a notification with no sound."
         },
         {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
+        },
+        {
           "name": "reply_to_message_id",
           "types": [
             "Integer"
@@ -684,6 +724,14 @@
           ],
           "required": false,
           "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
         },
         {
           "name": "reply_to_message_id",
@@ -816,6 +864,14 @@
           "description": "Sends the message silently. Users will receive a notification with no sound."
         },
         {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
+        },
+        {
           "name": "reply_to_message_id",
           "types": [
             "Integer"
@@ -938,6 +994,14 @@
           "description": "Sends the message silently. Users will receive a notification with no sound."
         },
         {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
+        },
+        {
           "name": "reply_to_message_id",
           "types": [
             "Integer"
@@ -1035,6 +1099,14 @@
           "description": "Sends the message silently. Users will receive a notification with no sound."
         },
         {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
+        },
+        {
           "name": "reply_to_message_id",
           "types": [
             "Integer"
@@ -1125,6 +1197,14 @@
           "description": "Sends the message silently. Users will receive a notification with no sound."
         },
         {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
+        },
+        {
           "name": "reply_to_message_id",
           "types": [
             "Integer"
@@ -1190,6 +1270,14 @@
           ],
           "required": false,
           "description": "Sends messages silently. Users will receive a notification with no sound."
+        },
+        {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent messages from forwarding and saving"
         },
         {
           "name": "reply_to_message_id",
@@ -1283,6 +1371,14 @@
           ],
           "required": false,
           "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
         },
         {
           "name": "reply_to_message_id",
@@ -1537,6 +1633,14 @@
           "description": "Sends the message silently. Users will receive a notification with no sound."
         },
         {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
+        },
+        {
           "name": "reply_to_message_id",
           "types": [
             "Integer"
@@ -1623,6 +1727,14 @@
           ],
           "required": false,
           "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
         },
         {
           "name": "reply_to_message_id",
@@ -1777,6 +1889,14 @@
           "description": "Sends the message silently. Users will receive a notification with no sound."
         },
         {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
+        },
+        {
           "name": "reply_to_message_id",
           "types": [
             "Integer"
@@ -1839,6 +1959,14 @@
           ],
           "required": false,
           "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding"
         },
         {
           "name": "reply_to_message_id",
@@ -3399,6 +3527,14 @@
           "description": "Sends the message silently. Users will receive a notification with no sound."
         },
         {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
+        },
+        {
           "name": "reply_to_message_id",
           "types": [
             "Integer"
@@ -3962,6 +4098,14 @@
           "description": "Sends the message silently. Users will receive a notification with no sound."
         },
         {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
+        },
+        {
           "name": "reply_to_message_id",
           "types": [
             "Integer"
@@ -4129,6 +4273,14 @@
           ],
           "required": false,
           "description": "Sends the message silently. Users will receive a notification with no sound."
+        },
+        {
+          "name": "protect_content",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Protects the contents of the sent message from forwarding and saving"
         },
         {
           "name": "reply_to_message_id",
@@ -5226,7 +5378,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the entity. Can be \"mention\" (@username), \"hashtag\" (#hashtag), \"cashtag\" ($USD), \"bot_command\" (/start@jobs_bot), \"url\" (https://telegram.org), \"email\" (do-not-reply@telegram.org), \"phone_number\" (+1-212-555-0123), \"bold\" (bold text), \"italic\" (italic text), \"underline\" (underlined text), \"strikethrough\" (strikethrough text), \"code\" (monowidth string), \"pre\" (monowidth block), \"text_link\" (for clickable text URLs), \"text_mention\" (for users without usernames)"
+          "description": "Type of the entity. Currently, can be \"mention\" (@username), \"hashtag\" (#hashtag), \"cashtag\" ($USD), \"bot_command\" (/start@jobs_bot), \"url\" (https://telegram.org), \"email\" (do-not-reply@telegram.org), \"phone_number\" (+1-212-555-0123), \"bold\" (bold text), \"italic\" (italic text), \"underline\" (underlined text), \"strikethrough\" (strikethrough text), \"spoiler\" (spoiler message), \"code\" (monowidth string), \"pre\" (monowidth block), \"text_link\" (for clickable text URLs), \"text_mention\" (for users without usernames)"
         },
         {
           "name": "offset",
