@@ -230,7 +230,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Protects the contents of sent messages from forwarding and saving"
+          "description": "Protects the contents of the sent message from forwarding and saving"
         },
         {
           "name": "reply_to_message_id",
