@@ -1,4 +1,5 @@
 on:
+  workflow_dispatch: {} # Allow manually kicking off builds
   schedule:
     - cron:  '0 12 * * *' # Every day at 12:00 (noon). Ref https://crontab.guru/examples.html
 name: Scrape telegram bot API
