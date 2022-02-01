@@ -2146,7 +2146,7 @@
             "String"
           ],
           "required": true,
-          "description": "Unique identifier for the target group or username of the target supergroup or channel (in the format @username)"
+          "description": "Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)"
         },
         {
           "name": "user_id",
@@ -3497,7 +3497,7 @@
         "Message"
       ],
       "description": [
-        "Use this method to send static .WEBP or animated .TGS stickers. On success, the sent Message is returned."
+        "Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers. On success, the sent Message is returned."
       ],
       "fields": [
         {
@@ -3618,7 +3618,7 @@
         "Boolean"
       ],
       "description": [
-        "Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. You must use exactly one of the fields png_sticker or tgs_sticker. Returns True on success."
+        "Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. You must use exactly one of the fields png_sticker, tgs_sticker, or webm_sticker. Returns True on success."
       ],
       "fields": [
         {
@@ -3660,7 +3660,15 @@
             "InputFile"
           ],
           "required": false,
-          "description": "TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements"
+          "description": "TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/stickers#animated-sticker-requirements for technical requirements"
+        },
+        {
+          "name": "webm_sticker",
+          "types": [
+            "InputFile"
+          ],
+          "required": false,
+          "description": "WEBM video with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/stickers#video-sticker-requirements for technical requirements"
         },
         {
           "name": "emojis",
@@ -3695,7 +3703,7 @@
         "Boolean"
       ],
       "description": [
-        "Use this method to add a new sticker to a set created by the bot. You must use exactly one of the fields png_sticker or tgs_sticker. Animated stickers can be added to animated sticker sets and only to them. Animated sticker sets can have up to 50 stickers. Static sticker sets can have up to 120 stickers. Returns True on success."
+        "Use this method to add a new sticker to a set created by the bot. You must use exactly one of the fields png_sticker, tgs_sticker, or webm_sticker. Animated stickers can be added to animated sticker sets and only to them. Animated sticker sets can have up to 50 stickers. Static sticker sets can have up to 120 stickers. Returns True on success."
       ],
       "fields": [
         {
@@ -3729,7 +3737,15 @@
             "InputFile"
           ],
           "required": false,
-          "description": "TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/animated_stickers#technical-requirements for technical requirements"
+          "description": "TGS animation with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/stickers#animated-sticker-requirements for technical requirements"
+        },
+        {
+          "name": "webm_sticker",
+          "types": [
+            "InputFile"
+          ],
+          "required": false,
+          "description": "WEBM video with the sticker, uploaded using multipart/form-data. See https://core.telegram.org/stickers#video-sticker-requirements for technical requirements"
         },
         {
           "name": "emojis",
@@ -3804,7 +3820,7 @@
         "Boolean"
       ],
       "description": [
-        "Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Returns True on success."
+        "Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets only. Video thumbnails can be set only for video sticker sets only. Returns True on success."
       ],
       "fields": [
         {
@@ -3830,7 +3846,7 @@
             "String"
           ],
           "required": false,
-          "description": "A PNG image with the thumbnail, must be up to 128 kilobytes in size and have width and height exactly 100px, or a TGS animation with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/animated_stickers#technical-requirements for animated sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files. Animated sticker set thumbnail can't be uploaded via HTTP URL."
+          "description": "A PNG image with the thumbnail, must be up to 128 kilobytes in size and have width and height exactly 100px, or a TGS animation with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#animated-sticker-requirements for animated sticker technical requirements, or a WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-sticker-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More info on Sending Files: https://core.telegram.org/bots/api#sending-files. Animated sticker set thumbnails can't be uploaded via HTTP URL."
         }
       ]
     },
@@ -8211,6 +8227,14 @@
           "description": "True, if the sticker is animated"
         },
         {
+          "name": "is_video",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the sticker is a video sticker"
+        },
+        {
           "name": "thumb",
           "types": [
             "PhotoSize"
@@ -8284,6 +8308,14 @@
           "description": "True, if the sticker set contains animated stickers"
         },
         {
+          "name": "is_video",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the sticker set contains video stickers"
+        },
+        {
           "name": "contains_masks",
           "types": [
             "Boolean"
@@ -8305,7 +8337,7 @@
             "PhotoSize"
           ],
           "required": false,
-          "description": "Optional. Sticker set thumbnail in the .WEBP or .TGS format"
+          "description": "Optional. Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format"
         }
       ]
     },
