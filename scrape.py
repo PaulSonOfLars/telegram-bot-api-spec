@@ -191,8 +191,8 @@ def clean_tg_description(t: Tag) -> str:
 
     text = t.get_text()
 
-    # Replace newlines with spaces
-    text = re.sub("\n+", " ", text)
+    # Replace any weird whitespaces (eg double space, newlines, tabs) with single spaces
+    text = re.sub(r"\s+", " ", text)
 
     # Replace weird unicode with three dots
     text = text.replace("…", "...")
