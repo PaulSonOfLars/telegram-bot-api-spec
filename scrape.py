@@ -13,6 +13,8 @@ API_URL = ROOT_URL + "/bots/api"
 METHODS = "methods"
 TYPES = "types"
 
+APPROVED_NO_SUBTYPES = ("VoiceChatStarted", "InputFile", "CallbackGame")
+
 
 def retrieve_api_info() -> Dict:
     r = requests.get(API_URL)
@@ -46,19 +48,18 @@ def retrieve_api_info() -> Dict:
             continue
 
         if x.name == "p":
-            description = x.get_text().strip()
-            # we only need returns for methods.
-            # We only check this when curr_desc is empty, since the first paragraph contains the description.
-            if curr_type == METHODS and not items[curr_type][curr_name].get("description"):
-                get_method_return_type(curr_name, curr_type, description, items)
-
-            items[curr_type][curr_name].setdefault("description", []).append(description)
+            items[curr_type][curr_name].setdefault("description", []).append(clean_tg_description(x))
 
         if x.name == "table":
             get_fields(curr_name, curr_type, x, items)
 
         if x.name == "ul":
             get_subtypes(curr_name, curr_type, x, items)
+
+        # Only methods have return types.
+        # We check this every time just in case the description has been updated, and we have new return types to add.
+        if curr_type == METHODS and items[curr_type][curr_name].get("description"):
+            get_method_return_type(curr_name, curr_type, items[curr_type][curr_name].get("description"), items)
 
     return items
 
@@ -67,13 +68,17 @@ def get_subtypes(curr_name: str, curr_type: str, x, items: dict):
     if curr_name == "InputFile":  # Has no interesting subtypes
         return
 
-    subtypes = []
+    list_contents = []
     for li in x.find_all("li"):
-        subtype_name = li.get_text()
-        subtypes.append(subtype_name)
+        list_item = clean_tg_description(li)
+        list_contents.append(list_item)
 
-    items[curr_type][curr_name]["subtypes"] = subtypes
-    items[curr_type][curr_name]["description"] += [f"- {s}" for s in subtypes]
+    # List items found in types define possible subtypes.
+    if curr_type == TYPES:
+        items[curr_type][curr_name]["subtypes"] = list_contents
+
+    # Always add the list to the description, for better docs.
+    items[curr_type][curr_name]["description"] += [f"- {s}" for s in list_contents]
 
 
 # Get fields/parameters of type/method
@@ -114,15 +119,14 @@ def get_fields(curr_name: str, curr_type: str, x, items: dict):
     items[curr_type][curr_name]["fields"] = fields
 
 
-def get_method_return_type(curr_name, curr_type, description, items):
+def get_method_return_type(curr_name: str, curr_type: str, description_items: List[str], items: Dict):
+    description = "\n".join(description_items)
     ret_search = re.search("(?:on success,|returns)([^.]*)(?:on success)?", description, re.IGNORECASE)
     ret_search2 = re.search("([^.]*)(?:is returned)", description, re.IGNORECASE)
     if ret_search:
         extract_return_type(curr_type, curr_name, ret_search.group(1).strip(), items)
     elif ret_search2:
         extract_return_type(curr_type, curr_name, ret_search2.group(1).strip(), items)
-    else:
-        print("Failed to get return type for", curr_name)
 
 
 def get_type_and_name(x, anchor, items):
@@ -229,18 +233,23 @@ def clean_tg_type(t: str) -> List[str]:
     return [pref + get_proper_type(x) for x in fixed_commas]
 
 
-def verify_type_parameters(items: Dict):
+# Returns True if an issue is found.
+def verify_type_parameters(items: Dict) -> bool:
+    issue_found = False
+
     for t, values in items[TYPES].items():
         # check all values have a URL
         if not values.get("href"):
             print(f"{t} has no link!")
+            issue_found = True
             continue
 
         fields = values.get("fields", [])
         if len(fields) == 0:
             subtypes = values.get("subtypes", [])
-            if not subtypes:
-                print("TYPE", t, "HAS NO FIELDS OR SUBTYPES")
+            if not subtypes and t not in APPROVED_NO_SUBTYPES:
+                print("TYPE", t, "has no fields or subtypes, and is not approved")
+                issue_found = True
                 continue
 
             for st in subtypes:
@@ -248,6 +257,7 @@ def verify_type_parameters(items: Dict):
                     items[TYPES][st].setdefault("subtype_of", []).append(t)
                 else:
                     print("TYPE", t, "USES INVALID SUBTYPE", st)
+                    issue_found = True
 
         # check all parameter types are valid
         for param in fields:
@@ -258,19 +268,26 @@ def verify_type_parameters(items: Dict):
 
             if t not in items[TYPES] and t not in TG_CORE_TYPES:
                 print("UNKNOWN FIELD TYPE", t)
+                issue_found = True
+
+    return issue_found
 
 
-def verify_method_parameters(items: Dict):
+# Returns True if an issue is found.
+def verify_method_parameters(items: Dict) -> bool:
+    issue_found = False
     # Type check all methods
     for method, values in items[METHODS].items():
         # check all values have a URL
         if not values.get("href"):
             print(f"{method} has no link!")
+            issue_found = True
             continue
 
         # check all methods have a return
         if not values.get("returns"):
             print(f"{method} has no return types!")
+            issue_found = True
             continue
 
         if len(values.get("returns")) > 1:
@@ -284,6 +301,7 @@ def verify_method_parameters(items: Dict):
                     t = t[len("Array of "):]
 
                 if t not in items[TYPES] and t not in TG_CORE_TYPES:
+                    issue_found = True
                     print("UNKNOWN PARAM TYPE", t)
 
         # check all return types are valid
@@ -292,13 +310,17 @@ def verify_method_parameters(items: Dict):
                 ret = ret[len("Array of "):]
 
             if ret not in items[TYPES] and ret not in TG_CORE_TYPES:
+                issue_found = True
                 print("UNKNOWN RETURN TYPE", ret)
+
+    return issue_found
 
 
 if __name__ == '__main__':
     ITEMS = retrieve_api_info()
-    verify_type_parameters(ITEMS)
-    verify_method_parameters(ITEMS)
+    if verify_type_parameters(ITEMS) or verify_method_parameters(ITEMS):
+        print("Failed to validate schema. View logs above for more information.")
+        exit(1)
 
     with open("api.json", "w") as f:
         json.dump(ITEMS, f, indent=2)
