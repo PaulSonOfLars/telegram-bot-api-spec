@@ -4,7 +4,8 @@ import string
 from typing import List, Dict
 
 import requests
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup
+from bs4.element import Tag
 
 TG_CORE_TYPES = ["String", "Boolean", "Integer", "Float"]
 ROOT_URL = "https://core.telegram.org"
@@ -18,7 +19,7 @@ APPROVED_NO_SUBTYPES = ("VoiceChatStarted", "InputFile", "CallbackGame")
 
 def retrieve_api_info() -> Dict:
     r = requests.get(API_URL)
-    soup = BeautifulSoup(r.text, features="html.parser")
+    soup = BeautifulSoup(r.text, features="html5lib")
     dev_rules = soup.find("div", {"id": "dev_page_content"})
     curr_type = ""
     curr_name = ""
@@ -163,10 +164,7 @@ def extract_return_type(curr_type: str, curr_name: str, ret_str: str, items: Dic
 def clean_tg_description(t: Tag) -> str:
     # Replace HTML emoji images with actual emoji
     for i in t.find_all("img"):
-        split_src_url = i.get("src").split("/")
-        file = split_src_url[len(split_src_url) - 1]
-        file_no_ext = file.split(".")[0]
-        i.replace_with(bytes.fromhex(file_no_ext).decode("utf-8"))
+        i.replace_with(i.get("alt"))
 
     # Make sure to include linebreaks, or spacing gets weird
     for br in t.find_all("br"):
