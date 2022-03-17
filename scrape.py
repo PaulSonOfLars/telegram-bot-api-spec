@@ -205,6 +205,7 @@ def clean_tg_description(t: Tag) -> List[str]:
     text = text.replace(u"\u2013", "-")
     text = text.replace(u"\u2014", "-")
 
+    # Split on newlines to improve description output.
     return [t.strip() for t in text.split("\n") if t.strip()]
 
 
