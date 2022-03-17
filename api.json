@@ -3472,7 +3472,8 @@
         "- Bots can delete incoming messages in private chats.",
         "- Bots granted can_post_messages permissions can delete outgoing messages in channels.",
         "- If the bot is an administrator of a group, it can delete any message there.",
-        "- If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there. Returns True on success."
+        "- If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.",
+        "Returns True on success."
       ],
       "returns": [
         "Boolean"
@@ -3642,7 +3643,7 @@
             "String"
           ],
           "required": true,
-          "description": "Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals). Can contain only english letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in \"by<bot username>\". <bot_username> is case insensitive. 1-64 characters."
+          "description": "Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals). Can contain only english letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in \"_by_<bot_username>\". <bot_username> is case insensitive. 1-64 characters."
         },
         {
           "name": "title",
@@ -3861,7 +3862,8 @@
       "name": "answerInlineQuery",
       "href": "https://core.telegram.org/bots/api#answerinlinequery",
       "description": [
-        "Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per query are allowed."
+        "Use this method to send answers to an inline query. On success, True is returned.",
+        "No more than 50 results per query are allowed."
       ],
       "returns": [
         "Boolean"
@@ -4450,7 +4452,8 @@
       "name": "Update",
       "href": "https://core.telegram.org/bots/api#update",
       "description": [
-        "This object represents an incoming update. At most one of the optional parameters can be present in any given update."
+        "This object represents an incoming update.",
+        "At most one of the optional parameters can be present in any given update."
       ],
       "fields": [
         {
@@ -6495,7 +6498,8 @@
       "href": "https://core.telegram.org/bots/api#keyboardbutton",
       "description": [
         "This object represents one button of the reply keyboard. For simple text buttons String can be used instead of this object to specify text of the button. Optional fields request_contact, request_location, and request_poll are mutually exclusive.",
-        "Note: request_contact and request_location options will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message. Note: request_poll option will only work in Telegram versions released after 23 January, 2020. Older clients will display unsupported message."
+        "Note: request_contact and request_location options will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message.",
+        "Note: request_poll option will only work in Telegram versions released after 23 January, 2020. Older clients will display unsupported message."
       ],
       "fields": [
         {

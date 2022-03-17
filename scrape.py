@@ -49,7 +49,7 @@ def retrieve_api_info() -> Dict:
             continue
 
         if x.name == "p":
-            items[curr_type][curr_name].setdefault("description", []).append(clean_tg_description(x))
+            items[curr_type][curr_name].setdefault("description", []).extend(clean_tg_description(x))
 
         if x.name == "table":
             get_fields(curr_name, curr_type, x, items)
@@ -71,8 +71,7 @@ def get_subtypes(curr_name: str, curr_type: str, x, items: dict):
 
     list_contents = []
     for li in x.find_all("li"):
-        list_item = clean_tg_description(li)
-        list_contents.append(list_item)
+        list_contents.extend(clean_tg_description(li))
 
     # List items found in types define possible subtypes.
     if curr_type == TYPES:
@@ -89,7 +88,7 @@ def get_fields(curr_name: str, curr_type: str, x, items: dict):
     for tr in body.find_all("tr"):
         children = list(tr.find_all("td"))
         if curr_type == TYPES and len(children) == 3:
-            desc = clean_tg_description(children[2])
+            desc = clean_tg_field_description(children[2])
             fields.append(
                 {
                     "name": children[0].get_text(),
@@ -105,7 +104,7 @@ def get_fields(curr_name: str, curr_type: str, x, items: dict):
                     "name": children[0].get_text(),
                     "types": clean_tg_type(children[1].get_text()),
                     "required": children[2].get_text() == "Yes",
-                    "description": clean_tg_description(children[3]),
+                    "description": clean_tg_field_description(children[3])
                 }
             )
 
@@ -161,7 +160,11 @@ def extract_return_type(curr_type: str, curr_name: str, ret_str: str, items: Dic
         items[curr_type][curr_name]["returns"] = rets
 
 
-def clean_tg_description(t: Tag) -> str:
+def clean_tg_field_description(t: Tag) -> str:
+    return " ".join(clean_tg_description(t))
+
+
+def clean_tg_description(t: Tag) -> List[str]:
     # Replace HTML emoji images with actual emoji
     for i in t.find_all("img"):
         i.replace_with(i.get("alt"))
@@ -189,18 +192,21 @@ def clean_tg_description(t: Tag) -> str:
 
     text = t.get_text()
 
-    # Replace any weird whitespaces (eg double space, newlines, tabs) with single spaces
-    text = re.sub(r"\s+", " ", text)
+    # Replace any weird double whitespaces (eg double space, newlines, tabs) with single occurrences
+    text = re.sub(r"(\s){2,}", r"\1", text)
 
-    # Replace weird unicode with three dots
+    # Replace weird UTF-8 quotes with proper quotes
+    text = text.replace('”', '"').replace('“', '"')
+
+    # Replace weird unicode ellipsis with three dots
     text = text.replace("…", "...")
 
     # Use sensible dashes
     text = text.replace(u"\u2013", "-")
     text = text.replace(u"\u2014", "-")
 
-    # Replace weird UTF-8 quotes with proper quotes
-    return text.replace('”', '"').replace('“', '"')
+    # Split on newlines to improve description output.
+    return [t.strip() for t in text.split("\n") if t.strip()]
 
 
 def get_proper_type(t: str) -> str:
