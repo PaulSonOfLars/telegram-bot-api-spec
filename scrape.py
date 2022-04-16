@@ -14,7 +14,8 @@ API_URL = ROOT_URL + "/bots/api"
 METHODS = "methods"
 TYPES = "types"
 
-APPROVED_NO_SUBTYPES = ("VoiceChatStarted", "InputFile", "CallbackGame")
+# TODO: Remove this and instead check if description contains "no information"
+APPROVED_NO_SUBTYPES = ("InputFile", "CallbackGame", "VideoChatStarted")
 
 
 def retrieve_api_info() -> Dict:
