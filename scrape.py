@@ -14,7 +14,7 @@ API_URL = ROOT_URL + "/bots/api"
 METHODS = "methods"
 TYPES = "types"
 
-APPROVED_NO_SUBTYPES = ("VoiceChatStarted", "InputFile", "CallbackGame")
+APPROVED_NO_SUBTYPES = ("VideoChatStarted", "InputFile", "CallbackGame", "VideoChatStarted")
 
 
 def retrieve_api_info() -> Dict:
