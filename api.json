@@ -3200,7 +3200,7 @@
             "MenuButton"
           ],
           "required": false,
-          "description": "A JSON-serialized object for the new bot's menu button. Defaults to MenuButtonDefault"
+          "description": "A JSON-serialized object for the bot's new menu button. Defaults to MenuButtonDefault"
         }
       ]
     },
