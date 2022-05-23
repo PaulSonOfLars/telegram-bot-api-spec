@@ -329,3 +329,6 @@ if __name__ == '__main__':
 
     with open("api.json", "w") as f:
         json.dump(ITEMS, f, indent=2)
+
+    with open("api.min.json", "w") as f:
+        json.dump(ITEMS, f)
