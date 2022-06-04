@@ -1,7 +1,6 @@
 import json
 import re
 import string
-from typing import List, Dict
 
 import requests
 from bs4 import BeautifulSoup
@@ -9,7 +8,9 @@ from bs4.element import Tag
 
 TG_CORE_TYPES = ["String", "Boolean", "Integer", "Float"]
 ROOT_URL = "https://core.telegram.org"
-API_URL = ROOT_URL + "/bots/api"
+TO_SCRAPE = {
+    "api": ROOT_URL + "/bots/api",
+}
 
 METHODS = "methods"
 TYPES = "types"
@@ -18,8 +19,8 @@ TYPES = "types"
 APPROVED_NO_SUBTYPES = ("InputFile", "CallbackGame", "VideoChatStarted")
 
 
-def retrieve_api_info() -> Dict:
-    r = requests.get(API_URL)
+def retrieve_info(url: str) -> dict:
+    r = requests.get(url)
     soup = BeautifulSoup(r.text, features="html5lib")
     dev_rules = soup.find("div", {"id": "dev_page_content"})
     curr_type = ""
@@ -30,7 +31,7 @@ def retrieve_api_info() -> Dict:
         TYPES: dict(),
     }
 
-    for x in list(dev_rules.children):
+    for x in list(dev_rules.children):  # type: Tag
         if x.name == "h3" or x.name == "hr":
             # New category; clear name and type.
             curr_name = ""
@@ -44,19 +45,19 @@ def retrieve_api_info() -> Dict:
                 curr_type = ""
                 continue
 
-            curr_name, curr_type = get_type_and_name(x, anchor, items)
+            curr_name, curr_type = get_type_and_name(x, anchor, items, url)
 
         if not curr_type or not curr_name:
             continue
 
         if x.name == "p":
-            items[curr_type][curr_name].setdefault("description", []).extend(clean_tg_description(x))
+            items[curr_type][curr_name].setdefault("description", []).extend(clean_tg_description(x, url))
 
         if x.name == "table":
-            get_fields(curr_name, curr_type, x, items)
+            get_fields(curr_name, curr_type, x, items, url)
 
         if x.name == "ul":
-            get_subtypes(curr_name, curr_type, x, items)
+            get_subtypes(curr_name, curr_type, x, items, url)
 
         # Only methods have return types.
         # We check this every time just in case the description has been updated, and we have new return types to add.
@@ -66,13 +67,13 @@ def retrieve_api_info() -> Dict:
     return items
 
 
-def get_subtypes(curr_name: str, curr_type: str, x, items: dict):
+def get_subtypes(curr_name: str, curr_type: str, x: Tag, items: dict, url: str):
     if curr_name == "InputFile":  # Has no interesting subtypes
         return
 
     list_contents = []
     for li in x.find_all("li"):
-        list_contents.extend(clean_tg_description(li))
+        list_contents.extend(clean_tg_description(li, url))
 
     # List items found in types define possible subtypes.
     if curr_type == TYPES:
@@ -83,13 +84,13 @@ def get_subtypes(curr_name: str, curr_type: str, x, items: dict):
 
 
 # Get fields/parameters of type/method
-def get_fields(curr_name: str, curr_type: str, x, items: dict):
+def get_fields(curr_name: str, curr_type: str, x: Tag, items: dict, url: str):
     body = x.find("tbody")
     fields = []
     for tr in body.find_all("tr"):
         children = list(tr.find_all("td"))
         if curr_type == TYPES and len(children) == 3:
-            desc = clean_tg_field_description(children[2])
+            desc = clean_tg_field_description(children[2], url)
             fields.append(
                 {
                     "name": children[0].get_text(),
@@ -105,7 +106,7 @@ def get_fields(curr_name: str, curr_type: str, x, items: dict):
                     "name": children[0].get_text(),
                     "types": clean_tg_type(children[1].get_text()),
                     "required": children[2].get_text() == "Yes",
-                    "description": clean_tg_field_description(children[3])
+                    "description": clean_tg_field_description(children[3], url)
                 }
             )
 
@@ -120,7 +121,7 @@ def get_fields(curr_name: str, curr_type: str, x, items: dict):
     items[curr_type][curr_name]["fields"] = fields
 
 
-def get_method_return_type(curr_name: str, curr_type: str, description_items: List[str], items: Dict):
+def get_method_return_type(curr_name: str, curr_type: str, description_items: list[str], items: dict):
     description = "\n".join(description_items)
     ret_search = re.search("(?:on success,|returns)([^.]*)(?:on success)?", description, re.IGNORECASE)
     ret_search2 = re.search("([^.]*)(?:is returned)", description, re.IGNORECASE)
@@ -130,22 +131,22 @@ def get_method_return_type(curr_name: str, curr_type: str, description_items: Li
         extract_return_type(curr_type, curr_name, ret_search2.group(1).strip(), items)
 
 
-def get_type_and_name(x, anchor, items):
-    if x.text[0].isupper():
+def get_type_and_name(t: Tag, anchor: Tag, items: dict, url: str):
+    if t.text[0].isupper():
         curr_type = TYPES
     else:
         curr_type = METHODS
-    curr_name = x.get_text()
+    curr_name = t.get_text()
     items[curr_type][curr_name] = {"name": curr_name}
 
     href = anchor.get("href")
     if href:
-        items[curr_type][curr_name]["href"] = API_URL + href
+        items[curr_type][curr_name]["href"] = url + href
 
     return curr_name, curr_type
 
 
-def extract_return_type(curr_type: str, curr_name: str, ret_str: str, items: Dict):
+def extract_return_type(curr_type: str, curr_name: str, ret_str: str, items: dict):
     array_match = re.search(r"(?:array of )+(\w*)", ret_str, re.IGNORECASE)
     if array_match:
         ret = clean_tg_type(array_match.group(1))
@@ -161,11 +162,11 @@ def extract_return_type(curr_type: str, curr_name: str, ret_str: str, items: Dic
         items[curr_type][curr_name]["returns"] = rets
 
 
-def clean_tg_field_description(t: Tag) -> str:
-    return " ".join(clean_tg_description(t))
+def clean_tg_field_description(t: Tag, url: str) -> str:
+    return " ".join(clean_tg_description(t, url))
 
 
-def clean_tg_description(t: Tag) -> List[str]:
+def clean_tg_description(t: Tag, url: str) -> list[str]:
     # Replace HTML emoji images with actual emoji
     for i in t.find_all("img"):
         i.replace_with(i.get("alt"))
@@ -183,7 +184,7 @@ def clean_tg_description(t: Tag) -> List[str]:
         link = a.get("href")
         # Page-relative URL
         if link.startswith("#"):
-            link = API_URL + link
+            link = url + link
         # Domain-relative URL
         elif link.startswith("/"):
             link = ROOT_URL + link
@@ -205,6 +206,8 @@ def clean_tg_description(t: Tag) -> List[str]:
     # Use sensible dashes
     text = text.replace(u"\u2013", "-")
     text = text.replace(u"\u2014", "-")
+    # Use sensible single quotes
+    text = text.replace(u"\u2019", "'")
 
     # Split on newlines to improve description output.
     return [t.strip() for t in text.split("\n") if t.strip()]
@@ -226,7 +229,7 @@ def get_proper_type(t: str) -> str:
     return t
 
 
-def clean_tg_type(t: str) -> List[str]:
+def clean_tg_type(t: str) -> list[str]:
     pref = ""
     if t.startswith("Array of "):
         pref = "Array of "
@@ -239,7 +242,7 @@ def clean_tg_type(t: str) -> List[str]:
 
 
 # Returns True if an issue is found.
-def verify_type_parameters(items: Dict) -> bool:
+def verify_type_parameters(items: dict) -> bool:
     issue_found = False
 
     for t, values in items[TYPES].items():
@@ -279,7 +282,7 @@ def verify_type_parameters(items: Dict) -> bool:
 
 
 # Returns True if an issue is found.
-def verify_method_parameters(items: Dict) -> bool:
+def verify_method_parameters(items: dict) -> bool:
     issue_found = False
     # Type check all methods
     for method, values in items[METHODS].items():
@@ -321,14 +324,20 @@ def verify_method_parameters(items: Dict) -> bool:
     return issue_found
 
 
+def main():
+    for filename, url in TO_SCRAPE.items():
+        print("parsing", url)
+        items = retrieve_info(url)
+        if verify_type_parameters(items) or verify_method_parameters(items):
+            print("Failed to validate schema. View logs above for more information.")
+            exit(1)
+
+        with open(f"{filename}.json", "w") as f:
+            json.dump(items, f, indent=2)
+
+        with open(f"{filename}.min.json", "w") as f:
+            json.dump(items, f)
+
+
 if __name__ == '__main__':
-    ITEMS = retrieve_api_info()
-    if verify_type_parameters(ITEMS) or verify_method_parameters(ITEMS):
-        print("Failed to validate schema. View logs above for more information.")
-        exit(1)
-
-    with open("api.json", "w") as f:
-        json.dump(ITEMS, f, indent=2)
-
-    with open("api.min.json", "w") as f:
-        json.dump(ITEMS, f)
+    main()
