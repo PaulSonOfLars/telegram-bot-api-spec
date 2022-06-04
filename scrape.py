@@ -15,8 +15,14 @@ TO_SCRAPE = {
 METHODS = "methods"
 TYPES = "types"
 
-# TODO: Remove this and instead check if description contains "no information"
-APPROVED_NO_SUBTYPES = ("InputFile", "CallbackGame", "VideoChatStarted")
+# List of all abstract types which don't have subtypes.
+APPROVED_NO_SUBTYPES = {
+    "InputFile"  # This is how telegram represents files
+}
+# List of all approved multi-returns.
+APPROVED_MULTI_RETURNS = [
+    ['Message', 'Boolean']  # Edit returns either the new message, or an OK to confirm the edit.
+]
 
 
 def retrieve_info(url: str) -> dict:
@@ -245,38 +251,42 @@ def clean_tg_type(t: str) -> list[str]:
 def verify_type_parameters(items: dict) -> bool:
     issue_found = False
 
-    for t, values in items[TYPES].items():
+    for type_name, values in items[TYPES].items():
         # check all values have a URL
         if not values.get("href"):
-            print(f"{t} has no link!")
+            print(f"{type_name} has no link!")
             issue_found = True
             continue
 
         fields = values.get("fields", [])
         if len(fields) == 0:
             subtypes = values.get("subtypes", [])
-            if not subtypes and t not in APPROVED_NO_SUBTYPES:
-                print("TYPE", t, "has no fields or subtypes, and is not approved")
+            description = "".join(values.get("description", [])).lower()
+            # Some types are abstract and have no information or subtypes - this is mentioned in their description.
+            # Otherwise, check if they're manually approved.
+            if not subtypes and \
+                    not ("currently holds no information" in description or type_name in APPROVED_NO_SUBTYPES):
+                print("TYPE", type_name, "has no fields or subtypes, and is not approved")
                 issue_found = True
                 continue
 
             for st in subtypes:
                 if st in items[TYPES]:
-                    items[TYPES][st].setdefault("subtype_of", []).append(t)
+                    items[TYPES][st].setdefault("subtype_of", []).append(type_name)
                 else:
-                    print("TYPE", t, "USES INVALID SUBTYPE", st)
+                    print("TYPE", type_name, "USES INVALID SUBTYPE", st)
                     issue_found = True
 
         # check all parameter types are valid
         for param in fields:
-            types = param.get("types")
-            for t in types:
-                while t.startswith("Array of "):
-                    t = t[len("Array of "):]
+            field_types = param.get("types")
+            for field_type_name in field_types:
+                while field_type_name.startswith("Array of "):
+                    field_type_name = field_type_name[len("Array of "):]
 
-            if t not in items[TYPES] and t not in TG_CORE_TYPES:
-                print("UNKNOWN FIELD TYPE", t)
-                issue_found = True
+                if field_type_name not in items[TYPES] and field_type_name not in TG_CORE_TYPES:
+                    print("UNKNOWN FIELD TYPE", field_type_name)
+                    issue_found = True
 
     return issue_found
 
@@ -293,13 +303,16 @@ def verify_method_parameters(items: dict) -> bool:
             continue
 
         # check all methods have a return
-        if not values.get("returns"):
+        returns = values.get("returns")
+        if not returns:
             print(f"{method} has no return types!")
             issue_found = True
             continue
 
-        if len(values.get("returns")) > 1:
-            print(f"{method} has multiple return types: {values.get('returns')}")
+        # If we have multiple returns, this is an edge case, but not a deal-breaker; check that output.
+        # Some multi-returns are common and pre-approved.
+        if len(returns) > 1 and returns not in APPROVED_MULTI_RETURNS:
+            print(f"{method} has multiple return types: {returns}")
 
         # check all parameter types are valid
         for param in values.get("fields", []):
