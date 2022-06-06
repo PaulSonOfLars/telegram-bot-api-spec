@@ -8,12 +8,12 @@ jobs:
     name: Scrape
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
-        python-version: '3.8'
+        python-version: '3.9'
 
     - name: Install dependencies
       run: >
@@ -24,7 +24,7 @@ jobs:
       run: python scrape.py
 
     - name: Open Pull Request
-      uses: peter-evans/create-pull-request@v3.5.2
+      uses: peter-evans/create-pull-request@v4
       with:
         commit-message: >
           Regenerate bot API docs.
