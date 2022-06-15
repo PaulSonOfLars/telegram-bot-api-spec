@@ -48,8 +48,8 @@
       "name": "setWebhook",
       "href": "https://core.telegram.org/bots/api#setwebhook",
       "description": [
-        "Use this method to specify a url and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified url, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success.",
-        "If you'd like to make sure that the Webhook request comes from Telegram, we recommend using a secret path in the URL, e.g. https://www.example.com/<token>. Since nobody else knows your bot's token, you can be pretty sure it's us."
+        "Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable amount of attempts. Returns True on success.",
+        "If you'd like to make sure that the webhook request comes from Telegram, we recommend using a secret path in the URL, e.g. https://www.example.com/<token>. Since nobody else knows your bot's token, you can be pretty sure it's us."
       ],
       "returns": [
         "Boolean"
@@ -61,7 +61,7 @@
             "String"
           ],
           "required": true,
-          "description": "HTTPS url to send updates to. Use an empty string to remove webhook integration"
+          "description": "HTTPS URL to send updates to. Use an empty string to remove webhook integration"
         },
         {
           "name": "certificate",
@@ -3072,7 +3072,7 @@
             "String"
           ],
           "required": false,
-          "description": "URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @Botfather, specify the URL that opens your game - note that this will only work if the query comes from a callback_game button. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter."
+          "description": "URL that will be opened by the user's client. If you have created a Game and accepted the conditions via @BotFather, specify the URL that opens your game - note that this will only work if the query comes from a callback_game button. Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter."
         },
         {
           "name": "cache_time",
@@ -4100,7 +4100,7 @@
             "String"
           ],
           "required": true,
-          "description": "Payments provider token, obtained via Botfather"
+          "description": "Payment provider token, obtained via @BotFather"
         },
         {
           "name": "currency",
@@ -4148,7 +4148,7 @@
             "String"
           ],
           "required": false,
-          "description": "A JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider."
+          "description": "JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider."
         },
         {
           "name": "photo_url",
@@ -4164,7 +4164,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Photo size"
+          "description": "Photo size in bytes"
         },
         {
           "name": "photo_width",
@@ -4220,7 +4220,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if user's phone number should be sent to provider"
+          "description": "Pass True, if the user's phone number should be sent to provider"
         },
         {
           "name": "send_email_to_provider",
@@ -4228,7 +4228,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True, if user's email address should be sent to provider"
+          "description": "Pass True, if the user's email address should be sent to provider"
         },
         {
           "name": "is_flexible",
@@ -4413,7 +4413,7 @@
             "String"
           ],
           "required": true,
-          "description": "Short name of the game, serves as the unique identifier for the game. Set up your games via Botfather."
+          "description": "Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather."
         },
         {
           "name": "disable_notification",
@@ -4586,7 +4586,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This ID becomes especially handy if you're using Webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially."
+          "description": "The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This ID becomes especially handy if you're using webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially."
         },
         {
           "name": "message",
@@ -5568,7 +5568,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. For \"text_link\" only, url that will be opened after user taps on the text"
+          "description": "Optional. For \"text_link\" only, URL that will be opened after user taps on the text"
         },
         {
           "name": "user",
@@ -5714,7 +5714,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         }
       ]
     },
@@ -5787,7 +5787,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         },
         {
           "name": "thumb",
@@ -5852,7 +5852,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         }
       ]
     },
@@ -5925,7 +5925,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Mime type of a file as defined by sender"
+          "description": "Optional. Mime type of the file as defined by sender"
         },
         {
           "name": "file_size",
@@ -5933,7 +5933,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         }
       ]
     },
@@ -6039,7 +6039,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         }
       ]
     },
@@ -6597,7 +6597,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. File size in bytes, if known"
+          "description": "Optional. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value."
         },
         {
           "name": "file_path",
@@ -6808,7 +6808,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. HTTP or tg:// url to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their ID without using a username, if this is allowed by their privacy settings."
+          "description": "Optional. HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their ID without using a username, if this is allowed by their privacy settings."
         },
         {
           "name": "callback_data",
@@ -6963,7 +6963,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Data associated with the callback button. Be aware that the message, which originated the query, can contain no callback buttons with this data."
+          "description": "Optional. Data associated with the callback button. Be aware that the message, from which originated the query, can contain no callback buttons with this data."
         },
         {
           "name": "game_short_name",
@@ -9389,7 +9389,7 @@
             "String"
           ],
           "required": true,
-          "description": "Mime type of the content of video url, \"text/html\" or \"video/mp4\""
+          "description": "Mime type of the content of the video URL, \"text/html\" or \"video/mp4\""
         },
         {
           "name": "thumb_url",
@@ -11147,7 +11147,7 @@
             "String"
           ],
           "required": true,
-          "description": "Payment provider token, obtained via Botfather"
+          "description": "Payment provider token, obtained via @BotFather"
         },
         {
           "name": "currency",
@@ -11195,7 +11195,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for."
+          "description": "Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service."
         },
         {
           "name": "photo_size",
@@ -11203,7 +11203,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Optional. Photo size"
+          "description": "Optional. Photo size in bytes"
         },
         {
           "name": "photo_width",
@@ -11259,7 +11259,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if user's phone number should be sent to provider"
+          "description": "Optional. Pass True, if the user's phone number should be sent to provider"
         },
         {
           "name": "send_email_to_provider",
@@ -11267,7 +11267,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True, if user's email address should be sent to provider"
+          "description": "Optional. Pass True, if the user's email address should be sent to provider"
         },
         {
           "name": "is_flexible",
@@ -11287,7 +11287,7 @@
       "href": "https://core.telegram.org/bots/api#choseninlineresult",
       "description": [
         "Represents a result of an inline query that was chosen by the user and sent to their chat partner.",
-        "Note: It is necessary to enable inline feedback via @Botfather in order to receive these objects in updates."
+        "Note: It is necessary to enable inline feedback via @BotFather in order to receive these objects in updates."
       ],
       "fields": [
         {
