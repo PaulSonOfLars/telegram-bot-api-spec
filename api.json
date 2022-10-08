@@ -1769,7 +1769,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove keyboard or to force a reply from the user."
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user."
         }
       ]
     },
@@ -3096,7 +3096,7 @@
       "name": "setMyCommands",
       "href": "https://core.telegram.org/bots/api#setmycommands",
       "description": [
-        "Use this method to change the list of the bot's commands. See https://core.telegram.org/bots#commands for more details about bot commands. Returns True on success."
+        "Use this method to change the list of the bot's commands. See this manual for more details about bot commands. Returns True on success."
       ],
       "returns": [
         "Boolean"
