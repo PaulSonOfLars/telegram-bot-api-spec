@@ -3227,7 +3227,7 @@
             "String"
           ],
           "required": false,
-          "description": "Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers"
+          "description": "Unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers."
         }
       ]
     },
