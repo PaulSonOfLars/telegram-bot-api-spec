@@ -3272,7 +3272,7 @@
             "String"
           ],
           "required": true,
-          "description": "New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers"
+          "description": "New unique identifier of the custom emoji shown as the topic icon. Use getForumTopicIconStickers to get all allowed custom emoji identifiers."
         }
       ]
     },
