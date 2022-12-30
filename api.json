@@ -3296,7 +3296,7 @@
             "String"
           ],
           "required": false,
-          "description": "New topic name, 0-128 characters. If not specififed or empty, the current name of the topic will be kept"
+          "description": "New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept"
         },
         {
           "name": "icon_custom_emoji_id",
