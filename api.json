@@ -3133,7 +3133,7 @@
       "name": "getChatMember",
       "href": "https://core.telegram.org/bots/api#getchatmember",
       "description": [
-        "Use this method to get information about a member of a chat. The method is guaranteed to work only if the bot is an administrator in the chat. Returns a ChatMember object on success."
+        "Use this method to get information about a member of a chat. The method is guaranteed to work for other users, only if the bot is an administrator in the chat. Returns a ChatMember object on success."
       ],
       "returns": [
         "ChatMember"
