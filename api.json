@@ -2370,6 +2370,14 @@
           "description": "A JSON-serialized object for new user permissions"
         },
         {
+          "name": "use_independent_chat_permissions",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if chat permissions are set independently. Otherwise, the can_send_other_messages and can_add_web_page_previews permissions will imply the can_send_messages, can_send_audios, can_send_documents, can_send_photos, can_send_videos, can_send_video_notes, and can_send_voice_notes permissions; the can_send_polls permission will imply the can_send_messages permission."
+        },
+        {
           "name": "until_date",
           "types": [
             "Integer"
@@ -2625,6 +2633,14 @@
           ],
           "required": true,
           "description": "A JSON-serialized object for new default chat permissions"
+        },
+        {
+          "name": "use_independent_chat_permissions",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if chat permissions are set independently. Otherwise, the can_send_other_messages and can_add_web_page_previews permissions will imply the can_send_messages, can_send_audios, can_send_documents, can_send_photos, can_send_videos, can_send_video_notes, and can_send_voice_notes permissions; the can_send_polls permission will imply the can_send_messages permission."
         }
       ]
     },
@@ -6267,6 +6283,22 @@
           "description": "Optional. Message is a service message about a successful payment, information about the payment. More about payments: https://core.telegram.org/bots/api#payments"
         },
         {
+          "name": "user_shared",
+          "types": [
+            "UserShared"
+          ],
+          "required": false,
+          "description": "Optional. Service message: a user was shared with the bot"
+        },
+        {
+          "name": "chat_shared",
+          "types": [
+            "ChatShared"
+          ],
+          "required": false,
+          "description": "Optional. Service message: a chat was shared with the bot"
+        },
+        {
           "name": "connected_website",
           "types": [
             "String"
@@ -7461,6 +7493,56 @@
         "This object represents a service message about General forum topic unhidden in the chat. Currently holds no information."
       ]
     },
+    "UserShared": {
+      "name": "UserShared",
+      "href": "https://core.telegram.org/bots/api#usershared",
+      "description": [
+        "This object contains information about the user whose identifier was shared with the bot using a KeyboardButtonRequestUser button."
+      ],
+      "fields": [
+        {
+          "name": "request_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Identifier of the request"
+        },
+        {
+          "name": "user_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Identifier of the shared user. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the user and could be unable to use this identifier, unless the user is already known to the bot by some other means."
+        }
+      ]
+    },
+    "ChatShared": {
+      "name": "ChatShared",
+      "href": "https://core.telegram.org/bots/api#chatshared",
+      "description": [
+        "This object contains information about the chat whose identifier was shared with the bot using a KeyboardButtonRequestChat button."
+      ],
+      "fields": [
+        {
+          "name": "request_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Identifier of the request"
+        },
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Identifier of the shared chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the chat and could be unable to use this identifier, unless the chat is already known to the bot by some other means."
+        }
+      ]
+    },
     "WriteAccessAllowed": {
       "name": "WriteAccessAllowed",
       "href": "https://core.telegram.org/bots/api#writeaccessallowed",
@@ -7670,10 +7752,11 @@
       "name": "KeyboardButton",
       "href": "https://core.telegram.org/bots/api#keyboardbutton",
       "description": [
-        "This object represents one button of the reply keyboard. For simple text buttons String can be used instead of this object to specify text of the button. Optional fields web_app, request_contact, request_location, and request_poll are mutually exclusive.",
+        "This object represents one button of the reply keyboard. For simple text buttons, String can be used instead of this object to specify the button text. The optional fields web_app, request_user, request_chat, request_contact, request_location, and request_poll are mutually exclusive.",
         "Note: request_contact and request_location options will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message.",
         "Note: request_poll option will only work in Telegram versions released after 23 January, 2020. Older clients will display unsupported message.",
-        "Note: web_app option will only work in Telegram versions released after 16 April, 2022. Older clients will display unsupported message."
+        "Note: web_app option will only work in Telegram versions released after 16 April, 2022. Older clients will display unsupported message.",
+        "Note: request_user and request_chat options will only work in Telegram versions released after 3 February, 2023. Older clients will display unsupported message."
       ],
       "fields": [
         {
@@ -7683,6 +7766,22 @@
           ],
           "required": true,
           "description": "Text of the button. If none of the optional fields are used, it will be sent as a message when the button is pressed"
+        },
+        {
+          "name": "request_user",
+          "types": [
+            "KeyboardButtonRequestUser"
+          ],
+          "required": false,
+          "description": "Optional. If specified, pressing the button will open a list of suitable users. Tapping on any user will send their identifier to the bot in a \"user_shared\" service message. Available in private chats only."
+        },
+        {
+          "name": "request_chat",
+          "types": [
+            "KeyboardButtonRequestChat"
+          ],
+          "required": false,
+          "description": "Optional. If specified, pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot in a \"chat_shared\" service message. Available in private chats only."
         },
         {
           "name": "request_contact",
@@ -7715,6 +7814,112 @@
           ],
           "required": false,
           "description": "Optional. If specified, the described Web App will be launched when the button is pressed. The Web App will be able to send a \"web_app_data\" service message. Available in private chats only."
+        }
+      ]
+    },
+    "KeyboardButtonRequestUser": {
+      "name": "KeyboardButtonRequestUser",
+      "href": "https://core.telegram.org/bots/api#keyboardbuttonrequestuser",
+      "description": [
+        "This object defines the criteria used to request a suitable user. The identifier of the selected user will be shared with the bot when the corresponding button is pressed."
+      ],
+      "fields": [
+        {
+          "name": "request_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Signed 32-bit identifier of the request"
+        },
+        {
+          "name": "user_is_bot",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. Pass True to request a bot, pass False to request a regular user. If not specified, no additional restrictions are applied."
+        },
+        {
+          "name": "user_is_premium",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. Pass True to request a premium user, pass False to request a non-premium user. If not specified, no additional restrictions are applied."
+        }
+      ]
+    },
+    "KeyboardButtonRequestChat": {
+      "name": "KeyboardButtonRequestChat",
+      "href": "https://core.telegram.org/bots/api#keyboardbuttonrequestchat",
+      "description": [
+        "This object defines the criteria used to request a suitable chat. The identifier of the selected chat will be shared with the bot when the corresponding button is pressed."
+      ],
+      "fields": [
+        {
+          "name": "request_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Signed 32-bit identifier of the request"
+        },
+        {
+          "name": "chat_is_channel",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "Pass True to request a channel chat, pass False to request a group or a supergroup chat."
+        },
+        {
+          "name": "chat_is_forum",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. Pass True to request a forum supergroup, pass False to request a non-forum chat. If not specified, no additional restrictions are applied."
+        },
+        {
+          "name": "chat_has_username",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. Pass True to request a supergroup or a channel with a username, pass False to request a chat without a username. If not specified, no additional restrictions are applied."
+        },
+        {
+          "name": "chat_is_created",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. Pass True to request a chat owned by the user. Otherwise, no additional restrictions are applied."
+        },
+        {
+          "name": "user_administrator_rights",
+          "types": [
+            "ChatAdministratorRights"
+          ],
+          "required": false,
+          "description": "Optional. A JSON-serialized object listing the required administrator rights of the user in the chat. If not specified, no additional restrictions are applied."
+        },
+        {
+          "name": "bot_administrator_rights",
+          "types": [
+            "ChatAdministratorRights"
+          ],
+          "required": false,
+          "description": "Optional. A JSON-serialized object listing the required administrator rights of the bot in the chat. The rights must be a subset of user_administrator_rights. If not specified, no additional restrictions are applied."
+        },
+        {
+          "name": "bot_is_member",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. Pass True to request a chat with the bot as a member. Otherwise, no additional restrictions are applied."
         }
       ]
     },
@@ -8491,6 +8696,86 @@
           "description": "True, if the user is a member of the chat at the moment of the request"
         },
         {
+          "name": "can_send_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to send text messages, contacts, invoices, locations and venues"
+        },
+        {
+          "name": "can_send_audios",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to send audios"
+        },
+        {
+          "name": "can_send_documents",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to send documents"
+        },
+        {
+          "name": "can_send_photos",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to send photos"
+        },
+        {
+          "name": "can_send_videos",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to send videos"
+        },
+        {
+          "name": "can_send_video_notes",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to send video notes"
+        },
+        {
+          "name": "can_send_voice_notes",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to send voice notes"
+        },
+        {
+          "name": "can_send_polls",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to send polls"
+        },
+        {
+          "name": "can_send_other_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to send animations, games, stickers and use inline bots"
+        },
+        {
+          "name": "can_add_web_page_previews",
+          "types": [
+            "Boolean"
+          ],
+          "required": true,
+          "description": "True, if the user is allowed to add web page previews to their messages"
+        },
+        {
           "name": "can_change_info",
           "types": [
             "Boolean"
@@ -8521,46 +8806,6 @@
           ],
           "required": true,
           "description": "True, if the user is allowed to create forum topics"
-        },
-        {
-          "name": "can_send_messages",
-          "types": [
-            "Boolean"
-          ],
-          "required": true,
-          "description": "True, if the user is allowed to send text messages, contacts, locations and venues"
-        },
-        {
-          "name": "can_send_media_messages",
-          "types": [
-            "Boolean"
-          ],
-          "required": true,
-          "description": "True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes"
-        },
-        {
-          "name": "can_send_polls",
-          "types": [
-            "Boolean"
-          ],
-          "required": true,
-          "description": "True, if the user is allowed to send polls"
-        },
-        {
-          "name": "can_send_other_messages",
-          "types": [
-            "Boolean"
-          ],
-          "required": true,
-          "description": "True, if the user is allowed to send animations, games, stickers and use inline bots"
-        },
-        {
-          "name": "can_add_web_page_previews",
-          "types": [
-            "Boolean"
-          ],
-          "required": true,
-          "description": "True, if the user is allowed to add web page previews to their messages"
         },
         {
           "name": "until_date",
@@ -8720,6 +8965,14 @@
           "description": "User that sent the join request"
         },
         {
+          "name": "user_chat_id",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Identifier of a private chat with the user who sent the join request. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot can use this identifier for 24 hours to send messages until the join request is processed, assuming no other administrator contacted the user."
+        },
+        {
           "name": "date",
           "types": [
             "Integer"
@@ -8758,15 +9011,55 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the user is allowed to send text messages, contacts, locations and venues"
+          "description": "Optional. True, if the user is allowed to send text messages, contacts, invoices, locations and venues"
         },
         {
-          "name": "can_send_media_messages",
+          "name": "can_send_audios",
           "types": [
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the user is allowed to send audios, documents, photos, videos, video notes and voice notes, implies can_send_messages"
+          "description": "Optional. True, if the user is allowed to send audios"
+        },
+        {
+          "name": "can_send_documents",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the user is allowed to send documents"
+        },
+        {
+          "name": "can_send_photos",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the user is allowed to send photos"
+        },
+        {
+          "name": "can_send_videos",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the user is allowed to send videos"
+        },
+        {
+          "name": "can_send_video_notes",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the user is allowed to send video notes"
+        },
+        {
+          "name": "can_send_voice_notes",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the user is allowed to send voice notes"
         },
         {
           "name": "can_send_polls",
@@ -8774,7 +9067,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the user is allowed to send polls, implies can_send_messages"
+          "description": "Optional. True, if the user is allowed to send polls"
         },
         {
           "name": "can_send_other_messages",
@@ -8782,7 +9075,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the user is allowed to send animations, games, stickers and use inline bots, implies can_send_media_messages"
+          "description": "Optional. True, if the user is allowed to send animations, games, stickers and use inline bots"
         },
         {
           "name": "can_add_web_page_previews",
@@ -8790,7 +9083,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the user is allowed to add web page previews to their messages, implies can_send_media_messages"
+          "description": "Optional. True, if the user is allowed to add web page previews to their messages"
         },
         {
           "name": "can_change_info",
