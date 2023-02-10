@@ -1,4 +1,7 @@
 {
+  "version": "Bot API 6.5",
+  "release_date": "February 3, 2023",
+  "changelog": "https://core.telegram.org/bots/api#february-3-2023",
   "methods": {
     "getUpdates": {
       "name": "getUpdates",

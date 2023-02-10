@@ -32,7 +32,16 @@ def retrieve_info(url: str) -> dict:
     curr_type = ""
     curr_name = ""
 
+    # First header in the body is the release date (with an anchor)
+    release_tag = dev_rules.find("h4", recursive=False)
+    changelog_url = url + release_tag.find("a").get("href")
+    # First paragraph in the root body is the version
+    version = dev_rules.find("p", recursive=False).get_text()
+
     items = {
+        "version": version,
+        "release_date": release_tag.get_text(),
+        "changelog": changelog_url,
         METHODS: dict(),
         TYPES: dict(),
     }
