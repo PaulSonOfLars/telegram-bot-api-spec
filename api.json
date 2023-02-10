@@ -3149,7 +3149,7 @@
       "name": "getChatMember",
       "href": "https://core.telegram.org/bots/api#getchatmember",
       "description": [
-        "Use this method to get information about a member of a chat. The method is guaranteed to work for other users, only if the bot is an administrator in the chat. Returns a ChatMember object on success."
+        "Use this method to get information about a member of a chat. The method is only guaranteed to work for other users if the bot is an administrator in the chat. Returns a ChatMember object on success."
       ],
       "returns": [
         "ChatMember"
@@ -7830,7 +7830,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Signed 32-bit identifier of the request"
+          "description": "Signed 32-bit identifier of the request, which will be received back in the UserShared object. Must be unique within the message"
         },
         {
           "name": "user_is_bot",
@@ -7863,7 +7863,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Signed 32-bit identifier of the request"
+          "description": "Signed 32-bit identifier of the request, which will be received back in the ChatShared object. Must be unique within the message"
         },
         {
           "name": "chat_is_channel",
@@ -7903,7 +7903,7 @@
             "ChatAdministratorRights"
           ],
           "required": false,
-          "description": "Optional. A JSON-serialized object listing the required administrator rights of the user in the chat. If not specified, no additional restrictions are applied."
+          "description": "Optional. A JSON-serialized object listing the required administrator rights of the user in the chat. The rights must be a superset of bot_administrator_rights. If not specified, no additional restrictions are applied."
         },
         {
           "name": "bot_administrator_rights",
