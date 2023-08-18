@@ -1,7 +1,7 @@
 {
-  "version": "Bot API 6.7",
-  "release_date": "April 21, 2023",
-  "changelog": "https://core.telegram.org/bots/api#april-21-2023",
+  "version": "Bot API 6.8",
+  "release_date": "August 18, 2023",
+  "changelog": "https://core.telegram.org/bots/api#august-18-2023",
   "methods": {
     "getUpdates": {
       "name": "getUpdates",
@@ -3424,6 +3424,27 @@
         }
       ]
     },
+    "unpinAllGeneralForumTopicMessages": {
+      "name": "unpinAllGeneralForumTopicMessages",
+      "href": "https://core.telegram.org/bots/api#unpinallgeneralforumtopicmessages",
+      "description": [
+        "Use this method to clear the list of pinned messages in a General forum topic. The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on success."
+      ],
+      "returns": [
+        "Boolean"
+      ],
+      "fields": [
+        {
+          "name": "chat_id",
+          "types": [
+            "Integer",
+            "String"
+          ],
+          "required": true,
+          "description": "Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)"
+        }
+      ]
+    },
     "answerCallbackQuery": {
       "name": "answerCallbackQuery",
       "href": "https://core.telegram.org/bots/api#answercallbackquery",
@@ -5971,6 +5992,14 @@
           "description": "Optional. Custom emoji identifier of emoji status of the other party in a private chat. Returned only in getChat."
         },
         {
+          "name": "emoji_status_expiration_date",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Optional. Expiration date of the emoji status of the other party in a private chat, if any. Returned only in getChat."
+        },
+        {
           "name": "bio",
           "types": [
             "String"
@@ -6338,6 +6367,14 @@
           ],
           "required": false,
           "description": "Optional. Message is a sticker, information about the sticker"
+        },
+        {
+          "name": "story",
+          "types": [
+            "Story"
+          ],
+          "required": false,
+          "description": "Optional. Message is a forwarded story"
         },
         {
           "name": "video",
@@ -7043,6 +7080,13 @@
         }
       ]
     },
+    "Story": {
+      "name": "Story",
+      "href": "https://core.telegram.org/bots/api#story",
+      "description": [
+        "This object represents a message about a forwarded story in the chat. Currently holds no information."
+      ]
+    },
     "Video": {
       "name": "Video",
       "href": "https://core.telegram.org/bots/api#video",
@@ -7345,12 +7389,20 @@
           "description": "Unique poll identifier"
         },
         {
+          "name": "voter_chat",
+          "types": [
+            "Chat"
+          ],
+          "required": false,
+          "description": "Optional. The chat that changed the answer to the poll, if the voter is anonymous"
+        },
+        {
           "name": "user",
           "types": [
             "User"
           ],
-          "required": true,
-          "description": "The user, who changed the answer to the poll"
+          "required": false,
+          "description": "Optional. The user that changed the answer to the poll, if the voter isn't anonymous"
         },
         {
           "name": "option_ids",
@@ -7358,7 +7410,7 @@
             "Array of Integer"
           ],
           "required": true,
-          "description": "0-based identifiers of answer options, chosen by the user. May be empty if the user retracted their vote."
+          "description": "0-based identifiers of chosen answer options. May be empty if the vote was retracted."
         }
       ]
     },
