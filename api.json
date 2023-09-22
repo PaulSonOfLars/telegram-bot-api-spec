@@ -1,7 +1,7 @@
 {
-  "version": "Bot API 6.8",
-  "release_date": "August 18, 2023",
-  "changelog": "https://core.telegram.org/bots/api#august-18-2023",
+  "version": "Bot API 6.9",
+  "release_date": "September 22, 2023",
+  "changelog": "https://core.telegram.org/bots/api#september-22-2023",
   "methods": {
     "getUpdates": {
       "name": "getUpdates",
@@ -6614,7 +6614,7 @@
             "WriteAccessAllowed"
           ],
           "required": false,
-          "description": "Optional. Service message: the user allowed the bot added to the attachment menu to write messages"
+          "description": "Optional. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess"
         },
         {
           "name": "passport_data",
@@ -7864,16 +7864,32 @@
       "name": "WriteAccessAllowed",
       "href": "https://core.telegram.org/bots/api#writeaccessallowed",
       "description": [
-        "This object represents a service message about a user allowing a bot to write messages after adding the bot to the attachment menu or launching a Web App from a link."
+        "This object represents a service message about a user allowing a bot to write messages after adding it to the attachment menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess."
       ],
       "fields": [
+        {
+          "name": "from_request",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the access was granted after the user accepted an explicit request from a Web App sent by the method requestWriteAccess"
+        },
         {
           "name": "web_app_name",
           "types": [
             "String"
           ],
           "required": false,
-          "description": "Optional. Name of the Web App which was launched from a link"
+          "description": "Optional. Name of the Web App, if the access was granted when the Web App was launched from a link"
+        },
+        {
+          "name": "from_attachment_menu",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the access was granted when the bot was added to the attachment or side menu"
         }
       ]
     },
@@ -8731,7 +8747,7 @@
             "Boolean"
           ],
           "required": true,
-          "description": "True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+          "description": "True, if the administrator can access the chat event log, chat statistics, boost list in channels, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "name": "can_delete_messages",
@@ -8787,7 +8803,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the administrator can post in the channel; channels only"
+          "description": "Optional. True, if the administrator can post messages in the channel; channels only"
         },
         {
           "name": "can_edit_messages",
@@ -8804,6 +8820,30 @@
           ],
           "required": false,
           "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+        },
+        {
+          "name": "can_post_stories",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the administrator can post stories in the channel; channels only"
+        },
+        {
+          "name": "can_edit_stories",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the administrator can edit stories posted by other users; channels only"
+        },
+        {
+          "name": "can_delete_stories",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the administrator can delete stories posted by other users"
         },
         {
           "name": "can_manage_topics",
@@ -8925,7 +8965,7 @@
             "Boolean"
           ],
           "required": true,
-          "description": "True, if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+          "description": "True, if the administrator can access the chat event log, chat statistics, boost list in channels, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "name": "can_delete_messages",
@@ -8981,7 +9021,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the administrator can post in the channel; channels only"
+          "description": "Optional. True, if the administrator can post messages in the channel; channels only"
         },
         {
           "name": "can_edit_messages",
@@ -8998,6 +9038,30 @@
           ],
           "required": false,
           "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+        },
+        {
+          "name": "can_post_stories",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the administrator can post stories in the channel; channels only"
+        },
+        {
+          "name": "can_edit_stories",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the administrator can edit stories posted by other users; channels only"
+        },
+        {
+          "name": "can_delete_stories",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if the administrator can delete stories posted by other users"
         },
         {
           "name": "can_manage_topics",
