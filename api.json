@@ -2299,23 +2299,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True if the administrator can access the chat event log, chat statistics, boost list in channels, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
-        },
-        {
-          "name": "can_post_messages",
-          "types": [
-            "Boolean"
-          ],
-          "required": false,
-          "description": "Pass True if the administrator can post messages in the channel; channels only"
-        },
-        {
-          "name": "can_edit_messages",
-          "types": [
-            "Boolean"
-          ],
-          "required": false,
-          "description": "Pass True if the administrator can edit messages of other users and can pin messages; channels only"
+          "description": "Pass True if the administrator can access the chat event log, boost list in channels, see channel members, report spam messages, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "name": "can_delete_messages",
@@ -2324,30 +2308,6 @@
           ],
           "required": false,
           "description": "Pass True if the administrator can delete messages of other users"
-        },
-        {
-          "name": "can_post_stories",
-          "types": [
-            "Boolean"
-          ],
-          "required": false,
-          "description": "Pass True if the administrator can post stories in the channel; channels only"
-        },
-        {
-          "name": "can_edit_stories",
-          "types": [
-            "Boolean"
-          ],
-          "required": false,
-          "description": "Pass True if the administrator can edit stories posted by other users; channels only"
-        },
-        {
-          "name": "can_delete_stories",
-          "types": [
-            "Boolean"
-          ],
-          "required": false,
-          "description": "Pass True if the administrator can delete stories posted by other users; channels only"
         },
         {
           "name": "can_manage_video_chats",
@@ -2363,7 +2323,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True if the administrator can restrict, ban or unban chat members"
+          "description": "Pass True if the administrator can restrict, ban or unban chat members, or access supergroup statistics"
         },
         {
           "name": "can_promote_members",
@@ -2390,12 +2350,52 @@
           "description": "Pass True if the administrator can invite new users to the chat"
         },
         {
+          "name": "can_post_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if the administrator can post messages in the channel, or access channel statistics; channels only"
+        },
+        {
+          "name": "can_edit_messages",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if the administrator can edit messages of other users and can pin messages; channels only"
+        },
+        {
           "name": "can_pin_messages",
           "types": [
             "Boolean"
           ],
           "required": false,
           "description": "Pass True if the administrator can pin messages, supergroups only"
+        },
+        {
+          "name": "can_post_stories",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if the administrator can post stories in the channel; channels only"
+        },
+        {
+          "name": "can_edit_stories",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if the administrator can edit stories posted by other users; channels only"
+        },
+        {
+          "name": "can_delete_stories",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Pass True if the administrator can delete stories posted by other users; channels only"
         },
         {
           "name": "can_manage_topics",
@@ -8771,7 +8771,7 @@
             "Boolean"
           ],
           "required": true,
-          "description": "True, if the administrator can access the chat event log, chat statistics, boost list in channels, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+          "description": "True, if the administrator can access the chat event log, boost list in channels, see channel members, report spam messages, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "name": "can_delete_messages",
@@ -8795,7 +8795,7 @@
             "Boolean"
           ],
           "required": true,
-          "description": "True, if the administrator can restrict, ban or unban chat members"
+          "description": "True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics"
         },
         {
           "name": "can_promote_members",
@@ -8827,7 +8827,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the administrator can post messages in the channel; channels only"
+          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; channels only"
         },
         {
           "name": "can_edit_messages",
@@ -8989,7 +8989,7 @@
             "Boolean"
           ],
           "required": true,
-          "description": "True, if the administrator can access the chat event log, chat statistics, boost list in channels, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
+          "description": "True, if the administrator can access the chat event log, boost list in channels, see channel members, report spam messages, see anonymous administrators in supergroups and ignore slow mode. Implied by any other administrator privilege"
         },
         {
           "name": "can_delete_messages",
@@ -9013,7 +9013,7 @@
             "Boolean"
           ],
           "required": true,
-          "description": "True, if the administrator can restrict, ban or unban chat members"
+          "description": "True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics"
         },
         {
           "name": "can_promote_members",
@@ -9045,7 +9045,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the administrator can post messages in the channel; channels only"
+          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; channels only"
         },
         {
           "name": "can_edit_messages",
@@ -9450,7 +9450,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Identifier of a private chat with the user who sent the join request. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot can use this identifier for 24 hours to send messages until the join request is processed, assuming no other administrator contacted the user."
+          "description": "Identifier of a private chat with the user who sent the join request. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot can use this identifier for 5 minutes to send messages until the join request is processed, assuming no other administrator contacted the user."
         },
         {
           "name": "date",
