@@ -5725,7 +5725,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This ID becomes especially handy if you're using webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially."
+          "description": "The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This identifier becomes especially handy if you're using webhooks, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially."
         },
         {
           "name": "message",
@@ -5741,7 +5741,7 @@
             "Message"
           ],
           "required": false,
-          "description": "Optional. New version of a message that is known to the bot and was edited"
+          "description": "Optional. New version of a message that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot."
         },
         {
           "name": "channel_post",
@@ -5757,7 +5757,7 @@
             "Message"
           ],
           "required": false,
-          "description": "Optional. New version of a channel post that is known to the bot and was edited"
+          "description": "Optional. New version of a channel post that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot."
         },
         {
           "name": "message_reaction",
@@ -5821,7 +5821,7 @@
             "Poll"
           ],
           "required": false,
-          "description": "Optional. New poll state. Bots receive only updates about stopped polls and polls, which are sent by the bot"
+          "description": "Optional. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot"
         },
         {
           "name": "poll_answer",
@@ -9103,9 +9103,6 @@
       "href": "https://core.telegram.org/bots/api#keyboardbutton",
       "description": [
         "This object represents one button of the reply keyboard. For simple text buttons, String can be used instead of this object to specify the button text. The optional fields web_app, request_users, request_chat, request_contact, request_location, and request_poll are mutually exclusive.",
-        "Note: request_contact and request_location options will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message.",
-        "Note: request_poll option will only work in Telegram versions released after 23 January, 2020. Older clients will display unsupported message.",
-        "Note: web_app option will only work in Telegram versions released after 16 April, 2022. Older clients will display unsupported message.",
         "Note: request_users and request_chat options will only work in Telegram versions released after 3 February, 2023. Older clients will display unsupported message."
       ],
       "fields": [
@@ -9327,8 +9324,7 @@
       "name": "InlineKeyboardMarkup",
       "href": "https://core.telegram.org/bots/api#inlinekeyboardmarkup",
       "description": [
-        "This object represents an inline keyboard that appears right next to the message it belongs to.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will display unsupported message."
+        "This object represents an inline keyboard that appears right next to the message it belongs to."
       ],
       "fields": [
         {
@@ -9362,7 +9358,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their ID without using a username, if this is allowed by their privacy settings."
+          "description": "Optional. HTTP or tg:// URL to be opened when the button is pressed. Links tg://user?id=<user_id> can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings."
         },
         {
           "name": "callback_data",
@@ -12937,8 +12933,7 @@
       "name": "InlineQueryResultAudio",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultaudio",
       "description": [
-        "Represents a link to an MP3 audio file. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them."
+        "Represents a link to an MP3 audio file. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio."
       ],
       "fields": [
         {
@@ -13038,8 +13033,7 @@
       "name": "InlineQueryResultVoice",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultvoice",
       "description": [
-        "Represents a link to a voice recording in an .OGG container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them."
+        "Represents a link to a voice recording in an .OGG container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message."
       ],
       "fields": [
         {
@@ -13131,8 +13125,7 @@
       "name": "InlineQueryResultDocument",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultdocument",
       "description": [
-        "Represents a link to a file. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them."
+        "Represents a link to a file. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method."
       ],
       "fields": [
         {
@@ -13256,8 +13249,7 @@
       "name": "InlineQueryResultLocation",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultlocation",
       "description": [
-        "Represents a location on a map. By default, the location will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the location.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them."
+        "Represents a location on a map. By default, the location will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the location."
       ],
       "fields": [
         {
@@ -13381,8 +13373,7 @@
       "name": "InlineQueryResultVenue",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultvenue",
       "description": [
-        "Represents a venue. By default, the venue will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the venue.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them."
+        "Represents a venue. By default, the venue will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the venue."
       ],
       "fields": [
         {
@@ -13514,8 +13505,7 @@
       "name": "InlineQueryResultContact",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultcontact",
       "description": [
-        "Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the contact.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them."
+        "Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the contact."
       ],
       "fields": [
         {
@@ -13615,8 +13605,7 @@
       "name": "InlineQueryResultGame",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultgame",
       "description": [
-        "Represents a Game.",
-        "Note: This will only work in Telegram versions released after October 1, 2016. Older clients will not display any inline results if a game result is among them."
+        "Represents a Game."
       ],
       "fields": [
         {
@@ -13920,8 +13909,7 @@
       "name": "InlineQueryResultCachedSticker",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultcachedsticker",
       "description": [
-        "Represents a link to a sticker stored on the Telegram servers. By default, this sticker will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016 for static stickers and after 06 July, 2019 for animated stickers. Older clients will ignore them."
+        "Represents a link to a sticker stored on the Telegram servers. By default, this sticker will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker."
       ],
       "fields": [
         {
@@ -13973,8 +13961,7 @@
       "name": "InlineQueryResultCachedDocument",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultcacheddocument",
       "description": [
-        "Represents a link to a file stored on the Telegram servers. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them."
+        "Represents a link to a file stored on the Telegram servers. By default, this file will be sent by the user with an optional caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the file."
       ],
       "fields": [
         {
@@ -14158,8 +14145,7 @@
       "name": "InlineQueryResultCachedVoice",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultcachedvoice",
       "description": [
-        "Represents a link to a voice message stored on the Telegram servers. By default, this voice message will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the voice message.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them."
+        "Represents a link to a voice message stored on the Telegram servers. By default, this voice message will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the voice message."
       ],
       "fields": [
         {
@@ -14243,8 +14229,7 @@
       "name": "InlineQueryResultCachedAudio",
       "href": "https://core.telegram.org/bots/api#inlinequeryresultcachedaudio",
       "description": [
-        "Represents a link to an MP3 audio file stored on the Telegram servers. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.",
-        "Note: This will only work in Telegram versions released after 9 April, 2016. Older clients will ignore them."
+        "Represents a link to an MP3 audio file stored on the Telegram servers. By default, this audio file will be sent by the user. Alternatively, you can use input_message_content to send a message with the specified content instead of the audio."
       ],
       "fields": [
         {
