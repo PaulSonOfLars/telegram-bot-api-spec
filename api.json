@@ -8341,20 +8341,20 @@
       ],
       "fields": [
         {
-          "name": "longitude",
-          "types": [
-            "Float"
-          ],
-          "required": true,
-          "description": "Longitude as defined by sender"
-        },
-        {
           "name": "latitude",
           "types": [
             "Float"
           ],
           "required": true,
           "description": "Latitude as defined by sender"
+        },
+        {
+          "name": "longitude",
+          "types": [
+            "Float"
+          ],
+          "required": true,
+          "description": "Longitude as defined by sender"
         },
         {
           "name": "horizontal_accuracy",
