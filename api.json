@@ -376,7 +376,7 @@
             "Array of Integer"
           ],
           "required": true,
-          "description": "Identifiers of 1-100 messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order."
+          "description": "A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order."
         },
         {
           "name": "disable_notification",
@@ -543,7 +543,7 @@
             "Array of Integer"
           ],
           "required": true,
-          "description": "Identifiers of 1-100 messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order."
+          "description": "A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order."
         },
         {
           "name": "disable_notification",
@@ -2066,7 +2066,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "Unique identifier for the target message thread; supergroups only"
+          "description": "Unique identifier for the target message thread; for supergroups only"
         },
         {
           "name": "action",
@@ -2111,7 +2111,7 @@
             "Array of ReactionType"
           ],
           "required": false,
-          "description": "New list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators."
+          "description": "A JSON-serialized list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators."
         },
         {
           "name": "is_big",
@@ -2436,7 +2436,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True if the administrator can post messages in the channel, or access channel statistics; channels only"
+          "description": "Pass True if the administrator can post messages in the channel, or access channel statistics; for channels only"
         },
         {
           "name": "can_edit_messages",
@@ -2444,7 +2444,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True if the administrator can edit messages of other users and can pin messages; channels only"
+          "description": "Pass True if the administrator can edit messages of other users and can pin messages; for channels only"
         },
         {
           "name": "can_pin_messages",
@@ -2452,7 +2452,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True if the administrator can pin messages, supergroups only"
+          "description": "Pass True if the administrator can pin messages; for supergroups only"
         },
         {
           "name": "can_manage_topics",
@@ -2460,7 +2460,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Pass True if the user is allowed to create, rename, close, and reopen forum topics, supergroups only"
+          "description": "Pass True if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only"
         }
       ]
     },
@@ -4419,7 +4419,7 @@
             "Array of Integer"
           ],
           "required": true,
-          "description": "Identifiers of 1-100 messages to delete. See deleteMessage for limitations on which messages can be deleted"
+          "description": "A JSON-serialized list of 1-100 identifiers of messages to delete. See deleteMessage for limitations on which messages can be deleted"
         }
       ]
     },
@@ -4540,7 +4540,7 @@
             "Array of String"
           ],
           "required": true,
-          "description": "List of custom emoji identifiers. At most 200 custom emoji identifiers can be specified."
+          "description": "A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified."
         }
       ]
     },
@@ -9913,7 +9913,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; channels only"
+          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; for channels only"
         },
         {
           "name": "can_edit_messages",
@@ -9921,7 +9921,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; channels only"
+          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only"
         },
         {
           "name": "can_pin_messages",
@@ -9929,7 +9929,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+          "description": "Optional. True, if the user is allowed to pin messages; for groups and supergroups only"
         },
         {
           "name": "can_manage_topics",
@@ -9937,7 +9937,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only"
+          "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only"
         }
       ]
     },
@@ -10196,7 +10196,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; channels only"
+          "description": "Optional. True, if the administrator can post messages in the channel, or access channel statistics; for channels only"
         },
         {
           "name": "can_edit_messages",
@@ -10204,7 +10204,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; channels only"
+          "description": "Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only"
         },
         {
           "name": "can_pin_messages",
@@ -10212,7 +10212,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the user is allowed to pin messages; groups and supergroups only"
+          "description": "Optional. True, if the user is allowed to pin messages; for groups and supergroups only"
         },
         {
           "name": "can_manage_topics",
@@ -10220,7 +10220,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only"
+          "description": "Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only"
         },
         {
           "name": "custom_title",
@@ -15321,7 +15321,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Base64-encoded encrypted Telegram Passport element data provided by the user, available for \"personal_details\", \"passport\", \"driver_license\", \"identity_card\", \"internal_passport\" and \"address\" types. Can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Base64-encoded encrypted Telegram Passport element data provided by the user; available only for \"personal_details\", \"passport\", \"driver_license\", \"identity_card\", \"internal_passport\" and \"address\" types. Can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "name": "phone_number",
@@ -15329,7 +15329,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. User's verified phone number, available only for \"phone_number\" type"
+          "description": "Optional. User's verified phone number; available only for \"phone_number\" type"
         },
         {
           "name": "email",
@@ -15337,7 +15337,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. User's verified email address, available only for \"email\" type"
+          "description": "Optional. User's verified email address; available only for \"email\" type"
         },
         {
           "name": "files",
@@ -15345,7 +15345,7 @@
             "Array of PassportFile"
           ],
           "required": false,
-          "description": "Optional. Array of encrypted files with documents provided by the user, available for \"utility_bill\", \"bank_statement\", \"rental_agreement\", \"passport_registration\" and \"temporary_registration\" types. Files can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Array of encrypted files with documents provided by the user; available only for \"utility_bill\", \"bank_statement\", \"rental_agreement\", \"passport_registration\" and \"temporary_registration\" types. Files can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "name": "front_side",
@@ -15353,7 +15353,7 @@
             "PassportFile"
           ],
           "required": false,
-          "description": "Optional. Encrypted file with the front side of the document, provided by the user. Available for \"passport\", \"driver_license\", \"identity_card\" and \"internal_passport\". The file can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Encrypted file with the front side of the document, provided by the user; available only for \"passport\", \"driver_license\", \"identity_card\" and \"internal_passport\". The file can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "name": "reverse_side",
@@ -15361,7 +15361,7 @@
             "PassportFile"
           ],
           "required": false,
-          "description": "Optional. Encrypted file with the reverse side of the document, provided by the user. Available for \"driver_license\" and \"identity_card\". The file can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Encrypted file with the reverse side of the document, provided by the user; available only for \"driver_license\" and \"identity_card\". The file can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "name": "selfie",
@@ -15369,7 +15369,7 @@
             "PassportFile"
           ],
           "required": false,
-          "description": "Optional. Encrypted file with the selfie of the user holding a document, provided by the user; available for \"passport\", \"driver_license\", \"identity_card\" and \"internal_passport\". The file can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Encrypted file with the selfie of the user holding a document, provided by the user; available if requested for \"passport\", \"driver_license\", \"identity_card\" and \"internal_passport\". The file can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "name": "translation",
@@ -15377,7 +15377,7 @@
             "Array of PassportFile"
           ],
           "required": false,
-          "description": "Optional. Array of encrypted files with translated versions of documents provided by the user. Available if requested for \"passport\", \"driver_license\", \"identity_card\", \"internal_passport\", \"utility_bill\", \"bank_statement\", \"rental_agreement\", \"passport_registration\" and \"temporary_registration\" types. Files can be decrypted and verified using the accompanying EncryptedCredentials."
+          "description": "Optional. Array of encrypted files with translated versions of documents provided by the user; available if requested for \"passport\", \"driver_license\", \"identity_card\", \"internal_passport\", \"utility_bill\", \"bank_statement\", \"rental_agreement\", \"passport_registration\" and \"temporary_registration\" types. Files can be decrypted and verified using the accompanying EncryptedCredentials."
         },
         {
           "name": "hash",
