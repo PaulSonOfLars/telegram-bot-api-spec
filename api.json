@@ -276,7 +276,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -688,7 +688,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -827,7 +827,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -949,7 +949,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -1103,7 +1103,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -1249,7 +1249,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -1362,7 +1362,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -1468,7 +1468,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -1660,7 +1660,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -1796,7 +1796,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -1900,7 +1900,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -2068,7 +2068,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -2148,7 +2148,7 @@
             "ForceReply"
           ],
           "required": false,
-          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account"
+          "description": "Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove a reply keyboard or to force a reply from the user. Not supported for messages sent on behalf of a business account."
         }
       ]
     },
@@ -8941,7 +8941,7 @@
       "name": "SharedUser",
       "href": "https://core.telegram.org/bots/api#shareduser",
       "description": [
-        "This object contains information about a user that was shared with the bot using a KeyboardButtonRequestUser button."
+        "This object contains information about a user that was shared with the bot using a KeyboardButtonRequestUsers button."
       ],
       "fields": [
         {
@@ -9661,7 +9661,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True to request the users' first and last name"
+          "description": "Optional. Pass True to request the users' first and last names"
         },
         {
           "name": "request_username",
@@ -9669,7 +9669,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True to request the users' username"
+          "description": "Optional. Pass True to request the users' usernames"
         },
         {
           "name": "request_photo",
@@ -9677,7 +9677,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Pass True to request the users' photo"
+          "description": "Optional. Pass True to request the users' photos"
         }
       ]
     },
@@ -9685,7 +9685,7 @@
       "name": "KeyboardButtonRequestChat",
       "href": "https://core.telegram.org/bots/api#keyboardbuttonrequestchat",
       "description": [
-        "This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the \u0441hat if appropriate More about requesting chats: https://core.telegram.org/bots/features#chat-and-user-selection"
+        "This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the chat if appropriate. More about requesting chats: https://core.telegram.org/bots/features#chat-and-user-selection."
       ],
       "fields": [
         {
@@ -12169,7 +12169,7 @@
             "Array of Integer"
           ],
           "required": true,
-          "description": "A JSON-serialized list of identifiers of deleted messages in the chat of the business account"
+          "description": "The list of identifiers of deleted messages in the chat of the business account"
         }
       ]
     },
