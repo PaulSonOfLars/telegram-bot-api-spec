@@ -3,8 +3,11 @@ import re
 import string
 
 import requests
+import yaml
 from bs4 import BeautifulSoup
 from bs4.element import Tag
+
+from openapi import to_openapi
 
 TG_CORE_TYPES = ["String", "Boolean", "Integer", "Float"]
 ROOT_URL = "https://core.telegram.org"
@@ -346,6 +349,11 @@ def verify_method_parameters(items: dict) -> bool:
     return issue_found
 
 
+class NoAliasDumper(yaml.Dumper):
+    def ignore_aliases(self, data):
+        return True
+
+
 def main():
     for filename, url in TO_SCRAPE.items():
         print("parsing", url)
@@ -359,6 +367,9 @@ def main():
 
         with open(f"{filename}.min.json", "w") as f:
             json.dump(items, f)
+
+        with open(f"{filename}-openapi.yaml", "w") as f:
+            yaml.dump(to_openapi(items), f, Dumper=NoAliasDumper, sort_keys=False)
 
 
 if __name__ == '__main__':
