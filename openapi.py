@@ -62,6 +62,18 @@ def to_openapi(data: dict) -> dict:
                            "Generated from the Bot API docs at https://core.telegram.org/bots/api",
             "version": data.get("version"),
         },
+        "servers": [
+            {
+                "url": "https://api.telegram.org/bot{token}",
+                "description": "The official hosted Bot API server from Telegram.",
+                "variables": {
+                    "token": {
+                        "description": "The bot's API token, as obtained from t.me/botfather.",
+                        "default": "123:XYZ",
+                    }
+                },
+            }
+        ],
         "paths": openapi_methods(data),
         "components": {
             "schemas": openapi_types(data),
@@ -74,11 +86,12 @@ def openapi_methods(data):
     for method, methodData in data.get("methods", {}).items():
         methods[f"/{method}"] = {
             "post": {
+                "operationId": method,
                 "summary": method,
                 "description": "\n".join(methodData.get("description")),
                 "parameters": method_parameters(methodData),
                 "responses": {
-                    200: {
+                    "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {

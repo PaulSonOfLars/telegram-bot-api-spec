@@ -4,9 +4,17 @@ info:
   description: Unofficial telegram-bot-api OpenAPI spec. Generated from the Bot API
     docs at https://core.telegram.org/bots/api
   version: Bot API 7.2
+servers:
+- url: https://api.telegram.org/bot{token}
+  description: The official hosted Bot API server from Telegram.
+  variables:
+    token:
+      description: The bot's API token, as obtained from t.me/botfather.
+      default: 123:XYZ
 paths:
   /getUpdates:
     post:
+      operationId: getUpdates
       summary: getUpdates
       description: Use this method to receive incoming updates using long polling
         (wiki). Returns an Array of Update objects.
@@ -37,7 +45,7 @@ paths:
           items:
             type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -68,6 +76,7 @@ paths:
           description: Server error
   /setWebhook:
     post:
+      operationId: setWebhook
       summary: setWebhook
       description: 'Use this method to specify a URL and receive incoming updates
         via an outgoing webhook. Whenever there is an update for the bot, we will
@@ -119,7 +128,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -148,6 +157,7 @@ paths:
           description: Server error
   /deleteWebhook:
     post:
+      operationId: deleteWebhook
       summary: deleteWebhook
       description: Use this method to remove webhook integration if you decide to
         switch back to getUpdates. Returns True on success.
@@ -158,7 +168,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -187,13 +197,14 @@ paths:
           description: Server error
   /getWebhookInfo:
     post:
+      operationId: getWebhookInfo
       summary: getWebhookInfo
       description: Use this method to get current webhook status. Requires no parameters.
         On success, returns a WebhookInfo object. If the bot is using getUpdates,
         will return an object with the url field empty.
       parameters: []
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -222,12 +233,13 @@ paths:
           description: Server error
   /getMe:
     post:
+      operationId: getMe
       summary: getMe
       description: A simple method for testing your bot's authentication token. Requires
         no parameters. Returns basic information about the bot in form of a User object.
       parameters: []
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -256,6 +268,7 @@ paths:
           description: Server error
   /logOut:
     post:
+      operationId: logOut
       summary: logOut
       description: Use this method to log out from the cloud Bot API server before
         launching the bot locally. You must log out the bot before running it locally,
@@ -265,7 +278,7 @@ paths:
         True on success. Requires no parameters.
       parameters: []
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -294,6 +307,7 @@ paths:
           description: Server error
   /close:
     post:
+      operationId: close
       summary: close
       description: Use this method to close the bot instance before moving it from
         one local server to another. You need to delete the webhook before calling
@@ -302,7 +316,7 @@ paths:
         launched. Returns True on success. Requires no parameters.
       parameters: []
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -331,6 +345,7 @@ paths:
           description: Server error
   /sendMessage:
     post:
+      operationId: sendMessage
       summary: sendMessage
       description: Use this method to send text messages. On success, the sent Message
         is returned.
@@ -405,7 +420,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -434,6 +449,7 @@ paths:
           description: Server error
   /forwardMessage:
     post:
+      operationId: forwardMessage
       summary: forwardMessage
       description: Use this method to forward messages of any kind. Service messages
         and messages with protected content can't be forwarded. On success, the sent
@@ -482,7 +498,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -511,6 +527,7 @@ paths:
           description: Server error
   /forwardMessages:
     post:
+      operationId: forwardMessages
       summary: forwardMessages
       description: Use this method to forward multiple messages of any kind. If some
         of the specified messages can't be found or forwarded, they are skipped. Service
@@ -563,7 +580,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -594,6 +611,7 @@ paths:
           description: Server error
   /copyMessage:
     post:
+      operationId: copyMessage
       summary: copyMessage
       description: Use this method to copy messages of any kind. Service messages,
         giveaway messages, giveaway winners messages, and invoice messages can't be
@@ -678,7 +696,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -707,6 +725,7 @@ paths:
           description: Server error
   /copyMessages:
     post:
+      operationId: copyMessages
       summary: copyMessages
       description: Use this method to copy messages of any kind. If some of the specified
         messages can't be found or copied, they are skipped. Service messages, giveaway
@@ -767,7 +786,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -798,6 +817,7 @@ paths:
           description: Server error
   /sendPhoto:
     post:
+      operationId: sendPhoto
       summary: sendPhoto
       description: Use this method to send photos. On success, the sent Message is
         returned.
@@ -881,7 +901,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -910,6 +930,7 @@ paths:
           description: Server error
   /sendAudio:
     post:
+      operationId: sendAudio
       summary: sendAudio
       description: 'Use this method to send audio files, if you want Telegram clients
         to display them in the music player. Your audio must be in the .MP3 or .M4A
@@ -1017,7 +1038,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -1046,6 +1067,7 @@ paths:
           description: Server error
   /sendDocument:
     post:
+      operationId: sendDocument
       summary: sendDocument
       description: Use this method to send general files. On success, the sent Message
         is returned. Bots can currently send files of any type of up to 50 MB in size,
@@ -1139,7 +1161,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -1168,6 +1190,7 @@ paths:
           description: Server error
   /sendVideo:
     post:
+      operationId: sendVideo
       summary: sendVideo
       description: Use this method to send video files, Telegram clients support MPEG4
         videos (other formats may be sent as Document). On success, the sent Message
@@ -1285,7 +1308,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -1314,6 +1337,7 @@ paths:
           description: Server error
   /sendAnimation:
     post:
+      operationId: sendAnimation
       summary: sendAnimation
       description: Use this method to send animation files (GIF or H.264/MPEG-4 AVC
         video without sound). On success, the sent Message is returned. Bots can currently
@@ -1426,7 +1450,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -1455,6 +1479,7 @@ paths:
           description: Server error
   /sendVoice:
     post:
+      operationId: sendVoice
       summary: sendVoice
       description: Use this method to send audio files, if you want Telegram clients
         to display the file as a playable voice message. For this to work, your audio
@@ -1543,7 +1568,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -1572,6 +1597,7 @@ paths:
           description: Server error
   /sendVideoNote:
     post:
+      operationId: sendVideoNote
       summary: sendVideoNote
       description: As of v.4.0, Telegram clients support rounded square MPEG4 videos
         of up to 1 minute long. Use this method to send video messages. On success,
@@ -1655,7 +1681,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -1684,6 +1710,7 @@ paths:
           description: Server error
   /sendMediaGroup:
     post:
+      operationId: sendMediaGroup
       summary: sendMediaGroup
       description: Use this method to send a group of photos, videos, documents or
         audios as an album. Documents and audio files can be only grouped in an album
@@ -1746,7 +1773,7 @@ paths:
         schema:
           $ref: '#/components/schemas/ReplyParameters'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -1777,6 +1804,7 @@ paths:
           description: Server error
   /sendLocation:
     post:
+      operationId: sendLocation
       summary: sendLocation
       description: Use this method to send point on the map. On success, the sent
         Message is returned.
@@ -1865,7 +1893,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -1894,6 +1922,7 @@ paths:
           description: Server error
   /sendVenue:
     post:
+      operationId: sendVenue
       summary: sendVenue
       description: Use this method to send information about a venue. On success,
         the sent Message is returned.
@@ -1988,7 +2017,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2017,6 +2046,7 @@ paths:
           description: Server error
   /sendContact:
     post:
+      operationId: sendContact
       summary: sendContact
       description: Use this method to send phone contacts. On success, the sent Message
         is returned.
@@ -2089,7 +2119,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2118,6 +2148,7 @@ paths:
           description: Server error
   /sendPoll:
     post:
+      operationId: sendPoll
       summary: sendPoll
       description: Use this method to send a native poll. On success, the sent Message
         is returned.
@@ -2237,7 +2268,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2266,6 +2297,7 @@ paths:
           description: Server error
   /sendDice:
     post:
+      operationId: sendDice
       summary: sendDice
       description: Use this method to send an animated emoji that will display a random
         value. On success, the sent Message is returned.
@@ -2323,7 +2355,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2352,6 +2384,7 @@ paths:
           description: Server error
   /sendChatAction:
     post:
+      operationId: sendChatAction
       summary: sendChatAction
       description: 'Use this method when you need to tell the user that something
         is happening on the bot''s side. The status is set for 5 seconds or less (when
@@ -2388,7 +2421,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2417,6 +2450,7 @@ paths:
           description: Server error
   /setMessageReaction:
     post:
+      operationId: setMessageReaction
       summary: setMessageReaction
       description: Use this method to change the chosen reactions on a message. Service
         messages can't be reacted to. Automatically forwarded messages from a channel
@@ -2452,7 +2486,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2481,6 +2515,7 @@ paths:
           description: Server error
   /getUserProfilePhotos:
     post:
+      operationId: getUserProfilePhotos
       summary: getUserProfilePhotos
       description: Use this method to get a list of profile pictures for a user. Returns
         a UserProfilePhotos object.
@@ -2504,7 +2539,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2533,6 +2568,7 @@ paths:
           description: Server error
   /getFile:
     post:
+      operationId: getFile
       summary: getFile
       description: 'Use this method to get basic information about a file and prepare
         it for downloading. For the moment, bots can download files of up to 20MB
@@ -2552,7 +2588,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2581,6 +2617,7 @@ paths:
           description: Server error
   /banChatMember:
     post:
+      operationId: banChatMember
       summary: banChatMember
       description: Use this method to ban a user in a group, a supergroup or a channel.
         In the case of supergroups and channels, the user will not be able to return
@@ -2616,7 +2653,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2645,6 +2682,7 @@ paths:
           description: Server error
   /unbanChatMember:
     post:
+      operationId: unbanChatMember
       summary: unbanChatMember
       description: Use this method to unban a previously banned user in a supergroup
         or channel. The user will not return to the group or channel automatically,
@@ -2676,7 +2714,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2705,6 +2743,7 @@ paths:
           description: Server error
   /restrictChatMember:
     post:
+      operationId: restrictChatMember
       summary: restrictChatMember
       description: Use this method to restrict a user in a supergroup. The bot must
         be an administrator in the supergroup for this to work and must have the appropriate
@@ -2744,7 +2783,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2773,6 +2812,7 @@ paths:
           description: Server error
   /promoteChatMember:
     post:
+      operationId: promoteChatMember
       summary: promoteChatMember
       description: Use this method to promote or demote a user in a supergroup or
         a channel. The bot must be an administrator in the chat for this to work and
@@ -2871,7 +2911,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2900,6 +2940,7 @@ paths:
           description: Server error
   /setChatAdministratorCustomTitle:
     post:
+      operationId: setChatAdministratorCustomTitle
       summary: setChatAdministratorCustomTitle
       description: Use this method to set a custom title for an administrator in a
         supergroup promoted by the bot. Returns True on success.
@@ -2926,7 +2967,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -2955,6 +2996,7 @@ paths:
           description: Server error
   /banChatSenderChat:
     post:
+      operationId: banChatSenderChat
       summary: banChatSenderChat
       description: Use this method to ban a channel chat in a supergroup or a channel.
         Until the chat is unbanned, the owner of the banned chat won't be able to
@@ -2979,7 +3021,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3008,6 +3050,7 @@ paths:
           description: Server error
   /unbanChatSenderChat:
     post:
+      operationId: unbanChatSenderChat
       summary: unbanChatSenderChat
       description: Use this method to unban a previously banned channel chat in a
         supergroup or channel. The bot must be an administrator for this to work and
@@ -3030,7 +3073,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3059,6 +3102,7 @@ paths:
           description: Server error
   /setChatPermissions:
     post:
+      operationId: setChatPermissions
       summary: setChatPermissions
       description: Use this method to set default chat permissions for all members.
         The bot must be an administrator in the group or a supergroup for this to
@@ -3086,7 +3130,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3115,6 +3159,7 @@ paths:
           description: Server error
   /exportChatInviteLink:
     post:
+      operationId: exportChatInviteLink
       summary: exportChatInviteLink
       description: Use this method to generate a new primary invite link for a chat;
         any previously generated primary link is revoked. The bot must be an administrator
@@ -3132,7 +3177,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3161,6 +3206,7 @@ paths:
           description: Server error
   /createChatInviteLink:
     post:
+      operationId: createChatInviteLink
       summary: createChatInviteLink
       description: Use this method to create an additional invite link for a chat.
         The bot must be an administrator in the chat for this to work and must have
@@ -3200,7 +3246,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3229,6 +3275,7 @@ paths:
           description: Server error
   /editChatInviteLink:
     post:
+      operationId: editChatInviteLink
       summary: editChatInviteLink
       description: Use this method to edit a non-primary invite link created by the
         bot. The bot must be an administrator in the chat for this to work and must
@@ -3273,7 +3320,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3302,6 +3349,7 @@ paths:
           description: Server error
   /revokeChatInviteLink:
     post:
+      operationId: revokeChatInviteLink
       summary: revokeChatInviteLink
       description: Use this method to revoke an invite link created by the bot. If
         the primary link is revoked, a new link is automatically generated. The bot
@@ -3324,7 +3372,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3353,6 +3401,7 @@ paths:
           description: Server error
   /approveChatJoinRequest:
     post:
+      operationId: approveChatJoinRequest
       summary: approveChatJoinRequest
       description: Use this method to approve a chat join request. The bot must be
         an administrator in the chat for this to work and must have the can_invite_users
@@ -3375,7 +3424,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3404,6 +3453,7 @@ paths:
           description: Server error
   /declineChatJoinRequest:
     post:
+      operationId: declineChatJoinRequest
       summary: declineChatJoinRequest
       description: Use this method to decline a chat join request. The bot must be
         an administrator in the chat for this to work and must have the can_invite_users
@@ -3426,7 +3476,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3455,6 +3505,7 @@ paths:
           description: Server error
   /setChatPhoto:
     post:
+      operationId: setChatPhoto
       summary: setChatPhoto
       description: Use this method to set a new profile photo for the chat. Photos
         can't be changed for private chats. The bot must be an administrator in the
@@ -3477,7 +3528,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InputFile'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3506,6 +3557,7 @@ paths:
           description: Server error
   /deleteChatPhoto:
     post:
+      operationId: deleteChatPhoto
       summary: deleteChatPhoto
       description: Use this method to delete a chat photo. Photos can't be changed
         for private chats. The bot must be an administrator in the chat for this to
@@ -3522,7 +3574,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3551,6 +3603,7 @@ paths:
           description: Server error
   /setChatTitle:
     post:
+      operationId: setChatTitle
       summary: setChatTitle
       description: Use this method to change the title of a chat. Titles can't be
         changed for private chats. The bot must be an administrator in the chat for
@@ -3573,7 +3626,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3602,6 +3655,7 @@ paths:
           description: Server error
   /setChatDescription:
     post:
+      operationId: setChatDescription
       summary: setChatDescription
       description: Use this method to change the description of a group, a supergroup
         or a channel. The bot must be an administrator in the chat for this to work
@@ -3623,7 +3677,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3652,6 +3706,7 @@ paths:
           description: Server error
   /pinChatMessage:
     post:
+      operationId: pinChatMessage
       summary: pinChatMessage
       description: Use this method to add a message to the list of pinned messages
         in a chat. If the chat is not a private chat, the bot must be an administrator
@@ -3681,7 +3736,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3710,6 +3765,7 @@ paths:
           description: Server error
   /unpinChatMessage:
     post:
+      operationId: unpinChatMessage
       summary: unpinChatMessage
       description: Use this method to remove a message from the list of pinned messages
         in a chat. If the chat is not a private chat, the bot must be an administrator
@@ -3734,7 +3790,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3763,6 +3819,7 @@ paths:
           description: Server error
   /unpinAllChatMessages:
     post:
+      operationId: unpinAllChatMessages
       summary: unpinAllChatMessages
       description: Use this method to clear the list of pinned messages in a chat.
         If the chat is not a private chat, the bot must be an administrator in the
@@ -3781,7 +3838,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3810,6 +3867,7 @@ paths:
           description: Server error
   /leaveChat:
     post:
+      operationId: leaveChat
       summary: leaveChat
       description: Use this method for your bot to leave a group, supergroup or channel.
         Returns True on success.
@@ -3825,7 +3883,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3854,6 +3912,7 @@ paths:
           description: Server error
   /getChat:
     post:
+      operationId: getChat
       summary: getChat
       description: Use this method to get up to date information about the chat. Returns
         a Chat object on success.
@@ -3869,7 +3928,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3898,6 +3957,7 @@ paths:
           description: Server error
   /getChatAdministrators:
     post:
+      operationId: getChatAdministrators
       summary: getChatAdministrators
       description: Use this method to get a list of administrators in a chat, which
         aren't bots. Returns an Array of ChatMember objects.
@@ -3913,7 +3973,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3944,6 +4004,7 @@ paths:
           description: Server error
   /getChatMemberCount:
     post:
+      operationId: getChatMemberCount
       summary: getChatMemberCount
       description: Use this method to get the number of members in a chat. Returns
         Int on success.
@@ -3959,7 +4020,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -3989,6 +4050,7 @@ paths:
           description: Server error
   /getChatMember:
     post:
+      operationId: getChatMember
       summary: getChatMember
       description: Use this method to get information about a member of a chat. The
         method is only guaranteed to work for other users if the bot is an administrator
@@ -4011,7 +4073,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4040,6 +4102,7 @@ paths:
           description: Server error
   /setChatStickerSet:
     post:
+      operationId: setChatStickerSet
       summary: setChatStickerSet
       description: Use this method to set a new group sticker set for a supergroup.
         The bot must be an administrator in the chat for this to work and must have
@@ -4063,7 +4126,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4092,6 +4155,7 @@ paths:
           description: Server error
   /deleteChatStickerSet:
     post:
+      operationId: deleteChatStickerSet
       summary: deleteChatStickerSet
       description: Use this method to delete a group sticker set from a supergroup.
         The bot must be an administrator in the chat for this to work and must have
@@ -4110,7 +4174,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4139,13 +4203,14 @@ paths:
           description: Server error
   /getForumTopicIconStickers:
     post:
+      operationId: getForumTopicIconStickers
       summary: getForumTopicIconStickers
       description: Use this method to get custom emoji stickers, which can be used
         as a forum topic icon by any user. Requires no parameters. Returns an Array
         of Sticker objects.
       parameters: []
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4176,6 +4241,7 @@ paths:
           description: Server error
   /createForumTopic:
     post:
+      operationId: createForumTopic
       summary: createForumTopic
       description: Use this method to create a topic in a forum supergroup chat. The
         bot must be an administrator in the chat for this to work and must have the
@@ -4209,7 +4275,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4238,6 +4304,7 @@ paths:
           description: Server error
   /editForumTopic:
     post:
+      operationId: editForumTopic
       summary: editForumTopic
       description: Use this method to edit name and icon of a topic in a forum supergroup
         chat. The bot must be an administrator in the chat for this to work and must
@@ -4271,7 +4338,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4300,6 +4367,7 @@ paths:
           description: Server error
   /closeForumTopic:
     post:
+      operationId: closeForumTopic
       summary: closeForumTopic
       description: Use this method to close an open topic in a forum supergroup chat.
         The bot must be an administrator in the chat for this to work and must have
@@ -4323,7 +4391,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4352,6 +4420,7 @@ paths:
           description: Server error
   /reopenForumTopic:
     post:
+      operationId: reopenForumTopic
       summary: reopenForumTopic
       description: Use this method to reopen a closed topic in a forum supergroup
         chat. The bot must be an administrator in the chat for this to work and must
@@ -4375,7 +4444,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4404,6 +4473,7 @@ paths:
           description: Server error
   /deleteForumTopic:
     post:
+      operationId: deleteForumTopic
       summary: deleteForumTopic
       description: Use this method to delete a forum topic along with all its messages
         in a forum supergroup chat. The bot must be an administrator in the chat for
@@ -4427,7 +4497,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4456,6 +4526,7 @@ paths:
           description: Server error
   /unpinAllForumTopicMessages:
     post:
+      operationId: unpinAllForumTopicMessages
       summary: unpinAllForumTopicMessages
       description: Use this method to clear the list of pinned messages in a forum
         topic. The bot must be an administrator in the chat for this to work and must
@@ -4479,7 +4550,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4508,6 +4579,7 @@ paths:
           description: Server error
   /editGeneralForumTopic:
     post:
+      operationId: editGeneralForumTopic
       summary: editGeneralForumTopic
       description: Use this method to edit the name of the 'General' topic in a forum
         supergroup chat. The bot must be an administrator in the chat for this to
@@ -4530,7 +4602,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4559,6 +4631,7 @@ paths:
           description: Server error
   /closeGeneralForumTopic:
     post:
+      operationId: closeGeneralForumTopic
       summary: closeGeneralForumTopic
       description: Use this method to close an open 'General' topic in a forum supergroup
         chat. The bot must be an administrator in the chat for this to work and must
@@ -4575,7 +4648,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4604,6 +4677,7 @@ paths:
           description: Server error
   /reopenGeneralForumTopic:
     post:
+      operationId: reopenGeneralForumTopic
       summary: reopenGeneralForumTopic
       description: Use this method to reopen a closed 'General' topic in a forum supergroup
         chat. The bot must be an administrator in the chat for this to work and must
@@ -4621,7 +4695,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4650,6 +4724,7 @@ paths:
           description: Server error
   /hideGeneralForumTopic:
     post:
+      operationId: hideGeneralForumTopic
       summary: hideGeneralForumTopic
       description: Use this method to hide the 'General' topic in a forum supergroup
         chat. The bot must be an administrator in the chat for this to work and must
@@ -4667,7 +4742,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4696,6 +4771,7 @@ paths:
           description: Server error
   /unhideGeneralForumTopic:
     post:
+      operationId: unhideGeneralForumTopic
       summary: unhideGeneralForumTopic
       description: Use this method to unhide the 'General' topic in a forum supergroup
         chat. The bot must be an administrator in the chat for this to work and must
@@ -4712,7 +4788,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4741,6 +4817,7 @@ paths:
           description: Server error
   /unpinAllGeneralForumTopicMessages:
     post:
+      operationId: unpinAllGeneralForumTopicMessages
       summary: unpinAllGeneralForumTopicMessages
       description: Use this method to clear the list of pinned messages in a General
         forum topic. The bot must be an administrator in the chat for this to work
@@ -4758,7 +4835,7 @@ paths:
               format: int64
             - type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4787,6 +4864,7 @@ paths:
           description: Server error
   /answerCallbackQuery:
     post:
+      operationId: answerCallbackQuery
       summary: answerCallbackQuery
       description: Use this method to send answers to callback queries sent from inline
         keyboards. The answer will be displayed to the user as a notification at the
@@ -4819,7 +4897,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4848,6 +4926,7 @@ paths:
           description: Server error
   /getUserChatBoosts:
     post:
+      operationId: getUserChatBoosts
       summary: getUserChatBoosts
       description: Use this method to get the list of boosts added to a chat by a
         user. Requires administrator rights in the chat. Returns a UserChatBoosts
@@ -4870,7 +4949,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4899,6 +4978,7 @@ paths:
           description: Server error
   /getBusinessConnection:
     post:
+      operationId: getBusinessConnection
       summary: getBusinessConnection
       description: Use this method to get information about the connection of the
         bot with a business account. Returns a BusinessConnection object on success.
@@ -4909,7 +4989,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4938,6 +5018,7 @@ paths:
           description: Server error
   /setMyCommands:
     post:
+      operationId: setMyCommands
       summary: setMyCommands
       description: Use this method to change the list of the bot's commands. See this
         manual for more details about bot commands. Returns True on success.
@@ -4960,7 +5041,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -4989,6 +5070,7 @@ paths:
           description: Server error
   /deleteMyCommands:
     post:
+      operationId: deleteMyCommands
       summary: deleteMyCommands
       description: Use this method to delete the list of the bot's commands for the
         given scope and user language. After deletion, higher level commands will
@@ -5005,7 +5087,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5034,6 +5116,7 @@ paths:
           description: Server error
   /getMyCommands:
     post:
+      operationId: getMyCommands
       summary: getMyCommands
       description: Use this method to get the current list of the bot's commands for
         the given scope and user language. Returns an Array of BotCommand objects.
@@ -5050,7 +5133,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5081,6 +5164,7 @@ paths:
           description: Server error
   /setMyName:
     post:
+      operationId: setMyName
       summary: setMyName
       description: Use this method to change the bot's name. Returns True on success.
       parameters:
@@ -5095,7 +5179,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5124,6 +5208,7 @@ paths:
           description: Server error
   /getMyName:
     post:
+      operationId: getMyName
       summary: getMyName
       description: Use this method to get the current bot name for the given user
         language. Returns BotName on success.
@@ -5134,7 +5219,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5163,6 +5248,7 @@ paths:
           description: Server error
   /setMyDescription:
     post:
+      operationId: setMyDescription
       summary: setMyDescription
       description: Use this method to change the bot's description, which is shown
         in the chat with the bot if the chat is empty. Returns True on success.
@@ -5178,7 +5264,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5207,6 +5293,7 @@ paths:
           description: Server error
   /getMyDescription:
     post:
+      operationId: getMyDescription
       summary: getMyDescription
       description: Use this method to get the current bot description for the given
         user language. Returns BotDescription on success.
@@ -5217,7 +5304,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5246,6 +5333,7 @@ paths:
           description: Server error
   /setMyShortDescription:
     post:
+      operationId: setMyShortDescription
       summary: setMyShortDescription
       description: Use this method to change the bot's short description, which is
         shown on the bot's profile page and is sent together with the link when users
@@ -5262,7 +5350,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5291,6 +5379,7 @@ paths:
           description: Server error
   /getMyShortDescription:
     post:
+      operationId: getMyShortDescription
       summary: getMyShortDescription
       description: Use this method to get the current bot short description for the
         given user language. Returns BotShortDescription on success.
@@ -5301,7 +5390,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5330,6 +5419,7 @@ paths:
           description: Server error
   /setChatMenuButton:
     post:
+      operationId: setChatMenuButton
       summary: setChatMenuButton
       description: Use this method to change the bot's menu button in a private chat,
         or the default menu button. Returns True on success.
@@ -5346,7 +5436,7 @@ paths:
         schema:
           $ref: '#/components/schemas/MenuButton'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5375,6 +5465,7 @@ paths:
           description: Server error
   /getChatMenuButton:
     post:
+      operationId: getChatMenuButton
       summary: getChatMenuButton
       description: Use this method to get the current value of the bot's menu button
         in a private chat, or the default menu button. Returns MenuButton on success.
@@ -5386,7 +5477,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5415,6 +5506,7 @@ paths:
           description: Server error
   /setMyDefaultAdministratorRights:
     post:
+      operationId: setMyDefaultAdministratorRights
       summary: setMyDefaultAdministratorRights
       description: Use this method to change the default administrator rights requested
         by the bot when it's added as an administrator to groups or channels. These
@@ -5432,7 +5524,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5461,6 +5553,7 @@ paths:
           description: Server error
   /getMyDefaultAdministratorRights:
     post:
+      operationId: getMyDefaultAdministratorRights
       summary: getMyDefaultAdministratorRights
       description: Use this method to get the current default administrator rights
         of the bot. Returns ChatAdministratorRights on success.
@@ -5471,7 +5564,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5500,6 +5593,7 @@ paths:
           description: Server error
   /editMessageText:
     post:
+      operationId: editMessageText
       summary: editMessageText
       description: Use this method to edit text and game messages. On success, if
         the edited message is not an inline message, the edited Message is returned,
@@ -5554,7 +5648,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineKeyboardMarkup'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5587,6 +5681,7 @@ paths:
           description: Server error
   /editMessageCaption:
     post:
+      operationId: editMessageCaption
       summary: editMessageCaption
       description: Use this method to edit captions of messages. On success, if the
         edited message is not an inline message, the edited Message is returned, otherwise
@@ -5636,7 +5731,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineKeyboardMarkup'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5669,6 +5764,7 @@ paths:
           description: Server error
   /editMessageMedia:
     post:
+      operationId: editMessageMedia
       summary: editMessageMedia
       description: Use this method to edit animation, audio, document, photo, or video
         messages. If a message is part of a message album, then it can be edited only
@@ -5710,7 +5806,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineKeyboardMarkup'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5743,6 +5839,7 @@ paths:
           description: Server error
   /editMessageLiveLocation:
     post:
+      operationId: editMessageLiveLocation
       summary: editMessageLiveLocation
       description: Use this method to edit live location messages. A location can
         be edited until its live_period expires or editing is explicitly disabled
@@ -5806,7 +5903,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineKeyboardMarkup'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5839,6 +5936,7 @@ paths:
           description: Server error
   /stopMessageLiveLocation:
     post:
+      operationId: stopMessageLiveLocation
       summary: stopMessageLiveLocation
       description: Use this method to stop updating a live location message before
         live_period expires. On success, if the message is not an inline message,
@@ -5871,7 +5969,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineKeyboardMarkup'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5904,6 +6002,7 @@ paths:
           description: Server error
   /editMessageReplyMarkup:
     post:
+      operationId: editMessageReplyMarkup
       summary: editMessageReplyMarkup
       description: Use this method to edit only the reply markup of messages. On success,
         if the edited message is not an inline message, the edited Message is returned,
@@ -5936,7 +6035,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineKeyboardMarkup'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -5969,6 +6068,7 @@ paths:
           description: Server error
   /stopPoll:
     post:
+      operationId: stopPoll
       summary: stopPoll
       description: Use this method to stop a poll which was sent by the bot. On success,
         the stopped Poll is returned.
@@ -5995,7 +6095,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineKeyboardMarkup'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6024,6 +6124,7 @@ paths:
           description: Server error
   /deleteMessage:
     post:
+      operationId: deleteMessage
       summary: deleteMessage
       description: 'Use this method to delete a message, including service messages,
         with the following limitations:
@@ -6067,7 +6168,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6096,6 +6197,7 @@ paths:
           description: Server error
   /deleteMessages:
     post:
+      operationId: deleteMessages
       summary: deleteMessages
       description: Use this method to delete multiple messages simultaneously. If
         some of the specified messages can't be found, they are skipped. Returns True
@@ -6120,7 +6222,7 @@ paths:
             type: integer
             format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6149,6 +6251,7 @@ paths:
           description: Server error
   /sendSticker:
     post:
+      operationId: sendSticker
       summary: sendSticker
       description: Use this method to send static .WEBP, animated .TGS, or video .WEBM
         stickers. On success, the sent Message is returned.
@@ -6215,7 +6318,7 @@ paths:
             - $ref: '#/components/schemas/ReplyKeyboardRemove'
             - $ref: '#/components/schemas/ForceReply'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6244,6 +6347,7 @@ paths:
           description: Server error
   /getStickerSet:
     post:
+      operationId: getStickerSet
       summary: getStickerSet
       description: Use this method to get a sticker set. On success, a StickerSet
         object is returned.
@@ -6254,7 +6358,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6283,6 +6387,7 @@ paths:
           description: Server error
   /getCustomEmojiStickers:
     post:
+      operationId: getCustomEmojiStickers
       summary: getCustomEmojiStickers
       description: Use this method to get information about custom emoji stickers
         by their identifiers. Returns an Array of Sticker objects.
@@ -6295,7 +6400,7 @@ paths:
           items:
             type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6326,6 +6431,7 @@ paths:
           description: Server error
   /uploadStickerFile:
     post:
+      operationId: uploadStickerFile
       summary: uploadStickerFile
       description: Use this method to upload a file with a sticker for later use in
         the createNewStickerSet, addStickerToSet, or replaceStickerInSet methods (the
@@ -6348,7 +6454,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6377,6 +6483,7 @@ paths:
           description: Server error
   /createNewStickerSet:
     post:
+      operationId: createNewStickerSet
       summary: createNewStickerSet
       description: Use this method to create a new sticker set owned by a user. The
         bot will be able to edit the sticker set thus created. Returns True on success.
@@ -6415,7 +6522,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6444,6 +6551,7 @@ paths:
           description: Server error
   /addStickerToSet:
     post:
+      operationId: addStickerToSet
       summary: addStickerToSet
       description: Use this method to add a new sticker to a set created by the bot.
         Emoji sticker sets can have up to 200 stickers. Other sticker sets can have
@@ -6466,7 +6574,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InputSticker'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6495,6 +6603,7 @@ paths:
           description: Server error
   /setStickerPositionInSet:
     post:
+      operationId: setStickerPositionInSet
       summary: setStickerPositionInSet
       description: Use this method to move a sticker in a set created by the bot to
         a specific position. Returns True on success.
@@ -6511,7 +6620,7 @@ paths:
           type: integer
           format: int64
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6540,6 +6649,7 @@ paths:
           description: Server error
   /deleteStickerFromSet:
     post:
+      operationId: deleteStickerFromSet
       summary: deleteStickerFromSet
       description: Use this method to delete a sticker from a set created by the bot.
         Returns True on success.
@@ -6550,7 +6660,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6579,6 +6689,7 @@ paths:
           description: Server error
   /replaceStickerInSet:
     post:
+      operationId: replaceStickerInSet
       summary: replaceStickerInSet
       description: Use this method to replace an existing sticker in a sticker set
         with a new one. The method is equivalent to calling deleteStickerFromSet,
@@ -6606,7 +6717,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InputSticker'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6635,6 +6746,7 @@ paths:
           description: Server error
   /setStickerEmojiList:
     post:
+      operationId: setStickerEmojiList
       summary: setStickerEmojiList
       description: Use this method to change the list of emoji assigned to a regular
         or custom emoji sticker. The sticker must belong to a sticker set created
@@ -6653,7 +6765,7 @@ paths:
           items:
             type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6682,6 +6794,7 @@ paths:
           description: Server error
   /setStickerKeywords:
     post:
+      operationId: setStickerKeywords
       summary: setStickerKeywords
       description: Use this method to change search keywords assigned to a regular
         or custom emoji sticker. The sticker must belong to a sticker set created
@@ -6700,7 +6813,7 @@ paths:
           items:
             type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6729,6 +6842,7 @@ paths:
           description: Server error
   /setStickerMaskPosition:
     post:
+      operationId: setStickerMaskPosition
       summary: setStickerMaskPosition
       description: Use this method to change the mask position of a mask sticker.
         The sticker must belong to a sticker set that was created by the bot. Returns
@@ -6745,7 +6859,7 @@ paths:
         schema:
           $ref: '#/components/schemas/MaskPosition'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6774,6 +6888,7 @@ paths:
           description: Server error
   /setStickerSetTitle:
     post:
+      operationId: setStickerSetTitle
       summary: setStickerSetTitle
       description: Use this method to set the title of a created sticker set. Returns
         True on success.
@@ -6789,7 +6904,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6818,6 +6933,7 @@ paths:
           description: Server error
   /setStickerSetThumbnail:
     post:
+      operationId: setStickerSetThumbnail
       summary: setStickerSetThumbnail
       description: Use this method to set the thumbnail of a regular or mask sticker
         set. The format of the thumbnail file must match the format of the stickers
@@ -6849,7 +6965,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6878,6 +6994,7 @@ paths:
           description: Server error
   /setCustomEmojiStickerSetThumbnail:
     post:
+      operationId: setCustomEmojiStickerSetThumbnail
       summary: setCustomEmojiStickerSetThumbnail
       description: Use this method to set the thumbnail of a custom emoji sticker
         set. Returns True on success.
@@ -6893,7 +7010,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6922,6 +7039,7 @@ paths:
           description: Server error
   /deleteStickerSet:
     post:
+      operationId: deleteStickerSet
       summary: deleteStickerSet
       description: Use this method to delete a sticker set that was created by the
         bot. Returns True on success.
@@ -6932,7 +7050,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -6961,6 +7079,7 @@ paths:
           description: Server error
   /answerInlineQuery:
     post:
+      operationId: answerInlineQuery
       summary: answerInlineQuery
       description: 'Use this method to send answers to an inline query. On success,
         True is returned.
@@ -7001,7 +7120,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineQueryResultsButton'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -7030,6 +7149,7 @@ paths:
           description: Server error
   /answerWebAppQuery:
     post:
+      operationId: answerWebAppQuery
       summary: answerWebAppQuery
       description: Use this method to set the result of an interaction with a Web
         App and send a corresponding message on behalf of the user to the chat from
@@ -7046,7 +7166,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineQueryResult'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -7075,6 +7195,7 @@ paths:
           description: Server error
   /sendInvoice:
     post:
+      operationId: sendInvoice
       summary: sendInvoice
       description: Use this method to send invoices. On success, the sent Message
         is returned.
@@ -7230,7 +7351,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineKeyboardMarkup'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -7259,6 +7380,7 @@ paths:
           description: Server error
   /createInvoiceLink:
     post:
+      operationId: createInvoiceLink
       summary: createInvoiceLink
       description: Use this method to create a link for an invoice. Returns the created
         invoice link as String on success.
@@ -7373,7 +7495,7 @@ paths:
         schema:
           type: boolean
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -7402,6 +7524,7 @@ paths:
           description: Server error
   /answerShippingQuery:
     post:
+      operationId: answerShippingQuery
       summary: answerShippingQuery
       description: If you sent an invoice requesting a shipping address and the parameter
         is_flexible was specified, the Bot API will send an Update with a shipping_query
@@ -7431,7 +7554,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -7460,6 +7583,7 @@ paths:
           description: Server error
   /answerPreCheckoutQuery:
     post:
+      operationId: answerPreCheckoutQuery
       summary: answerPreCheckoutQuery
       description: 'Once the user has confirmed their payment and shipping details,
         the Bot API sends the final confirmation in the form of an Update with the
@@ -7483,7 +7607,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -7512,6 +7636,7 @@ paths:
           description: Server error
   /setPassportDataErrors:
     post:
+      operationId: setPassportDataErrors
       summary: setPassportDataErrors
       description: 'Informs a user that some of the Telegram Passport elements they
         provided contains errors. The user will not be able to re-submit their Passport
@@ -7538,7 +7663,7 @@ paths:
           items:
             $ref: '#/components/schemas/PassportElementError'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -7567,6 +7692,7 @@ paths:
           description: Server error
   /sendGame:
     post:
+      operationId: sendGame
       summary: sendGame
       description: Use this method to send a game. On success, the sent Message is
         returned.
@@ -7614,7 +7740,7 @@ paths:
         schema:
           $ref: '#/components/schemas/InlineKeyboardMarkup'
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -7643,6 +7769,7 @@ paths:
           description: Server error
   /setGameScore:
     post:
+      operationId: setGameScore
       summary: setGameScore
       description: Use this method to set the score of the specified user in a game
         message. On success, if the message is not an inline message, the Message
@@ -7689,7 +7816,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
@@ -7722,6 +7849,7 @@ paths:
           description: Server error
   /getGameHighScores:
     post:
+      operationId: getGameHighScores
       summary: getGameHighScores
       description: Use this method to get data for high score tables. Will return
         the score of the specified user and several of their neighbors in a game.
@@ -7751,7 +7879,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        '200':
           description: Success
           content:
             application/json:
