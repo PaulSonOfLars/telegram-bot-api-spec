@@ -147,7 +147,8 @@ def get_method_return_type(curr_name: str, curr_type: str, description_items: li
         extract_return_type(curr_type, curr_name, ret_search2.group(1).strip(), items)
     elif ret_search3:
         extract_return_type(curr_type, curr_name, ret_search3.group(1).strip(), items)
-
+    else:
+        print("WARN - failed to get return type for", curr_name)
 
 def get_type_and_name(t: Tag, anchor: Tag, items: dict, url: str):
     if t.text[0].isupper():
