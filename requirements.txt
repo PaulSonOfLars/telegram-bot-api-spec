@@ -1,3 +1,6 @@
+# GET / POST network requests
 requests==2.29.0
+
+# web scrapping tools
 beautifulsoup4==4.12
 html5lib==1.1

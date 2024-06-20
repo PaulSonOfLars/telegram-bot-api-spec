@@ -1,15 +1,19 @@
 import json
 import re
 import string
+from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 
 TG_CORE_TYPES = ["String", "Boolean", "Integer", "Float"]
-ROOT_URL = "https://core.telegram.org"
+
+ROOT_URL = ""
 TO_SCRAPE = {
-    "api": ROOT_URL + "/bots/api",
+    "botapi": "https" + "://" + "core.telegram.org" + "/bots/api",
+    "botapiblogfork": "https" + "://" + "blogfork.telegram.org" + "/bots/api",
+    "botapicorefork": "https" + "://" + "corefork.telegram.org" + "/bots/api",
 }
 
 METHODS = "methods"
@@ -353,6 +357,8 @@ def verify_method_parameters(items: dict) -> bool:
 def main():
     for filename, url in TO_SCRAPE.items():
         print("parsing", url)
+        rupi = urlparse(url)
+        ROOT_URL = rupi.scheme + "://" + rupi.netloc
         items = retrieve_info(url)
         if verify_type_parameters(items) or verify_method_parameters(items):
             print("Failed to validate schema. View logs above for more information.")
