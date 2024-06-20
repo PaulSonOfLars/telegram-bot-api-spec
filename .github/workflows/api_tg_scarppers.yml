@@ -1,0 +1,30 @@
+on:
+  workflow_dispatch: {} # Allow manually kicking off builds
+  schedule:
+    - cron:  '0 */5 * * *'
+name: Scrape Telegram API Schemas
+jobs:
+  build:
+    name: Scrape
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 1
+        ref: data
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+
+    - name: Set up NodeJS
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: scrape preparations
+      run: |
+          pip install --upgrade pip setuptools wheel
+          wget https://github.com/TelegramPlayGround/TG-APIs/raw/935d4e0/deploy.sh -O deploy.sh
+          bash deploy.sh

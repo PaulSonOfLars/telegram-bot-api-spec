@@ -1,7 +1,7 @@
 #!/bin/bash
 set +xe
 
-CH="47289635"
+CH="935d4e0"
 wget https://github.com/TelegramPlayGround/TG-APIs/raw/${CH}/scrape.py -O scrape.py
 wget https://github.com/TelegramPlayGround/TG-APIs/raw/${CH}/scrape_tg_api_schema.py -O scrape_tg_api_schema.py
 wget https://github.com/TelegramPlayGround/TG-APIs/raw/${CH}/requirements.txt -O requirements.txt
