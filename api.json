@@ -1,7 +1,7 @@
 {
-  "version": "Bot API 7.6",
-  "release_date": "July 1, 2024",
-  "changelog": "https://core.telegram.org/bots/api#july-1-2024",
+  "version": "Bot API 7.7",
+  "release_date": "July 7, 2024",
+  "changelog": "https://core.telegram.org/bots/api#july-7-2024",
   "methods": {
     "getUpdates": {
       "name": "getUpdates",
@@ -7619,6 +7619,14 @@
           ],
           "required": false,
           "description": "Optional. Message is a service message about a successful payment, information about the payment. More about payments: https://core.telegram.org/bots/api#payments"
+        },
+        {
+          "name": "refunded_payment",
+          "types": [
+            "RefundedPayment"
+          ],
+          "required": false,
+          "description": "Optional. Message is a service message about a refunded payment, information about the payment. More about payments: https://core.telegram.org/bots/api#payments"
         },
         {
           "name": "users_shared",
@@ -17030,6 +17038,55 @@
           ],
           "required": true,
           "description": "Provider payment identifier"
+        }
+      ]
+    },
+    "RefundedPayment": {
+      "name": "RefundedPayment",
+      "href": "https://core.telegram.org/bots/api#refundedpayment",
+      "description": [
+        "This object contains basic information about a refunded payment."
+      ],
+      "fields": [
+        {
+          "name": "currency",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Three-letter ISO 4217 currency code, or \"XTR\" for payments in Telegram Stars. Currently, always \"XTR\""
+        },
+        {
+          "name": "total_amount",
+          "types": [
+            "Integer"
+          ],
+          "required": true,
+          "description": "Total refunded price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45, total_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies)."
+        },
+        {
+          "name": "invoice_payload",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Bot-specified invoice payload"
+        },
+        {
+          "name": "telegram_payment_charge_id",
+          "types": [
+            "String"
+          ],
+          "required": true,
+          "description": "Telegram payment identifier"
+        },
+        {
+          "name": "provider_payment_charge_id",
+          "types": [
+            "String"
+          ],
+          "required": false,
+          "description": "Optional. Provider payment identifier"
         }
       ]
     },
