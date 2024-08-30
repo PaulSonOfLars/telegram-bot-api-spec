@@ -5709,7 +5709,7 @@
             "String"
           ],
           "required": true,
-          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes."
+          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes."
         },
         {
           "name": "provider_token",
@@ -5929,7 +5929,7 @@
             "String"
           ],
           "required": true,
-          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes."
+          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes."
         },
         {
           "name": "provider_token",
@@ -11407,6 +11407,22 @@
           ],
           "required": false,
           "description": "Optional. Number of pending join requests created using this link"
+        },
+        {
+          "name": "subscription_period",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Optional. The number of seconds the subscription will be active for before the next payment"
+        },
+        {
+          "name": "subscription_price",
+          "types": [
+            "Integer"
+          ],
+          "required": false,
+          "description": "Optional. The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link"
         }
       ]
     },
@@ -16705,7 +16721,7 @@
             "String"
           ],
           "required": true,
-          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes."
+          "description": "Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes."
         },
         {
           "name": "provider_token",
