@@ -34,7 +34,7 @@ git commit -m "update tDesktop API scheme"
 
 git config --global user.email "durov2005@gmail.com"
 git config --global user.name "GitHub Action <Pavel Durov>"
-git add *.tl *.json
+git add core.tl core.json corefork.tl corefork.json blogfork.tl blogfork.json
 git commit -m "update OW (3) API scheme"
 
 git config --global user.email "levlam@telegram.org"
@@ -93,9 +93,7 @@ rm -rf tdesktop schemes
 cd "${a}"
 rm -rf /tmp/tldiff/
 git add TL -A
-# git config --global user.email "totufals@hotmail.com"
-# git config --global user.email "johnprestonmail@gmail.com"
-git config --global user.email "durov2005@gmail.com"
+git config --global user.email "Lonami@users.noreply.github.com"
 git config --global user.name "GitHub Action <Lonami Exo> | GitHub Action <John Preston>"
 git commit -m "Update new Layer Diff"
 
