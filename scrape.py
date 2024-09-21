@@ -14,11 +14,13 @@ TO_SCRAPE = {
 METHODS = "methods"
 TYPES = "types"
 
+# List of all abstract types which don't have subtypes.
 APPROVED_NO_SUBTYPES = {
-    "InputFile"
+    "InputFile"  # This is how telegram represents files
 }
+# List of all approved multi-returns.
 APPROVED_MULTI_RETURNS = [
-    ['Message', 'Boolean']
+    ['Message', 'Boolean']  # Edit returns either the new message, or an OK to confirm the edit.
 ]
 
 def retrieve_info(url: str) -> dict:
@@ -28,8 +30,10 @@ def retrieve_info(url: str) -> dict:
     curr_type = ""
     curr_name = ""
 
+    # First header in the body is the release date (with an anchor)
     release_tag = dev_rules.find("h4", recursive=False)
     changelog_url = url + release_tag.find("a").get("href")
+    # First paragraph in the root body is the version
     version = dev_rules.find("p", recursive=False).get_text()
 
     items = {
@@ -42,6 +46,7 @@ def retrieve_info(url: str) -> dict:
 
     for x in list(dev_rules.children):  
         if x.name == "h3" or x.name == "hr":
+            # New category; clear name and type.
             curr_name = ""
             curr_type = ""
 
@@ -67,24 +72,29 @@ def retrieve_info(url: str) -> dict:
         if x.name == "ul":
             get_subtypes(curr_name, curr_type, x, items, url)
 
+        # Only methods have return types.
+        # We check this every time just in case the description has been updated, and we have new return types to add.
         if curr_type == METHODS and items[curr_type][curr_name].get("description"):
             get_method_return_type(curr_name, curr_type, items[curr_type][curr_name].get("description"), items)
 
     return items
 
 def get_subtypes(curr_name: str, curr_type: str, x: Tag, items: dict, url: str):
-    if curr_name == "InputFile":
+    if curr_name == "InputFile":  # Has no interesting subtypes
         return
 
     list_contents = []
     for li in x.find_all("li"):
         list_contents.extend(clean_tg_description(li, url))
 
+    # List items found in types define possible subtypes.
     if curr_type == TYPES:
         items[curr_type][curr_name]["subtypes"] = list_contents
 
+    # Always add the list to the description, for better docs.
     items[curr_type][curr_name]["description"] += [f"- {s}" for s in list_contents]
 
+# Get fields/parameters of type/method
 def get_fields(curr_name: str, curr_type: str, x: Tag, items: dict, url: str):
     body = x.find("tbody")
     fields = []
@@ -111,6 +121,14 @@ def get_fields(curr_name: str, curr_type: str, x: Tag, items: dict, url: str):
                 }
             )
 
+        else:
+            print("An unexpected state has occurred!")
+            print("Type:", curr_type)
+            print("Name:", curr_name)
+            print("Number of children:", len(children))
+            print(children)
+            exit(1)
+            
     items[curr_type][curr_name]["fields"] = fields
 
 def get_method_return_type(curr_name: str, curr_type: str, description_items: list[str], items: dict):
@@ -158,20 +176,25 @@ def clean_tg_field_description(t: Tag, url: str) -> str:
     return " ".join(clean_tg_description(t, url))
 
 def clean_tg_description(t: Tag, url: str) -> list[str]:
+    # Replace HTML emoji images with actual emoji
     for i in t.find_all("img"):
         i.replace_with(i.get("alt"))
 
+    # Make sure to include linebreaks, or spacing gets weird
     for br in t.find_all("br"):
         br.replace_with("\n")
 
+    # Replace helpful anchors with the actual URL.
     for a in t.find_all("a"):
         anchor_text = a.get_text()
         if "»" not in anchor_text:
             continue
 
         link = a.get("href")
+        # Page-relative URL
         if link.startswith("#"):
             link = url + link
+        # Domain-relative URL
         elif link.startswith("/"):
             link = ROOT_URL + link
 
@@ -179,11 +202,21 @@ def clean_tg_description(t: Tag, url: str) -> list[str]:
         a.replace_with(anchor_text)
 
     text = t.get_text()
+
+    # Replace any weird double whitespaces (eg double space, newlines, tabs) with single occurrences
     text = re.sub(r"(\s){2,}", r"\1", text)
+
+    # Replace weird UTF-8 quotes with proper quotes
     text = text.replace('”', '"').replace('“', '"')
+
+    # Replace weird unicode ellipsis with three dots
     text = text.replace("…", "...")
+
+    # Use sensible dashes
     text = text.replace(u"\u2013", "-")
     text = text.replace(u"\u2014", "-")
+
+    # Use sensible single quotes
     text = text.replace(u"\u2019", "'")
 
     return [t.strip() for t in text.split("\n") if t.strip()]
@@ -200,7 +233,7 @@ def clean_tg_type(t: str) -> list[str]:
     return [pref + get_proper_type(x) for x in fixed_commas]
 
 def get_proper_type(t: str) -> str:
-    if t == "Messages":
+    if t == "Messages":  # Avoids https://core.telegram.org/bots/api#sendmediagroup
         return "Message"
     elif t == "Float number":
         return "Float"
