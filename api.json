@@ -6223,7 +6223,7 @@
             "String"
           ],
           "required": false,
-          "description": "Unique identifier of the business connection on behalf of which the link will be created"
+          "description": "Unique identifier of the business connection on behalf of which the link will be created. For payments in Telegram Stars only."
         },
         {
           "name": "title",
@@ -6279,7 +6279,7 @@
             "Integer"
           ],
           "required": false,
-          "description": "The number of seconds the subscription will be active for before the next payment. The currency must be set to \"XTR\" (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified."
+          "description": "The number of seconds the subscription will be active for before the next payment. The currency must be set to \"XTR\" (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user."
         },
         {
           "name": "max_tip_amount",
@@ -18109,7 +18109,7 @@
         {
           "name": "gift",
           "types": [
-            "String"
+            "Gift"
           ],
           "required": false,
           "description": "Optional. The gift sent to the user by the bot"
