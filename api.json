@@ -5843,7 +5843,7 @@
             "String"
           ],
           "required": false,
-          "description": "Text that will be shown along with the gift; 0-255 characters"
+          "description": "Text that will be shown along with the gift; 0-128 characters"
         },
         {
           "name": "text_parse_mode",
@@ -7666,6 +7666,14 @@
           ],
           "required": false,
           "description": "Optional. Default chat member permissions, for groups and supergroups"
+        },
+        {
+          "name": "can_send_gift",
+          "types": [
+            "Boolean"
+          ],
+          "required": false,
+          "description": "Optional. True, if gifts can be sent to the chat"
         },
         {
           "name": "can_send_paid_media",
