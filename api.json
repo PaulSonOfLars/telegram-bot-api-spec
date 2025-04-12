@@ -16611,7 +16611,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the profile photo, must be \"static\""
+          "description": "Type of the profile photo, must be static"
         },
         {
           "name": "photo",
@@ -16639,7 +16639,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the profile photo, must be \"animated\""
+          "description": "Type of the profile photo, must be animated"
         },
         {
           "name": "animation",
@@ -16688,7 +16688,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the content, must be \"photo\""
+          "description": "Type of the content, must be photo"
         },
         {
           "name": "photo",
@@ -16716,7 +16716,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the content, must be \"video\""
+          "description": "Type of the content, must be video"
         },
         {
           "name": "video",
