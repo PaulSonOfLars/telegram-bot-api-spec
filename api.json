@@ -757,7 +757,7 @@
             "String"
           ],
           "required": true,
-          "description": "Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files \u0412\u00bb"
+          "description": "Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -911,7 +911,7 @@
             "String"
           ],
           "required": true,
-          "description": "Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files \u0412\u00bb"
+          "description": "Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -968,7 +968,7 @@
             "String"
           ],
           "required": false,
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "disable_notification",
@@ -1081,7 +1081,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files \u0412\u00bb"
+          "description": "File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumbnail",
@@ -1090,7 +1090,7 @@
             "String"
           ],
           "required": false,
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -1235,7 +1235,7 @@
             "String"
           ],
           "required": true,
-          "description": "Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files \u0412\u00bb"
+          "description": "Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "duration",
@@ -1268,7 +1268,7 @@
             "String"
           ],
           "required": false,
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "cover",
@@ -1277,7 +1277,7 @@
             "String"
           ],
           "required": false,
-          "description": "Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files \u0412\u00bb"
+          "description": "Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "start_timestamp",
@@ -1446,7 +1446,7 @@
             "String"
           ],
           "required": true,
-          "description": "Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files \u0412\u00bb"
+          "description": "Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "duration",
@@ -1479,7 +1479,7 @@
             "String"
           ],
           "required": false,
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -1632,7 +1632,7 @@
             "String"
           ],
           "required": true,
-          "description": "Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files \u0412\u00bb"
+          "description": "Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -1777,7 +1777,7 @@
             "String"
           ],
           "required": true,
-          "description": "Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. More information on Sending Files \u0412\u00bb. Sending video notes by a URL is currently unsupported"
+          "description": "Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files. Sending video notes by a URL is currently unsupported"
         },
         {
           "name": "duration",
@@ -1802,7 +1802,7 @@
             "String"
           ],
           "required": false,
-          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "disable_notification",
@@ -2950,7 +2950,7 @@
             "String"
           ],
           "required": false,
-          "description": "Emoji on which the dice throw animation is based. Currently, must be one of \"\u0440\u045f\u040b\u0406\", \"\u0440\u045f\u040b\u0407\", \"\u0440\u045f\u040f\u0402\", \"\u0432\u0459\u0405\", \"\u0440\u045f\u040b\u0456\", or \"\u0440\u045f\u040b\u00b0\". Dice can have values 1-6 for \"\u0440\u045f\u040b\u0406\", \"\u0440\u045f\u040b\u0407\" and \"\u0440\u045f\u040b\u0456\", values 1-5 for \"\u0440\u045f\u040f\u0402\" and \"\u0432\u0459\u0405\", and values 1-64 for \"\u0440\u045f\u040b\u00b0\". Defaults to \"\u0440\u045f\u040b\u0406\""
+          "description": "Emoji on which the dice throw animation is based. Currently, must be one of \"\ud83c\udfb2\", \"\ud83c\udfaf\", \"\ud83c\udfc0\", \"\u26bd\", \"\ud83c\udfb3\", or \"\ud83c\udfb0\". Dice can have values 1-6 for \"\ud83c\udfb2\", \"\ud83c\udfaf\" and \"\ud83c\udfb3\", values 1-5 for \"\ud83c\udfc0\" and \"\u26bd\", and values 1-64 for \"\ud83c\udfb0\". Defaults to \"\ud83c\udfb2\""
         },
         {
           "name": "disable_notification",
@@ -7322,7 +7322,7 @@
             "String"
           ],
           "required": true,
-          "description": "Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. More information on Sending Files \u0412\u00bb. Video and animated stickers can't be sent via an HTTP URL."
+          "description": "Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS, or .WEBM sticker using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files. Video and animated stickers can't be sent via an HTTP URL."
         },
         {
           "name": "emoji",
@@ -7457,7 +7457,7 @@
             "InputFile"
           ],
           "required": true,
-          "description": "A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See https://core.telegram.org/stickers for technical requirements. More information on Sending Files \u0412\u00bb"
+          "description": "A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See https://core.telegram.org/stickers for technical requirements. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "sticker_format",
@@ -7802,7 +7802,7 @@
             "String"
           ],
           "required": false,
-          "description": "A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a .WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files \u0412\u00bb. Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail."
+          "description": "A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animation-requirements for animated sticker technical requirements), or a .WEBM video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-requirements for video sticker technical requirements. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. More information on Sending Files: https://core.telegram.org/bots/api#sending-files. Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail."
         },
         {
           "name": "format",
@@ -10121,7 +10121,7 @@
             "Game"
           ],
           "required": false,
-          "description": "Optional. Message is a game, information about the game. More about games \u0412\u00bb"
+          "description": "Optional. Message is a game, information about the game. More about games: https://core.telegram.org/bots/api#games"
         },
         {
           "name": "poll",
@@ -10265,7 +10265,7 @@
             "Invoice"
           ],
           "required": false,
-          "description": "Optional. Message is an invoice for a payment, information about the invoice. More about payments \u0412\u00bb"
+          "description": "Optional. Message is an invoice for a payment, information about the invoice. More about payments: https://core.telegram.org/bots/api#payments"
         },
         {
           "name": "successful_payment",
@@ -10273,7 +10273,7 @@
             "SuccessfulPayment"
           ],
           "required": false,
-          "description": "Optional. Message is a service message about a successful payment, information about the payment. More about payments \u0412\u00bb"
+          "description": "Optional. Message is a service message about a successful payment, information about the payment. More about payments: https://core.telegram.org/bots/api#payments"
         },
         {
           "name": "refunded_payment",
@@ -10281,7 +10281,7 @@
             "RefundedPayment"
           ],
           "required": false,
-          "description": "Optional. Message is a service message about a refunded payment, information about the payment. More about payments \u0412\u00bb"
+          "description": "Optional. Message is a service message about a refunded payment, information about the payment. More about payments: https://core.telegram.org/bots/api#payments"
         },
         {
           "name": "users_shared",
@@ -10329,7 +10329,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. The domain name of the website on which the user has logged in. More about Telegram Login \u0412\u00bb"
+          "description": "Optional. The domain name of the website on which the user has logged in. More about Telegram Login: https://core.telegram.org/widgets/login"
         },
         {
           "name": "write_access_allowed",
@@ -10945,7 +10945,7 @@
             "Game"
           ],
           "required": false,
-          "description": "Optional. Message is a game, information about the game. More about games \u0412\u00bb"
+          "description": "Optional. Message is a game, information about the game. More about games: https://core.telegram.org/bots/api#games"
         },
         {
           "name": "giveaway",
@@ -10969,7 +10969,7 @@
             "Invoice"
           ],
           "required": false,
-          "description": "Optional. Message is an invoice for a payment, information about the invoice. More about payments \u0412\u00bb"
+          "description": "Optional. Message is an invoice for a payment, information about the invoice. More about payments: https://core.telegram.org/bots/api#payments"
         },
         {
           "name": "location",
@@ -12035,7 +12035,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Value of the dice, 1-6 for \"\u0440\u045f\u040b\u0406\", \"\u0440\u045f\u040b\u0407\" and \"\u0440\u045f\u040b\u0456\" base emoji, 1-5 for \"\u0440\u045f\u040f\u0402\" and \"\u0432\u0459\u0405\" base emoji, 1-64 for \"\u0440\u045f\u040b\u00b0\" base emoji"
+          "description": "Value of the dice, 1-6 for \"\ud83c\udfb2\", \"\ud83c\udfaf\" and \"\ud83c\udfb3\" base emoji, 1-5 for \"\ud83c\udfc0\" and \"\u26bd\" base emoji, 1-64 for \"\ud83c\udfb0\" base emoji"
         }
       ]
     },
@@ -14414,7 +14414,7 @@
       "name": "KeyboardButtonRequestUsers",
       "href": "https://core.telegram.org/bots/api#keyboardbuttonrequestusers",
       "description": [
-        "This object defines the criteria used to request suitable users. Information about the selected users will be shared with the bot when the corresponding button is pressed. More about requesting users \u0412\u00bb"
+        "This object defines the criteria used to request suitable users. Information about the selected users will be shared with the bot when the corresponding button is pressed. More about requesting users: https://core.telegram.org/bots/features#chat-and-user-selection"
       ],
       "fields": [
         {
@@ -14479,7 +14479,7 @@
       "name": "KeyboardButtonRequestChat",
       "href": "https://core.telegram.org/bots/api#keyboardbuttonrequestchat",
       "description": [
-        "This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the chat if appropriate. More about requesting chats \u0412\u00bb."
+        "This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the chat if appropriate. More about requesting chats: https://core.telegram.org/bots/features#chat-and-user-selection."
       ],
       "fields": [
         {
@@ -14773,7 +14773,7 @@
             "Boolean"
           ],
           "required": false,
-          "description": "Optional. Specify True, to send a Pay button. Substrings \"\u0432\u00ad\u0452\" and \"XTR\" in the buttons's text will be replaced with a Telegram Star icon. NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages."
+          "description": "Optional. Specify True, to send a Pay button. Substrings \"\u2b50\" and \"XTR\" in the buttons's text will be replaced with a Telegram Star icon. NOTE: This type of button must always be the first button in the first row and can only be used in invoice messages."
         }
       ]
     },
@@ -18803,7 +18803,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files \u0412\u00bb"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -18871,7 +18871,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files \u0412\u00bb"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumbnail",
@@ -18879,7 +18879,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "cover",
@@ -18887,7 +18887,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files \u0412\u00bb"
+          "description": "Optional. Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "start_timestamp",
@@ -18995,7 +18995,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files \u0412\u00bb"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumbnail",
@@ -19003,7 +19003,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -19095,7 +19095,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files \u0412\u00bb"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumbnail",
@@ -19103,7 +19103,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -19179,7 +19179,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files \u0412\u00bb"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumbnail",
@@ -19187,7 +19187,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "caption",
@@ -19267,7 +19267,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files \u0412\u00bb"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         }
       ],
       "subtype_of": [
@@ -19295,7 +19295,7 @@
             "String"
           ],
           "required": true,
-          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files \u0412\u00bb"
+          "description": "File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "thumbnail",
@@ -19303,7 +19303,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "cover",
@@ -19311,7 +19311,7 @@
             "String"
           ],
           "required": false,
-          "description": "Optional. Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files \u0412\u00bb"
+          "description": "Optional. Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new one using multipart/form-data under <file_attach_name> name. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "start_timestamp",
@@ -19392,7 +19392,7 @@
             "String"
           ],
           "required": true,
-          "description": "The static profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the photo was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "The static profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the photo was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         }
       ],
       "subtype_of": [
@@ -19420,7 +19420,7 @@
             "String"
           ],
           "required": true,
-          "description": "The animated profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the photo was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "The animated profile photo. Profile photos can't be reused and can only be uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the photo was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "main_frame_timestamp",
@@ -19469,7 +19469,7 @@
             "String"
           ],
           "required": true,
-          "description": "The photo to post as a story. The photo must be of the size 1080x1920 and must not exceed 10 MB. The photo can't be reused and can only be uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the photo was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "The photo to post as a story. The photo must be of the size 1080x1920 and must not exceed 10 MB. The photo can't be reused and can only be uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the photo was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         }
       ],
       "subtype_of": [
@@ -19497,7 +19497,7 @@
             "String"
           ],
           "required": true,
-          "description": "The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB. The video can't be reused and can only be uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the video was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files \u0412\u00bb"
+          "description": "The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB. The video can't be reused and can only be uploaded as a new file, so you can pass \"attach://<file_attach_name>\" if the video was uploaded using multipart/form-data under <file_attach_name>. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "duration",
@@ -19760,7 +19760,7 @@
             "String"
           ],
           "required": true,
-          "description": "The added sticker. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new file using multipart/form-data under <file_attach_name> name. Animated and video stickers can't be uploaded via HTTP URL. More information on Sending Files \u0412\u00bb"
+          "description": "The added sticker. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or pass \"attach://<file_attach_name>\" to upload a new file using multipart/form-data under <file_attach_name> name. Animated and video stickers can't be uploaded via HTTP URL. More information on Sending Files: https://core.telegram.org/bots/api#sending-files"
         },
         {
           "name": "format",
