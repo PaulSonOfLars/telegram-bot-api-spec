@@ -12399,6 +12399,9 @@
     "PaidMediaLivePhoto": {
       "name": "PaidMediaLivePhoto",
       "href": "https://core.telegram.org/bots/api#paidmedialivephoto",
+      "description": [
+        "The paid media is a live photo."
+      ],
       "fields": [
         {
           "name": "type",
