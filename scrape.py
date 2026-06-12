@@ -275,18 +275,42 @@ def verify_type_parameters(items: dict) -> bool:
         fields = values.get("fields", [])
         if len(fields) == 0:
             subtypes = values.get("subtypes", [])
-            description = "".join(values.get("description", [])).lower()
+            description = "".join(values.get("description", []))
             # Some types are abstract and have no information or subtypes - this is mentioned in their description.
             # Otherwise, check if they're manually approved.
             if not subtypes and \
-                    not ("currently holds no information" in description or type_name in APPROVED_NO_SUBTYPES):
+                    not ("currently holds no information" in description.lower() or type_name in APPROVED_NO_SUBTYPES):
                 print("TYPE", type_name, "has no fields or subtypes, and is not approved")
                 issue_found = True
                 continue
 
+            # Handle case for:
+            # 'Currently, it can be either a String for plain text, an Array of RichText, or any of the following types:'
+            m = re.search(r"it can be either (.*?), or any of the following types:", description, re.IGNORECASE)
+            if m:
+                parts = m.group(1).split(",")
+                description_types = []
+                for part in parts:
+                    part = part.strip()
+                    # Match "<Type> of <Type>" first, else "a/an <Type>"
+                    type_match = re.search(r"(?:a|an)\s+(?:(\w*\s+of\s+\w*)|(\w*))", part)
+                    if type_match:
+                        description_types.append(type_match.group(1) or type_match.group(2))
+                # subtypes.extend(description_types)
+                subtypes = description_types + subtypes  # adds ['String', 'Array of RichText'] to end of list
+                values["subtypes"] = subtypes
+
             for st in subtypes:
-                if st in items[TYPES]:
+                cleaned = st.removeprefix("Array of ")
+
+                # If this is a core type (eg, string) or self-referential, we're OK.
+                if cleaned in TG_CORE_TYPES or cleaned == type_name:
+                    pass  # Acceptable, but nothing to do any "subtype of" magic for
+
+                # Else, if this refers to a new type - we'll need to mark it as a subtype.
+                elif st in items[TYPES]:
                     items[TYPES][st].setdefault("subtype_of", []).append(type_name)
+
                 else:
                     print("TYPE", type_name, "USES INVALID SUBTYPE", st)
                     issue_found = True

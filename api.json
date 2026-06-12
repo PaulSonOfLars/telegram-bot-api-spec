@@ -21287,6 +21287,8 @@
         "- RichTextReferenceLink"
       ],
       "subtypes": [
+        "String",
+        "Array of RichText",
         "RichTextBold",
         "RichTextItalic",
         "RichTextUnderline",
