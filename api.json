@@ -3241,7 +3241,7 @@
             "Integer"
           ],
           "required": true,
-          "description": "Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated."
+          "description": "Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated."
         },
         {
           "name": "text",
@@ -19870,7 +19870,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the result, must be animation"
+          "description": "Type of the media, must be animation"
         },
         {
           "name": "media",
@@ -19972,7 +19972,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the result, must be audio"
+          "description": "Type of the media, must be audio"
         },
         {
           "name": "media",
@@ -20057,7 +20057,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the result, must be document"
+          "description": "Type of the media, must be document"
         },
         {
           "name": "media",
@@ -20126,7 +20126,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the result, must be link"
+          "description": "Type of the media, must be link"
         },
         {
           "name": "url",
@@ -20154,7 +20154,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the result, must be live_photo"
+          "description": "Type of the media, must be live_photo"
         },
         {
           "name": "media",
@@ -20232,7 +20232,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the result, must be location"
+          "description": "Type of the media, must be location"
         },
         {
           "name": "latitude",
@@ -20277,7 +20277,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the result, must be photo"
+          "description": "Type of the media, must be photo"
         },
         {
           "name": "media",
@@ -20347,7 +20347,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the result, must be sticker"
+          "description": "Type of the media, must be sticker"
         },
         {
           "name": "media",
@@ -20383,7 +20383,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the result, must be venue"
+          "description": "Type of the media, must be venue"
         },
         {
           "name": "latitude",
@@ -20468,7 +20468,7 @@
             "String"
           ],
           "required": true,
-          "description": "Type of the result, must be video"
+          "description": "Type of the media, must be video"
         },
         {
           "name": "media",
