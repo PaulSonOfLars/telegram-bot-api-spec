@@ -233,7 +233,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "text",
@@ -496,7 +496,7 @@
       "name": "copyMessage",
       "href": "https://core.telegram.org/bots/api#copymessage",
       "description": [
-        "Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
+        "Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success."
       ],
       "returns": [
         "MessageId"
@@ -649,7 +649,7 @@
       "name": "copyMessages",
       "href": "https://core.telegram.org/bots/api#copymessages",
       "description": [
-        "Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned."
+        "Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value of the field correct_option_ids is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have a link to the original message. Album grouping is kept for copied messages. On success, an Array of MessageId of the sent messages is returned."
       ],
       "returns": [
         "Array of MessageId"
@@ -780,7 +780,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "photo",
@@ -949,7 +949,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "live_photo",
@@ -1128,7 +1128,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "audio",
@@ -1314,7 +1314,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "document",
@@ -1484,7 +1484,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "video",
@@ -1711,7 +1711,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "animation",
@@ -1913,7 +1913,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "voice",
@@ -2074,7 +2074,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "video_note",
@@ -2477,7 +2477,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "latitude",
@@ -2645,7 +2645,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "latitude",
@@ -2829,7 +2829,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "phone_number",
@@ -8265,7 +8265,7 @@
             "String"
           ],
           "required": false,
-          "description": "For outgoing ephemeral messages, identifier of the callback query which triggerred the message if any"
+          "description": "For outgoing ephemeral messages, identifier of the callback query which triggered the message if any"
         },
         {
           "name": "sticker",
@@ -11566,7 +11566,7 @@
             "ProximityAlertTriggered"
           ],
           "required": false,
-          "description": "Optional. Service message. A user in the chat triggered another user's proximity alert while sharing Live Location."
+          "description": "Optional. Service message: a user in the chat triggered another user's proximity alert while sharing Live Location"
         },
         {
           "name": "boost_added",
