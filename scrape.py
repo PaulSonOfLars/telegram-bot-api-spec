@@ -141,12 +141,17 @@ def get_fields(curr_name: str, curr_type: str, x: Tag, items: dict, url: str):
 
 def get_method_return_type(curr_name: str, curr_type: str, description_items: list[str], items: dict):
     description = "\n".join(description_items)
-    ret_search = re.search("(?:on success,|returns)([^.]*)(?:on success)?", description, re.IGNORECASE)
-    ret_search2 = re.search("([^.]*)(?:is returned)", description, re.IGNORECASE)
+    ret_search = re.search(".*(?:on success,)([^.]*)", description, re.IGNORECASE)
+    ret_search2 = re.search(".*(?:returns)([^.]*)(?:on success)?", description, re.IGNORECASE)
+    ret_search3 = re.search(".*([^.]*)(?:is returned)", description, re.IGNORECASE)
     if ret_search:
         extract_return_type(curr_type, curr_name, ret_search.group(1).strip(), items)
     elif ret_search2:
         extract_return_type(curr_type, curr_name, ret_search2.group(1).strip(), items)
+    elif ret_search3:
+        extract_return_type(curr_type, curr_name, ret_search3.group(1).strip(), items)
+    else:
+        print("WARN - failed to get return type for", curr_name)
 
 
 def get_type_and_name(t: Tag, anchor: Tag, items: dict, url: str):
@@ -273,18 +278,42 @@ def verify_type_parameters(items: dict) -> bool:
         fields = values.get("fields", [])
         if len(fields) == 0:
             subtypes = values.get("subtypes", [])
-            description = "".join(values.get("description", [])).lower()
+            description = "".join(values.get("description", []))
             # Some types are abstract and have no information or subtypes - this is mentioned in their description.
             # Otherwise, check if they're manually approved.
             if not subtypes and \
-                    not ("currently holds no information" in description or type_name in APPROVED_NO_SUBTYPES):
+                    not ("currently holds no information" in description.lower() or type_name in APPROVED_NO_SUBTYPES):
                 print("TYPE", type_name, "has no fields or subtypes, and is not approved")
                 issue_found = True
                 continue
 
+            # Handle case for:
+            # 'Currently, it can be either a String for plain text, an Array of RichText, or any of the following types:'
+            m = re.search(r"it can be either (.*?), or any of the following types:", description, re.IGNORECASE)
+            if m:
+                parts = m.group(1).split(",")
+                description_types = []
+                for part in parts:
+                    part = part.strip()
+                    # Match "<Type> of <Type>" first, else "a/an <Type>"
+                    type_match = re.search(r"(?:a|an)\s+(?:(\w*\s+of\s+\w*)|(\w*))", part)
+                    if type_match:
+                        description_types.append(type_match.group(1) or type_match.group(2))
+                # subtypes.extend(description_types)
+                subtypes = description_types + subtypes  # adds ['String', 'Array of RichText'] to end of list
+                values["subtypes"] = subtypes
+
             for st in subtypes:
-                if st in items[TYPES]:
+                cleaned = st.removeprefix("Array of ")
+
+                # If this is a core type (eg, string) or self-referential, we're OK.
+                if cleaned in TG_CORE_TYPES or cleaned == type_name:
+                    pass  # Acceptable, but nothing to do any "subtype of" magic for
+
+                # Else, if this refers to a new type - we'll need to mark it as a subtype.
+                elif st in items[TYPES]:
                     items[TYPES][st].setdefault("subtype_of", []).append(type_name)
+
                 else:
                     print("TYPE", type_name, "USES INVALID SUBTYPE", st)
                     issue_found = True
