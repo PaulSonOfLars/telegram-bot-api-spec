@@ -53,5 +53,8 @@ The output of this script `api.json`, is formatted as such:
 ```
 
 
+The script also emits `api-openapi.yaml`, an OpenAPI 3.1 description of the same
+methods and types, written alongside the JSON files. Regenerate it by running
+`python scrape.py` (requires `pyyaml`, listed in `requirements.txt`).
 
 [telegram bot api docs]: https://core.telegram.org/bots/api
