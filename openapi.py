@@ -1,31 +1,18 @@
-from typing import List
+from typing import Any
 
 
-def get_type_schema(s: List[str]) -> dict:
-    if not s:
+def get_type_schema(ss: list[str]) -> dict[str, Any]:
+    if not ss:
         return {}
 
-    if len(s) > 1:
-        return {
-            "type": "object",
-            "additionalProperties": {
-                "oneOf": [
-                    get_type_schema([ss])
-                    for ss in s
-                ]}
-        }
+    if len(ss) > 1:
+        return {"oneOf": [get_type_schema([s]) for s in ss]}
 
-    s = s[0]
+    s = ss[0]
     if s == "Integer":
-        return {
-            "type": "integer",
-            "format": "int64"
-        }
+        return {"type": "integer", "format": "int64"}
     if s == "Float":
-        return {
-            "type": "number",
-            "format": "float64"
-        }
+        return {"type": "number", "format": "double"}
     if s == "Boolean":
         return {
             "type": "boolean",
@@ -44,22 +31,26 @@ def get_type_schema(s: List[str]) -> dict:
     return {"$ref": f"#/components/schemas/{s}"}
 
 
-def method_parameters(method_data: dict) -> List[dict]:
-    return [{
-        "name": param.get("name"),
-        "required": param.get("required"),
-        "in": "query",
-        "schema": get_type_schema(param.get("types"))
-    } for param in method_data.get("fields", [])]
+def method_parameters(method_data: dict) -> list[dict]:
+    return [
+        {
+            "name": param.get("name"),
+            "required": param.get("required", False),
+            "in": "query",
+            "description": param.get("description"),
+            "schema": get_type_schema(param.get("types")),
+        }
+        for param in method_data.get("fields", [])
+    ]
 
 
 def to_openapi(data: dict) -> dict:
     return {
-        "openapi": "3.0.0",
+        "openapi": "3.1.0",
         "info": {
             "title": "telegram-bot-api",
             "description": "Unofficial telegram-bot-api OpenAPI spec. "
-                           "Generated from the Bot API docs at https://core.telegram.org/bots/api",
+            "Generated from the Bot API docs at https://core.telegram.org/bots/api",
             "version": data.get("version"),
         },
         "servers": [
@@ -77,18 +68,18 @@ def to_openapi(data: dict) -> dict:
         "paths": openapi_methods(data),
         "components": {
             "schemas": openapi_types(data),
-        }
+        },
     }
 
 
-def openapi_methods(data):
+def openapi_methods(data) -> dict[str, Any]:
     methods = {}
     for method, methodData in data.get("methods", {}).items():
         methods[f"/{method}"] = {
             "post": {
                 "operationId": method,
                 "summary": method,
-                "description": "\n".join(methodData.get("description")),
+                "description": "\n".join(methodData.get("description", [])),
                 "parameters": method_parameters(methodData),
                 "responses": {
                     "200": {
@@ -99,11 +90,13 @@ def openapi_methods(data):
                                     "type": "object",
                                     "properties": {
                                         "ok": {"type": "boolean"},
-                                        "result": get_type_schema(methodData.get("returns")),
+                                        "result": get_type_schema(
+                                            methodData.get("returns")
+                                        ),
                                     },
                                 }
                             }
-                        }
+                        },
                     },
                     "4XX": {
                         "description": "Error",
@@ -113,46 +106,53 @@ def openapi_methods(data):
                                     "type": "object",
                                     "properties": {
                                         "ok": {"type": "boolean"},
-                                        "error_code": {"type": "integer", "format": "int64"},
-                                        "description": {"$ref": "#/components/schemas/ResponseParameters"},
-                                    }
+                                        "error_code": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                        },
+                                        "description": {"type": "string"},
+                                        "parameters": {
+                                            "$ref": "#/components/schemas/ResponseParameters"
+                                        },
+                                    },
                                 }
                             }
-                        }
+                        },
                     },
                     "5XX": {
                         # TODO
                         "description": "Server error",
-                    }
-                }
+                    },
+                },
             }
         }
     return methods
 
 
-def field_properties(f):
+def field_properties(f) -> dict[str, Any]:
     schema = get_type_schema(f.get("types"))
     if "$ref" not in schema:
         schema["description"] = f.get("description")
     else:
-        return {
-            "description": f.get("description"),
-            "allOf": [schema]
-        }
+        return {"description": f.get("description"), "allOf": [schema]}
 
     return schema
 
 
-def openapi_types(data):
+def openapi_types(data: dict):
     types = {}
     for name, typeData in data.get("types", {}).items():
         types[name] = {
             "type": "object",
             "description": "\n".join(typeData.get("description", [])),
-            "properties": {f.get("name"): field_properties(f) for f in typeData.get("fields", [])},
+            "properties": {
+                f.get("name"): field_properties(f) for f in typeData.get("fields", [])
+            },
         }
 
-        required = [f.get("name") for f in typeData.get("fields", []) if f.get("required")]
+        required = [
+            f.get("name") for f in typeData.get("fields", []) if f.get("required")
+        ]
         if required:
             types[name]["required"] = required
 
