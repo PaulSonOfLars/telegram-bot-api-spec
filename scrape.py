@@ -26,7 +26,8 @@ APPROVED_MULTI_RETURNS = [
 
 
 def retrieve_info(url: str) -> dict:
-    r = requests.get(url)
+    r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=30)
+    r.raise_for_status()
     soup = BeautifulSoup(r.text, features="html5lib")
     dev_rules = soup.find("div", {"id": "dev_page_content"})
     curr_type = ""
@@ -34,13 +35,14 @@ def retrieve_info(url: str) -> dict:
 
     # First header in the body is the release date (with an anchor)
     release_tag = dev_rules.find("h4", recursive=False)
-    changelog_url = url + release_tag.find("a").get("href")
+    changelog_url = url + release_tag.find("a").get("href") if release_tag and release_tag.find("a") else ""
     # First paragraph in the root body is the version
-    version = dev_rules.find("p", recursive=False).get_text()
+    version_tag = dev_rules.find("p", recursive=False)
+    version = version_tag.get_text().strip() if version_tag else ""
 
     items = {
         "version": version,
-        "release_date": release_tag.get_text(),
+        "release_date": release_tag.get_text().strip() if release_tag else "",
         "changelog": changelog_url,
         METHODS: dict(),
         TYPES: dict(),
@@ -54,7 +56,7 @@ def retrieve_info(url: str) -> dict:
 
         if x.name == "h4":
             anchor = x.find("a")
-            name = anchor.get("name")
+            name = anchor.get("name") if anchor else None
             if name and "-" in name:
                 curr_name = ""
                 curr_type = ""
@@ -95,22 +97,26 @@ def get_subtypes(curr_name: str, curr_type: str, x: Tag, items: dict, url: str):
         items[curr_type][curr_name]["subtypes"] = list_contents
 
     # Always add the list to the description, for better docs.
-    items[curr_type][curr_name]["description"] += [f"- {s}" for s in list_contents]
+    items[curr_type][curr_name].setdefault("description", []).extend([f"- {s}" for s in list_contents])
 
 
 # Get fields/parameters of type/method
 def get_fields(curr_name: str, curr_type: str, x: Tag, items: dict, url: str):
     body = x.find("tbody")
+    if not body:
+        body = x
     fields = []
     for tr in body.find_all("tr"):
         children = list(tr.find_all("td"))
+        if not children:
+            continue
         if curr_type == TYPES and len(children) == 3:
             desc = clean_tg_field_description(children[2], url)
             fields.append(
                 {
-                    "name": children[0].get_text(),
-                    "types": clean_tg_type(children[1].get_text()),
-                    "required": not desc.startswith("Optional. "),
+                    "name": children[0].get_text().strip(),
+                    "types": clean_tg_type(children[1].get_text().strip()),
+                    "required": not (desc.startswith("Optional. ") or desc.startswith("Optional ")),
                     "description": desc,
                 }
             )
@@ -118,9 +124,9 @@ def get_fields(curr_name: str, curr_type: str, x: Tag, items: dict, url: str):
         elif curr_type == METHODS and len(children) == 4:
             fields.append(
                 {
-                    "name": children[0].get_text(),
-                    "types": clean_tg_type(children[1].get_text()),
-                    "required": children[2].get_text() == "Yes",
+                    "name": children[0].get_text().strip(),
+                    "types": clean_tg_type(children[1].get_text().strip()),
+                    "required": children[2].get_text().strip() == "Yes",
                     "description": clean_tg_field_description(children[3], url)
                 }
             )
@@ -138,9 +144,9 @@ def get_fields(curr_name: str, curr_type: str, x: Tag, items: dict, url: str):
 
 def get_method_return_type(curr_name: str, curr_type: str, description_items: list[str], items: dict):
     description = "\n".join(description_items)
-    ret_search = re.search(".*(?:on success,)([^.]*)", description, re.IGNORECASE)
-    ret_search2 = re.search(".*(?:returns)([^.]*)(?:on success)?", description, re.IGNORECASE)
-    ret_search3 = re.search(".*([^.]*)(?:is returned)", description, re.IGNORECASE)
+    ret_search = re.search(r".*(?:on success,)\s*([^.]*)", description, re.IGNORECASE)
+    ret_search2 = re.search(r".*(?:returns)\s*([^.]*)(?:on success)?", description, re.IGNORECASE)
+    ret_search3 = re.search(r".*?(?:,\s*|\.\s*|^)([^.]*?)\s*(?:is returned)", description, re.IGNORECASE)
     if ret_search:
         extract_return_type(curr_type, curr_name, ret_search.group(1).strip(), items)
     elif ret_search2:
@@ -152,16 +158,21 @@ def get_method_return_type(curr_name: str, curr_type: str, description_items: li
 
 
 def get_type_and_name(t: Tag, anchor: Tag, items: dict, url: str):
-    if t.text[0].isupper():
+    curr_name = t.get_text().strip()
+    if curr_name and curr_name[0].isupper():
         curr_type = TYPES
     else:
         curr_type = METHODS
-    curr_name = t.get_text()
     items[curr_type][curr_name] = {"name": curr_name}
 
-    href = anchor.get("href")
+    href = anchor.get("href") if anchor else None
     if href:
-        items[curr_type][curr_name]["href"] = url + href
+        if href.startswith("#"):
+            items[curr_type][curr_name]["href"] = url + href
+        elif href.startswith("/"):
+            items[curr_type][curr_name]["href"] = ROOT_URL + href
+        else:
+            items[curr_type][curr_name]["href"] = href
 
     return curr_name, curr_type
 
@@ -174,11 +185,14 @@ def extract_return_type(curr_type: str, curr_name: str, ret_str: str, items: dic
         items[curr_type][curr_name]["returns"] = rets
     else:
         words = ret_str.split()
-        rets = [
-            r for ret in words
-            for r in clean_tg_type(ret.translate(str.maketrans("", "", string.punctuation)))
-            if ret[0].isupper()
-        ]
+        rets = []
+        for ret in words:
+            cleaned_word = ret.translate(str.maketrans("", "", string.punctuation))
+            if ret and ret[0].isupper():
+                types = clean_tg_type(cleaned_word)
+                for t in types:
+                    if t and t not in rets:
+                        rets.append(t)
         items[curr_type][curr_name]["returns"] = rets
 
 
@@ -189,7 +203,11 @@ def clean_tg_field_description(t: Tag, url: str) -> str:
 def clean_tg_description(t: Tag, url: str) -> list[str]:
     # Replace HTML emoji images with actual emoji
     for i in t.find_all("img"):
-        i.replace_with(i.get("alt"))
+        alt = i.get("alt")
+        if alt:
+            i.replace_with(alt)
+        else:
+            i.decompose()
 
     # Make sure to include linebreaks, or spacing gets weird
     for br in t.find_all("br"):
@@ -202,6 +220,8 @@ def clean_tg_description(t: Tag, url: str) -> list[str]:
             continue
 
         link = a.get("href")
+        if not link:
+            continue
         # Page-relative URL
         if link.startswith("#"):
             link = url + link
@@ -251,14 +271,14 @@ def get_proper_type(t: str) -> str:
 
 def clean_tg_type(t: str) -> list[str]:
     pref = ""
-    if t.startswith("Array of "):
-        pref = "Array of "
+    while t.startswith("Array of "):
+        pref += "Array of "
         t = t[len("Array of "):]
 
     fixed_ors = [x.strip() for x in t.split(" or ")]  # Fix situations like "A or B"
     fixed_ands = [x.strip() for fo in fixed_ors for x in fo.split(" and ")]  # Fix situations like "A and B"
     fixed_commas = [x.strip() for fa in fixed_ands for x in fa.split(", ")]  # Fix situations like "A, B"
-    return [pref + get_proper_type(x) for x in fixed_commas]
+    return [pref + get_proper_type(x) for x in fixed_commas if x]
 
 
 # Returns True if an issue is found.
@@ -275,7 +295,7 @@ def verify_type_parameters(items: dict) -> bool:
         fields = values.get("fields", [])
         if len(fields) == 0:
             subtypes = values.get("subtypes", [])
-            description = "".join(values.get("description", []))
+            description = " ".join(values.get("description", []))
             # Some types are abstract and have no information or subtypes - this is mentioned in their description.
             # Otherwise, check if they're manually approved.
             if not subtypes and \
@@ -301,15 +321,17 @@ def verify_type_parameters(items: dict) -> bool:
                 values["subtypes"] = subtypes
 
             for st in subtypes:
-                cleaned = st.removeprefix("Array of ")
+                cleaned = st
+                while cleaned.startswith("Array of "):
+                    cleaned = cleaned[len("Array of "):]
 
                 # If this is a core type (eg, string) or self-referential, we're OK.
                 if cleaned in TG_CORE_TYPES or cleaned == type_name:
                     pass  # Acceptable, but nothing to do any "subtype of" magic for
 
                 # Else, if this refers to a new type - we'll need to mark it as a subtype.
-                elif st in items[TYPES]:
-                    items[TYPES][st].setdefault("subtype_of", []).append(type_name)
+                elif cleaned in items[TYPES]:
+                    items[TYPES][cleaned].setdefault("subtype_of", []).append(type_name)
 
                 else:
                     print("TYPE", type_name, "USES INVALID SUBTYPE", st)
@@ -317,7 +339,7 @@ def verify_type_parameters(items: dict) -> bool:
 
         # check all parameter types are valid
         for param in fields:
-            field_types = param.get("types")
+            field_types = param.get("types", [])
             for field_type_name in field_types:
                 while field_type_name.startswith("Array of "):
                     field_type_name = field_type_name[len("Array of "):]
@@ -349,12 +371,12 @@ def verify_method_parameters(items: dict) -> bool:
 
         # If we have multiple returns, this is an edge case, but not a deal-breaker; check that output.
         # Some multi-returns are common and pre-approved.
-        if len(returns) > 1 and returns not in APPROVED_MULTI_RETURNS:
+        if len(returns) > 1 and returns not in APPROVED_MULTI_RETURNS and list(reversed(returns)) not in APPROVED_MULTI_RETURNS:
             print(f"{method} has multiple return types: {returns}")
 
         # check all parameter types are valid
         for param in values.get("fields", []):
-            types = param.get("types")
+            types = param.get("types", [])
             for t in types:
                 while t.startswith("Array of "):
                     t = t[len("Array of "):]
@@ -379,15 +401,17 @@ def main():
     for filename, url in TO_SCRAPE.items():
         print("parsing", url)
         items = retrieve_info(url)
-        if verify_type_parameters(items) or verify_method_parameters(items):
+        type_issues = verify_type_parameters(items)
+        method_issues = verify_method_parameters(items)
+        if type_issues or method_issues:
             print("Failed to validate schema. View logs above for more information.")
             exit(1)
 
-        with open(f"{filename}.json", "w") as f:
-            json.dump(items, f, indent=2)
+        with open(f"{filename}.json", "w", encoding="utf-8") as f:
+            json.dump(items, f, indent=2, ensure_ascii=False)
 
-        with open(f"{filename}.min.json", "w") as f:
-            json.dump(items, f)
+        with open(f"{filename}.min.json", "w", encoding="utf-8") as f:
+            json.dump(items, f, separators=(',', ':'), ensure_ascii=False)
 
 
 if __name__ == '__main__':
